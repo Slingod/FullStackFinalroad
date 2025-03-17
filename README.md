@@ -2,16 +2,45 @@
 
 ## Project Description
 
-New Era Lissoise (NEL) is a fullstack event management platform developed with **Ruby on Rails 8.0.1**. It allows users to create, manage, and register for various events while offering authentication features, role management, and an intuitive user interface. The application follows the **CRUD model (Create, Read, Update, Delete)** for users and events.
+### Nouvelle Ère Lissoise (NEL)
+
+Welcome to the Nouvelle Ère Lissoise (NEL) website!
+We offer you the opportunity to discover events happening in our town and view photos and videos made by our members to relive the moments spent together. Each member can, if they wish, register for future events to show their commitment to our intercommunal and municipal activities.
+NEL is free with no financial commitments.
+We regularly support organizations and associations fighting against cancer and other causes for the common good, such as Secours populaire.
+
+### About NEL
+
+New Era Lissoise (NEL) is a full-stack event management platform developed with Ruby on Rails 8.0.1. It allows users to create, manage, and register for various events while offering authentication features, role management, and an intuitive user interface. The application follows the CRUD model (Create, Read, Update, Delete) for users and events.
+
+### Features
+
+- **Event Management** : Easily create, edit, and delete events.
+
+- **Event Registration**: Users can register for upcoming events to show their commitment.
+
+- **Authentication**: Uses Devise for secure user management.
+
+- **Role Management**: Assign different roles to users to control permissions.
+
+- **Intuitive User Interface**: A user-friendly interface for smooth navigation.
+
+- **Organization Support**: Support local causes and organizations.
 
 ## Technologies Used
 
 - **Ruby on Rails 8.0.1**: Main framework
+
 - **Devise**: User authentication (registration, login, logout, email confirmation, etc.)
+
 - **SQLite**: Default database for development
+
 - **Kamal**: Deployment tool
+
 - **Bootstrap / Tailwind CSS**: Frontend design and styling
+
 - **Whimsical**: Wireframing tool
+
 - **JWT** (Optional): API authentication
 
 ## Wireframe
@@ -20,6 +49,8 @@ The wireframe for the project is available here:
 
 - [User Flow](https://whimsical.com/fullstackfinal-P1XYFdSBXN73n7xRAngMNd)
 - [WireFrame](https://whimsical.com/wireframefullstack-TFytgVQdEJAt3t2LC5umit)
+- [Jira](https://nouvelleerelissoise.atlassian.net/jira/polaris/projects/MPDD/ideas/view/6524202)
+- [Powerpoint.pptx](https://github.com/user-attachments/files/19105674/Projet.Site.Web.pptx)
 
 ## Features
 

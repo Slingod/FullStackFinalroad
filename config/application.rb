@@ -1,15 +1,16 @@
 require_relative "boot"
-
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module NelProject
-  class Application < Rails::Application
-    config.assets.enabled = true
+# ✅ Ajout de Dotenv pour charger les variables d'environnement
+require "dotenv-rails"
+Dotenv::Railtie.load
 
+module ProjetChaton
+  class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 

@@ -4,7 +4,7 @@ class EventPolicy < ApplicationPolicy
       if user.admin?
         scope.all
       else
-        scope.where(public: true) # Supposons que les events ont un champ "public"
+        scope.where(public: true) 
       end
     end
   end

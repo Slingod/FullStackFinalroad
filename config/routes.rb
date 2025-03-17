@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # Static pages
   get "/about", to: "pages#about"
-  get "/contact", to: "contacts#new", as: :contact
+  get "/contact", to: "contacts#new"
   post "/contact", to: "contacts#create"
 
   # Devise for authentication
@@ -55,6 +55,12 @@ Rails.application.routes.draw do
   # Donation page
   get "/donate", to: "payments#new"
 
+  # CGU page
+  get "/cgu", to: "pages#cgu"
+
   # Application health check
   get "up" => "rails/health#show", as: :rails_health_check
+
+  # Road for 
+  resources :contacts, only: [:new, :create]
 end

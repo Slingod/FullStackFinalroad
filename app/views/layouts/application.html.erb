@@ -1,30 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Nel Project" %></title>
+    <title><%= content_for(:title) || "NEL" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  
+    </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+    <div class="wrapper">
+      <% flash.each do |key, message| %>
+        <div class="alert alert-<%= key %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <header class="header">
+        <div class="header-container">
+          <div class="welcome-message">
+            <% if user_signed_in? %>
+              <p>Welcome, <%= current_user.username.presence || "User" %>!</p>
+            <% else %>
+              <p>Welcome to our website!</p>
+            <% end %>
+          </div>
+
+          <div class="nav-buttons">
+            <% if user_signed_in? %>
+              <%= link_to 'Shop', shop_path, class: 'btn btn-primary' %>
+              
+              <% if current_user.admin? || current_user.super_admin? %>
+                <%= link_to 'Admin', admin_root_path, class: 'btn btn-success' %>
+              <% end %>
+
+              <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+
+            <% else %>
+              <%= link_to 'Sign Up', signup_path, class: 'btn btn-primary' %>
+              <%= link_to 'Login', login_path, class: 'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+      </header>
+
+      
+      <main class="content">
+        <%= yield %>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-content footer-links">
+          <%= link_to 'Contact Us', contact_path, class: 'btn' %>
+          <%= link_to 'About Us', about_path, class: 'btn btn-success' %>
+          <%= link_to 'Privacy Policy', cgu_path, class: 'btn btn-danger' %>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

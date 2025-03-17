@@ -1,0 +1,21 @@
+<div class="contact-container">
+  <h1 class="contact-title">Contact Us</h1>
+
+  <%= form_with model: @contact, url: contacts_path, local: true do |form| %>
+    <div class="contact-field">
+      <%= form.label :name, "Name" %>
+      <%= form.text_field :name %>
+    </div>
+    <div class="contact-field">
+      <%= form.label :email, "Email" %>
+      <%= form.email_field :email %>
+    </div>
+    <div class="contact-field">
+      <%= form.label :message, "Message" %>
+      <%= form.text_area :message %>
+    </div>
+    <div class="contact-actions">
+      <%= form.submit "Send", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

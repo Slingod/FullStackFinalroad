@@ -1,0 +1,19 @@
+<h1>Modifier <%= @user.email %></h1>
+
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
+  <p>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </p>
+
+  <p>
+  <%= form.label :admin, "Rôle" %>
+  <%= form.select :admin, [["Utilisateur", false], ["Admin", true]], class: "form-control" %>  
+  </p>
+
+  <p>
+    <%= form.submit "Mettre à jour", class: "btn btn-success" %>
+  </p>
+<% end %>
+
+<%= link_to "Retour", admin_users_path, class: "btn btn-secondary" %>
