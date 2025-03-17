@@ -1,4 +1,94 @@
-<div>
-  <h1 class="font-bold text-4xl">Pages#home</h1>
-  <p>Find me in app/views/pages/home.html.erb</p>
+<h1 style="text-align: center; margin-bottom: 30px;">Bienvenue sur la page d'accueil</h1>
+
+<div style="display: flex; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
+  <% (2021..2026).each do |year| %>
+    <div class="year-container" style="margin: 0 10px; text-align: center;">
+      <button class="year-btn" data-year="<%= year %>" style="background-color: #6c757d; color: white; padding: 8px 16px; border: none; cursor: pointer; border-radius: 25px; font-size: 14px; font-weight: bold; transition: background-color 0.3s, transform 0.2s;">
+        <%= year %>
+      </button>
+      <div id="months-<%= year %>" class="month-buttons" style="display: none; margin-top: 10px;">
+        <% (1..12).each do |month| %>
+          <div class="month-item" data-month="<%= month %>" style="padding: 6px 15px; cursor: pointer; color: #333; font-size: 13px; border: 1px solid #ccc; margin-bottom: 5px; border-radius: 5px; background-color: #f1f1f1; transition: background-color 0.3s, transform 0.2s; width: 100%; text-align: center;">
+            <%= Date::MONTHNAMES[month] %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
+
+<div id="events-container" style="display: none; text-align: center; margin-top: 30px;">
+  <h2 id="selected-month" style="color: black; margin-bottom: 20px;"></h2>
+  <div id="events-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const yearButtons = document.querySelectorAll('.year-btn');
+    const eventsContainer = document.getElementById('events-container');
+    const selectedMonth = document.getElementById('selected-month');
+    const eventsList = document.getElementById('events-list');
+    let lastOpenedYear = null;
+
+    const eventsByYear = <%= raw @events_by_year.transform_values { |months| months.transform_values { |events| events.map { |e| { id: e.id, author: e.author, location: e.location, picture: e.picture, date: e.date.to_s, duration: e.duration, price: e.price } } } }.to_json %>;
+
+    yearButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const year = button.getAttribute('data-year');
+        const monthsDiv = document.getElementById(`months-${year}`);
+
+        if (lastOpenedYear === year) {
+          monthsDiv.style.display = 'none';
+          lastOpenedYear = null;
+        } else {
+          document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
+          monthsDiv.style.display = 'block';
+          lastOpenedYear = year;
+        }
+      });
+    });
+
+    document.querySelectorAll('.month-item').forEach(monthItem => {
+      monthItem.addEventListener('click', function() {
+        const year = this.closest('.year-container').querySelector('.year-btn').getAttribute('data-year');
+        const month = this.getAttribute('data-month');
+        const monthName = this.textContent;
+
+        selectedMonth.textContent = `Événements de ${monthName} ${year}`;
+        eventsList.innerHTML = '';
+
+        const events = eventsByYear[year] && eventsByYear[year][month];
+
+        if (events && events.length > 0) {
+          events.forEach(event => {
+            const eventCard = document.createElement('div');
+            eventCard.classList.add('event-card');
+            eventCard.innerHTML = `
+              <div style="background-color: #f8f9fa; padding: 20px; margin: 10px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: left; color: black;">
+                <img src="${event.picture}" alt="Image de l'événement" style="width: 100%; border-radius: 10px;">
+                <h3 style="margin-top: 10px; font-size: 18px;">${event.author}</h3>
+                <p><strong>Lieu :</strong> ${event.location}</p>
+                <p><strong>Date :</strong> ${event.date}</p>
+                <p><strong>Durée :</strong> ${event.duration} minutes</p>
+                <p><strong>Prix :</strong> ${event.price} €</p>
+                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                  <a href="/events/${event.id}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">Voir</a>
+                  <a href="/events/${event.id}/edit" style="background-color: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">Modifier</a>
+                  <form action="/events/${event.id}" method="post" style="display: inline-block; width: 100%; margin-bottom: 10px;">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="submit" value="Supprimer" style="background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center;">
+                  </form>
+                </div>
+              </div>
+            `;
+            eventsList.appendChild(eventCard);
+          });
+        } else {
+          eventsList.innerHTML = '<p style="color: black;">Aucun événement pour ce mois.</p>';
+        }
+
+        eventsContainer.style.display = 'block';
+      });
+    });
+  });
+</script>
