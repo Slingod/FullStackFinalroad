@@ -1,24 +1,25 @@
 Rails.application.routes.draw do
-  # Home Page
+  # Homepage
   root "pages#home"
 
-  # Page about and contact
+  # Static pages
   get "/about", to: "pages#about"
   get "/contact", to: "contacts#new", as: :contact
   post "/contact", to: "contacts#create"
 
-  # Devise roads for users
+  # Devise for authentication
   devise_for :users
 
   devise_scope :user do
     get "signup", to: "devise/registrations#new", as: :signup
     get "login", to: "devise/sessions#new", as: :login
+    get "password/new", to: "devise/passwords#new", as: :forgot_password
   end
 
-  # User profile
-  resources :users, only: [:show]
+  # User resource
+  resources :users, only: [:show, :edit, :update, :destroy]
 
-  # registration or unregistration to an event
+  # Resources for events
   resources :events do
     member do
       post "register"
@@ -26,27 +27,34 @@ Rails.application.routes.draw do
     end
   end
 
-  # Picture
+  # Resources for pictures
   resources :pictures, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
-  # Page Shop
+  # Shop page
   get "shop", to: "home#shop", as: :shop
 
   # Admin space
   namespace :admin do
     root to: "dashboard#index"
-    resources :users
+    resources :users do
+      member do
+        put "update_role", to: "users#update_role" # To modify permissions
+        delete "force_delete", to: "users#force_delete" # Super Admin can delete an admin
+      end
+    end
+    resources :events
   end
 
-  # Processus for payment
+  # Payment process with Stripe
   scope '/checkout' do
     post 'create', to: 'checkout#create', as: 'checkout_create'
     get 'success', to: 'checkout#success', as: 'checkout_success'
     get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
   end
 
-  # Page for donations
+  # Donation page
   get "/donate", to: "payments#new"
 
+  # Application health check
   get "up" => "rails/health#show", as: :rails_health_check
 end
