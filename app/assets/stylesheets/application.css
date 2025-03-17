@@ -1,10 +1,319 @@
+@import "bootstrap";
+
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
+ *= require_self
+ *= require_tree .
  */
+
+/* ========================================================================== 
+   🌍 GLOBAL STYLES 
+   ========================================================================== */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: linear-gradient(90deg, #33b6e2da, #5e62b0d3, #dc307ddc);
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+html, body {
+  height: 100%;
+}
+
+.container {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ========================================================================== 
+   🔝 NAVIGATION BAR 
+   ========================================================================== */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #4b6cb7, #182848);
+}
+
+.navbar-brand {
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #f8f9fa;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-buttons .btn {
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.nav-buttons .btn:hover {
+  background-color: #0056b3;
+}
+
+/* ========================================================================== 
+   ⚙️ BUTTON STYLES 
+   ========================================================================== */
+
+   .nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre les boutons */
+  }
+  
+  .nav-buttons .btn {
+    min-width: 120px;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .nav-buttons .btn-danger {
+    background-color: #dc3545;
+  }
+  
+  .nav-buttons .btn:hover {
+    opacity: 0.8;
+  }
+  
+
+.btn-primary {
+  background-image: linear-gradient(90deg, #33b7e2, #5e62b0, #dc307c);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-image: linear-gradient(90deg, #5e62b0, #dc307c, #33b7e2);
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* ========================================================================== 
+   📌 FORM STYLES 
+   ========================================================================== */
+
+form {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  width: auto;
+  cursor: pointer;
+}
+
+/* ========================================================================== 
+   📢 FLASH MESSAGES 
+   ========================================================================== */
+
+.alert {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+/* ========================================================================== 
+   📌 FOOTER STYLES 
+   ========================================================================== */
+
+.footer {
+  margin-top: auto;
+  padding: 10px 0;
+  background-color: rgba(63, 110, 96, 0.8);
+  text-align: center;
+}
+
+.footer .btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 10px;
+}
+
+.footer .btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.footer .btn:hover {
+  background-color: #0056b3;
+}
+
+/* ========================================================================== 
+   🏷️ CARD STYLES 
+   ========================================================================== */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.card {
+  flex: 1 1 calc(20% - 20px);
+  max-width: calc(20% - 20px);
+  transition: transform 0.3s;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  color: #343a40;
+  text-align: center;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+/* Responsive Cards */
+@media (max-width: 1200px) {
+  .card {
+    flex: 1 1 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* ========================================================================== 
+   🖼️ PHOTO GALLERY 
+   ========================================================================== */
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.photo-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.cat-container img {
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cat-container button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ff9800;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.cat-container button:hover {
+  background-color: #e68900;
+}
