@@ -1,4 +1,17 @@
-<div>
-  <h1 class="font-bold text-4xl">Events#show</h1>
-  <p>Find me in app/views/events/show.html.erb</p>
+<h1>Details de l'événement</h1>
+
+<div class="event-card">
+  <h2><%= @event.author %></h2>
+  <p><strong>Location:</strong> <%= @event.location %></p>
+  <p><strong>Picture:</strong></p>
+  <% if @event.picture.attached? %>
+    <%= image_tag @event.picture, alt: "Image de l'événement" %>
+  <% else %>
+    <p>No image available</p>
+  <% end %>
+  <p><strong>Duration:</strong> <%= @event.duration %> minutes</p>
+  <p><strong>Price:</strong> <%= @event.price %> €</p>
+  <p><strong>Date:</strong> <%= @event.date.strftime("%d %B %Y") %></p>
 </div>
+
+<%= link_to 'Retour à la page d\'accueil', root_path, class: 'btn btn-primary' %>

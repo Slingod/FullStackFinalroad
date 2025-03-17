@@ -1,4 +1,53 @@
-<div>
-  <h1 class="font-bold text-4xl">Events#edit</h1>
-  <p>Find me in app/views/events/edit.html.erb</p>
-</div>
+<h1>Modifier l'événement</h1>
+
+<%= form_with(model: @event, local: true) do |form| %>
+  <% if @event.errors.any? %>
+    <div class="errors">
+      <ul>
+        <% @event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :author %>
+    <%= form.text_field :author, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :location %>
+    <%= form.text_field :location, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :picture, 'Image' %>
+    <%= form.file_field :picture, class: 'form-control' %> <!-- Ajout du champ pour télécharger une image -->
+    <% if @event.picture.attached? %>
+      <div>
+        <strong>Image actuelle:</strong>
+        <%= image_tag @event.picture.variant(resize: "200x200") %> <!-- Affiche l'image actuelle si elle est attachée -->
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :duration %>
+    <%= form.number_field :duration, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.01, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :date %>
+    <%= form.date_select :date, { start_year: 2021, end_year: 2026 }, class: 'form-control' %>
+  </div>
+
+  <%= form.submit 'Modifier l\'événement', class: 'btn btn-success' %>
+<% end %>
+
+<%= link_to 'Retour', event_path(@event), class: 'btn btn-secondary' %>
