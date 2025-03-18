@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
-    before_action :authenticate_user!  # Assure que seul un utilisateur connecté peut accéder
-    before_action :authorize_admin     # Vérifie si c'est un admin
+    before_action :authenticate_user!  # Ensures that only a logged in user can access
+    before_action :authorize_admin     # Check if it's an admin
     before_action :set_user, only: [ :show, :edit, :update, :destroy ]
 
     def index
@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
       safe_params[:admin] = params[:user][:admin] if current_user.admin?
     
       if @user.update(safe_params)
-        redirect_to admin_users_path, notice: "Utilisateur mis à jour"
+        redirect_to admin_users_path, notice: "User updated"
       else
         render :edit
       end
@@ -28,7 +28,7 @@ class Admin::UsersController < ApplicationController
     def destroy
         @user.destroy
         respond_to do |format|
-          format.html { redirect_to admin_users_path, notice: "Utilisateur supprimé avec succès." }
+          format.html { redirect_to admin_users_path, notice: "User successfully deleted." }
           format.turbo_stream
         end
       end
@@ -44,6 +44,6 @@ class Admin::UsersController < ApplicationController
     end
 
     def authorize_admin
-      redirect_to root_path, alert: "Accès refusé." unless current_user.admin?
+      redirect_to root_path, alert: "Access denied." unless current_user.admin?
     end
 end
