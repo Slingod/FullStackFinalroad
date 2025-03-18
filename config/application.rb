@@ -5,9 +5,9 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# ✅ Ajout de Dotenv pour charger les variables d'environnement
-require "dotenv-rails"
-Dotenv::Railtie.load
+# ✅ Add Dotenv to load environment variables
+require 'dotenv/load'
+Dotenv.load
 
 module ProjetChaton
   class Application < Rails::Application

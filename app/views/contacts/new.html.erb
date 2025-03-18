@@ -1,22 +1,24 @@
-<h1>Contact Us</h1>
+<div class="auth-container">
+  <h1 class="auth-title">Contact Us</h1>
 
-<%= form_with model: @contact, local: true do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name, required: true %>
-  </div>
+  <%= form_with(model: @contact, url: contact_path, method: :post, local: true) do |f| %>
+    <div class="auth-field">
+      <%= f.label :name, "Name", class: "auth-label" %><br />
+      <%= f.text_field :name, required: true, placeholder: "Your name", class: "auth-input" %>
+    </div>
 
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email, required: true %>
-  </div>
+    <div class="auth-field">
+      <%= f.label :email, "Email", class: "auth-label" %><br />
+      <%= f.email_field :email, required: true, placeholder: "Your email", class: "auth-input" %>
+    </div>
 
-  <div>
-    <%= form.label :message %>
-    <%= form.text_area :message, required: true %>
-  </div>
+    <div class="auth-field">
+      <%= f.label :message, "Message", class: "auth-label" %><br />
+      <%= f.text_area :message, required: true, placeholder: "Your message", class: "auth-textarea" %>
+    </div>
 
-  <div>
-    <%= form.submit "Send Message" %>
-  </div>
-<% end %>
+    <div class="auth-actions">
+      <%= f.submit "Send Message", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

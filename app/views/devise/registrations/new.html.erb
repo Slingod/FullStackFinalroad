@@ -10,29 +10,26 @@
     </div>
 
     <div class="auth-field">
-      <%= f.label :email, "Email" %><br />
+      <%= f.label :email, "Email" %>
       <%= f.email_field :email, autocomplete: "email", required: true, placeholder: "Email" %>
     </div>
 
     <div class="auth-field">
       <%= f.label :password, "Password" %>
       <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
+        <em>(<%= @minimum_password_length %> characters minimum)</em></br>
+      <% end %>
       <%= f.password_field :password, autocomplete: "new-password", required: true %>
     </div>
 
     <div class="auth-field">
-      <%= f.label :password_confirmation, "Confirm your password" %><br />
+      <%= f.label :password_confirmation, "Confirm your password" %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
     </div>
 
     <div class="auth-actions">
       <%= f.submit "Sign Up", class: "btn btn-primary" %>
+      <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-primary" %>
+  </div>
     </div>
   <% end %>
-
-  <div class="auth-actions">
-    <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-success" %>
-  </div>
-</div>
