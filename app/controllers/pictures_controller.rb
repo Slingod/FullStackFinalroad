@@ -1,21 +1,21 @@
 class PicturesController < ApplicationController
     before_action :set_picture, only: [:show, :edit, :update, :destroy]
   
-    # Liste de toutes les pictures
+    # List of all pictures
     def index
       @pictures = Picture.all
     end
   
-    # Affichage d'une picture spécifique
+    # Displaying a specific picture
     def show
     end
   
-    # Formulaire pour créer une nouvelle picture
+    # Form to create a new picture
     def new
       @picture = Picture.new
     end
   
-    # Création d'une nouvelle picture
+    # Creating a new picture
     def create
       @picture = Picture.new(picture_params)
       if @picture.save
@@ -25,7 +25,7 @@ class PicturesController < ApplicationController
       end
     end
   
-    # Mise à jour d'une picture existante
+    # Updating an existing picture
     def update
       if @picture.update(picture_params)
         redirect_to @picture, notice: 'Picture was successfully updated.'
@@ -34,7 +34,7 @@ class PicturesController < ApplicationController
       end
     end
   
-    # Suppression d'une picture
+    # Deleting a picture
     def destroy
       @picture.destroy
       redirect_to pictures_url, notice: 'Picture was successfully destroyed.'
@@ -42,12 +42,12 @@ class PicturesController < ApplicationController
   
     private
   
-    # Méthode pour trouver une picture par son ID
+    # Method to find a picture by its ID
     def set_picture
       @picture = Picture.find(params[:id])
     end
   
-    # Méthode pour définir les paramètres autorisés pour les actions CRUD
+    # Method to set allowed parameters for CRUD actions
     def picture_params
       params.require(:picture).permit(:name, :age, :breed, :image , :price)
     end

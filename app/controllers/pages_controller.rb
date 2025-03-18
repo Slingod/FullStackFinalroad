@@ -5,8 +5,8 @@ class PagesController < ApplicationController
     @events_by_year.each do |year, events|
       @events_by_year[year] = events.group_by { |event| event.date.month }
     end
-    @months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", 
-               "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    @months = ["January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"]
   end
 
   def about

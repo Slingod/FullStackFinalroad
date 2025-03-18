@@ -14,9 +14,17 @@ class EventsController < ApplicationController
   end
 
   def new
+    @event = Event.new  # Initializing the @event object
   end
 
   def create
+    @event = Event.new(event_params)
+
+    if @event.save
+      redirect_to @event, notice: "Event successfully created!"
+    else
+      render :new
+    end
   end
 
   def edit
@@ -27,19 +35,22 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     
     if @event.update(event_params)
-      redirect_to @event, notice: 'L\'événement a été modifié avec succès.'
+      redirect_to @event, notice: 'The event has been successfully modified.'
     else
       render :edit
     end
   end
 
   def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to events_path, notice: "Event successfully deleted."
   end
 
   private
 
   
   def event_params
-    params.require(:event).permit(:author, :location, :picture, :duration, :price, :date)
+    params.require(:event).permit(:author, :title ,:location, :picture, :duration, :price, :date)
   end
 end

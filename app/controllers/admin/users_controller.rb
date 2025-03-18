@@ -13,13 +13,17 @@ class Admin::UsersController < ApplicationController
   def edit
   end
 
-  def update
-    if @user.update(user_params(current_user))
-      redirect_to admin_users_path, notice: "Updated user successfully."
-    else
-      render :edit
-    end
-  end
+    def update
+      @user = User.find(params[:id])
+      safe_params = params.require(:user).permit(:email)
+      safe_params[:admin] = params[:user][:admin] if current_user.admin?
+    
+      if @user.update(safe_params)
+        redirect_to admin_users_path, notice: "User updated"
+      else
+        render :edit
+      end
+    end    
 
   def destroy
     @user.destroy
