@@ -7,7 +7,6 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  
   </head>
 
   <body>
@@ -33,6 +32,7 @@
               
               <% if current_user.admin? || current_user.super_admin? %>
                 <%= link_to 'Admin', admin_root_path, class: 'btn btn-success mr-' %>
+                <%= link_to 'Create Event', new_event_path, class: 'btn btn-info' %> <!-- Création d'événement visible seulement pour admin -->
               <% end %>
 
               <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
@@ -45,7 +45,6 @@
         </div>
       </header>
 
-      
       <main class="content">
         <%= yield %>
       </main>
@@ -60,4 +59,3 @@
     </div>
   </body>
 </html>
-
