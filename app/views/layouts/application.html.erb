@@ -2,21 +2,22 @@
 <html>
   <head>
     <title><%= content_for(:title) || "NEL" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  
-    </head>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag "application", defer: true %>
+  </head>
 
   <body>
     <div class="wrapper">
-      <% flash.each do |key, message| %>
-        <div class="alert alert-<%= key %>">
-          <%= message %>
-        </div>
-      <% end %>
+      <!-- Flash Messages -->
+      <div class="flash-messages">
+        <% flash.each do |key, message| %>
+          <div class="alert alert-<%= key %> flash"><%= message %></div>
+        <% end %>
+      </div>
+
       <header class="header">
         <div class="header-container">
           <div class="welcome-message">
@@ -30,13 +31,12 @@
           <div class="nav-buttons">
             <% if user_signed_in? %>
               <%= link_to 'Shop', shop_path, class: 'btn btn-primary' %>
-              
+
               <% if current_user.admin? || current_user.super_admin? %>
                 <%= link_to 'Admin', admin_root_path, class: 'btn btn-success' %>
               <% end %>
 
               <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-
             <% else %>
               <%= link_to 'Sign Up', signup_path, class: 'btn btn-primary' %>
               <%= link_to 'Login', login_path, class: 'btn btn-primary' %>
@@ -45,7 +45,6 @@
         </div>
       </header>
 
-      
       <main class="content">
         <%= yield %>
       </main>
