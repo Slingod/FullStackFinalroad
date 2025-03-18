@@ -38,7 +38,6 @@ gem "sprockets-rails" # Asset compilation and management
 # Internationalization and Environment
 gem "rails-i18n" # Rails Internationalization (I18n) support
 gem "dotenv-rails", groups: [:development, :test] # Environment variable management
-gem "dotenv", "~> 3.1" # Environment variable management
 
 # Development and Testing
 group :development, :test do
