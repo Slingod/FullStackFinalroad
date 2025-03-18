@@ -1,17 +1,41 @@
-<h1>Details de l'événement</h1>
+<h1 class="text-center mb-4">Event Details</h1>
 
-<div class="event-card">
-  <h2><%= @event.author %></h2>
-  <p><strong>Location:</strong> <%= @event.location %></p>
-  <p><strong>Picture:</strong></p>
-  <% if @event.picture.attached? %>
-    <%= image_tag @event.picture, alt: "Image de l'événement" %>
-  <% else %>
-    <p>No image available</p>
-  <% end %>
-  <p><strong>Duration:</strong> <%= @event.duration %> minutes</p>
-  <p><strong>Price:</strong> <%= @event.price %> €</p>
-  <p><strong>Date:</strong> <%= @event.date.strftime("%d %B %Y") %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg rounded">
+        <div class="card-header bg-primary text-white">
+          <h2 class="card-title text-center"><%= @event.author %></h2>
+        </div>
+
+        <div class="card-body">
+          <div class="text-center mb-3">
+            <% if @event.picture.attached? %>
+              <%= image_tag @event.picture, alt: "Event Image", class: "img-fluid rounded" %>
+            <% else %>
+              <p class="text-muted">No image available</p>
+            <% end %>
+          </div>
+
+          <div class="mb-3">
+            <p><strong>Location:</strong> <%= @event.location %></p>
+            <p><strong>Duration:</strong> <%= @event.duration %> minutes</p>
+            <p><strong>Price:</strong> <%= @event.price %> €</p>
+            <p><strong>Date:</strong> <%= @event.date.strftime("%d %B %Y") %></p>
+          </div>
+
+          <div class="text-center">
+            <%= link_to 'Back to Home Page', root_path, class: 'btn btn-primary' %>
+
+            <% if current_user.admin? %>
+              <%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-warning ml-2' %>
+              <%= button_to 'Delete', event_path(@event), method: :delete, data: { confirm: "Are you sure you want to delete this event?" }, class: 'btn btn-danger' %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<%= link_to 'Retour à la page d\'accueil', root_path, class: 'btn btn-primary' %>

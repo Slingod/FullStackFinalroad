@@ -1,7 +1,5 @@
-<h1 style="text-align: center; margin-bottom: 30px;">Bienvenue sur la page d'accueil</h1>
-
 <div style="display: flex; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
-  <% (2021..2026).each do |year| %>
+  <% (2023..2026).each do |year| %>
     <div class="year-container" style="margin: 0 10px; text-align: center;">
       <button class="year-btn" data-year="<%= year %>" style="background-color: #6c757d; color: white; padding: 8px 16px; border: none; cursor: pointer; border-radius: 25px; font-size: 14px; font-weight: bold; transition: background-color 0.3s, transform 0.2s;">
         <%= year %>
@@ -54,7 +52,7 @@
         const month = this.getAttribute('data-month');
         const monthName = this.textContent;
 
-        selectedMonth.textContent = `Événements de ${monthName} ${year}`;
+        selectedMonth.textContent = `Events of ${monthName} ${year}`;
         eventsList.innerHTML = '';
 
         const events = eventsByYear[year] && eventsByYear[year][month];
@@ -65,26 +63,28 @@
             eventCard.classList.add('event-card');
             eventCard.innerHTML = `
               <div style="background-color: #f8f9fa; padding: 20px; margin: 10px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: left; color: black;">
-                <img src="${event.picture}" alt="Image de l'événement" style="width: 100%; border-radius: 10px;">
+                <img src="${event.picture}" alt="Event image" style="width: 100%; border-radius: 10px;">
                 <h3 style="margin-top: 10px; font-size: 18px;">${event.author}</h3>
-                <p><strong>Lieu :</strong> ${event.location}</p>
-                <p><strong>Date :</strong> ${event.date}</p>
-                <p><strong>Durée :</strong> ${event.duration} minutes</p>
-                <p><strong>Prix :</strong> ${event.price} €</p>
+                <p><strong>Location:</strong> ${event.location}</p>
+                <p><strong>Date:</strong> ${event.date}</p>
+                <p><strong>Duration:</strong> ${event.duration} minutes</p>
+                <p><strong>Price:</strong> ${event.price} €</p>
                 <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-                  <a href="/events/${event.id}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">Voir</a>
-                  <a href="/events/${event.id}/edit" style="background-color: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">Modifier</a>
-                  <form action="/events/${event.id}" method="post" style="display: inline-block; width: 100%; margin-bottom: 10px;">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="submit" value="Supprimer" style="background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center;">
-                  </form>
+                  <a href="/events/${event.id}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">View</a>
+                  <% if current_user && current_user.admin? %>
+                    <a href="/events/${event.id}/edit" style="background-color: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">Edit</a>
+                    <form action="/events/${event.id}" method="post" style="display: inline-block; width: 100%; margin-bottom: 10px;">
+                      <input type="hidden" name="_method" value="delete">
+                      <input type="submit" value="Delete" style="background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center;">
+                    </form>
+                  <% end %>
                 </div>
               </div>
             `;
             eventsList.appendChild(eventCard);
           });
         } else {
-          eventsList.innerHTML = '<p style="color: black;">Aucun événement pour ce mois.</p>';
+          eventsList.innerHTML = '<p style="color: black;">No events for this month.</p>';
         }
 
         eventsContainer.style.display = 'block';

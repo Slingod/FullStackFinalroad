@@ -8,7 +8,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   
-    </head>
+  </head>
 
   <body>
     <div class="wrapper">
@@ -29,17 +29,17 @@
 
           <div class="nav-buttons">
             <% if user_signed_in? %>
-              <%= link_to 'Shop', shop_path, class: 'btn btn-primary' %>
+              <%= link_to 'Home', root_path, class: 'btn btn-primary mr-5' %>
               
               <% if current_user.admin? || current_user.super_admin? %>
-                <%= link_to 'Admin', admin_root_path, class: 'btn btn-success' %>
+                <%= link_to 'Admin', admin_root_path, class: 'btn btn-success mr-' %>
               <% end %>
 
               <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
 
             <% else %>
-              <%= link_to 'Sign Up', signup_path, class: 'btn btn-primary' %>
-              <%= link_to 'Login', login_path, class: 'btn btn-primary' %>
+              <%= link_to 'Sign Up', signup_path, class: 'btn btn-primary mr-2' %>
+              <%= link_to 'Login', login_path, class: 'btn btn-primary mr-2' %>
             <% end %>
           </div>
         </div>
@@ -60,3 +60,4 @@
     </div>
   </body>
 </html>
+

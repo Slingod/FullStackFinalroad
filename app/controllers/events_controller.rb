@@ -14,9 +14,17 @@ class EventsController < ApplicationController
   end
 
   def new
+    @event = Event.new  # Initialisation de l'objet @event
   end
 
   def create
+    @event = Event.new(event_params)
+
+    if @event.save
+      redirect_to @event, notice: "Événement créé avec succès!"
+    else
+      render :new
+    end
   end
 
   def edit
@@ -34,6 +42,9 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to events_path, notice: "Événement supprimé avec succès."
   end
 
   private

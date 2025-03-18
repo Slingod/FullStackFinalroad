@@ -27,7 +27,7 @@
     <% if @event.picture.attached? %>
       <div>
         <strong>Image actuelle:</strong>
-        <%= image_tag @event.picture.variant(resize: "200x200") %> <!-- Affiche l'image actuelle si elle est attachée -->
+        <%= image_tag @event.picture.variant(resize: "200x200") %> 
       </div>
     <% end %>
   </div>
