@@ -1,48 +1,32 @@
-require "active_support/core_ext/integer/time"
-
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
-
-  # Make code changes take effect immediately without server restart.
+  # Reload code changes without restarting the server
   config.enable_reloading = true
+  config.cache_classes = false
+  config.reload_classes_only_on_change = false
 
-  # Do not eager load code on boot.
+  # Do not eager load code on boot
   config.eager_load = false
 
-  # Show full error reports.
+  # Show full error reports
   config.consider_all_requests_local = true
 
-  # Enable server timing.
+  # Enable server timing
   config.server_timing = true
 
-  # Enable/disable Action Controller caching.
-  if Rails.root.join("tmp/caching-dev.txt").exist?
-    config.action_controller.perform_caching = true
-    config.action_controller.enable_fragment_cache_logging = true
-    config.public_file_server.headers = { "cache-control" => "public, max-age=#{2.days.to_i}" }
-  else
-    config.action_controller.perform_caching = false
-  end
+  # Disable caching (prevents loading outdated assets or views)
+  config.action_controller.perform_caching = false
+  config.cache_store = :null_store
 
-  # Change to :null_store to avoid any caching.
-  config.cache_store = :memory_store
-
-  # Store uploaded files on the local file system.
+  # Store uploaded files on the local file system
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
+  # Email settings for development
   config.action_mailer.raise_delivery_errors = true
-
-  # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false
-
-  # ✅ Devise mailer sender
-  config.mailer_sender = 'no-reply@monapp.com'
-
-  # ✅ Configuration de l'URL pour les emails (local)
+  config.mailer_sender = 'no-reply@myapp.com'
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  # ✅ Configuration SMTP pour envoyer des emails (ex: Gmail)
+  # SMTP configuration (ensure ENV variables are set)
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
@@ -50,25 +34,32 @@ Rails.application.configure do
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],  # Utiliser une variable d'environnement
-    password: ENV["GMAIL_PASSWORD"]    # Ne pas mettre le mot de passe en dur
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"]
   }
 
-  # Print deprecation notices to the Rails logger.
+  # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
-  # Raise an error on page load if there are pending migrations.
+  # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
 
-  # Highlight code that triggered database queries in logs.
+  # Highlight code that triggered database queries in logs
   config.active_record.verbose_query_logs = true
 
-  # Raises error for missing translations.
-  # config.i18n.raise_on_missing_translations = true
+  # Raise error for missing translations
+  config.i18n.raise_on_missing_translations = true
 
-  # Annotate rendered view with file names.
+  # Debugging: Show which layout is being used in logs
   config.action_view.annotate_rendered_view_with_filenames = true
 
-  # Raise error when a before_action's only/except options reference missing actions.
-  config.action_controller.raise_on_missing_callback_actions = true
+  # =============================
+  # 🚀 ASSET CONFIGURATION
+  # =============================
+
+  # Prevent assets from being cached
+  config.assets.debug = true
+
+  # Disable checking of precompiled assets
+  config.assets.check_precompiled_asset = false
 end
