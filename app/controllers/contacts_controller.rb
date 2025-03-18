@@ -4,10 +4,13 @@ class ContactsController < ApplicationController
   end
 
   def create
+    puts "=== Received Params ==="
+    puts params.inspect  # Debugging: Check received parameters in the console
+
     @contact = Contact.new(contact_params)
     if @contact.save
       ContactMailer.contact_email(@contact).deliver_now
-      flash[:success] = "Your message has been sent successfully. Thank you for contacting us! !"
+      flash[:success] = "Your message has been sent successfully. Thank you for contacting us!"
       redirect_to root_path
     else
       flash[:error] = "An error has occurred. Please check the information entered."

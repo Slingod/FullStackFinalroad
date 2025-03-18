@@ -1,21 +1,9 @@
 <div class="center-container">
-  <h1>Bienvenue dans le Dashboard Admin</h1>
-  <p>Gérez votre application ici.</p>
+  <h1 class="dashboard-title">Welcome to the Admin Dashboard</h1>
+  <p>Manage your application here.</p>
 
-  <%= button_to "Gérer les utilisateurs", admin_users_path, method: :get, class: 'btn btn-primary' %>
-  <%= button_to 'acces on Event page', shop_path, method: :get, class: 'btn btn-primary' %>
+  <div class="button-container">
+    <%= button_to "Manage Users", admin_users_path, method: :get, class: 'btn btn-primary' %>
+    <%= button_to "Access Events Page", admin_events_path, method: :get, class: 'btn btn-primary' %>
+  </div>
 </div>
-
-<style>
-  .center-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-top: 50px; /* Ajustez selon vos besoins */
-  }
-
-  .center-container h1, .center-container p {
-    margin: 0;
-  }
-</style>

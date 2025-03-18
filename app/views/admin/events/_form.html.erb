@@ -1,0 +1,29 @@
+<%= form_with model: @event, url: admin_events_path, local: true do |form| %>
+    <div>
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
+  
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+  
+    <div>
+      <%= form.label :price %>
+      <%= form.number_field :price, step: 0.01 %>
+    </div>
+  
+    <div>
+      <%= form.label :location %>
+      <%= form.text_field :location %>
+    </div>
+  
+    <div>
+      <%= form.label :media_files %>
+      <%= form.file_field :media_files, multiple: true, accept: "image/*,video/*" %>
+    </div>
+  
+    <%= form.submit "Save", class: "btn btn-primary" %>
+  <% end %>
+  

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post "/contact", to: "contacts#create"
 
   # Devise for authentication
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions' }
 
   devise_scope :user do
     get "signup", to: "devise/registrations#new", as: :signup
@@ -36,12 +36,14 @@ Rails.application.routes.draw do
   # Admin space
   namespace :admin do
     root to: "dashboard#index"
+
     resources :users do
       member do
         put "update_role", to: "users#update_role" # To modify permissions
         delete "force_delete", to: "users#force_delete" # Super Admin can delete an admin
       end
     end
+
     resources :events
   end
 
@@ -61,6 +63,6 @@ Rails.application.routes.draw do
   # Application health check
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Road for 
+  # Contact form
   resources :contacts, only: [:new, :create]
 end
