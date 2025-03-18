@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
-    has_one_attached :picture 
-  end
-  
+  has_many_attached :media_files
+
+  validates :title, :description, :price, :location, presence: true
+end
