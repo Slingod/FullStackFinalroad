@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update]
-  before_action :authorize_user!, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
+
+  def show
+  end
+
+  def edit
+  end
 
   def update
     if @user.update(user_params)
@@ -11,6 +17,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+    redirect_to members_path, notice: 'User was successfully deleted.'
+  end
+
   private
 
   def set_user
@@ -18,13 +29,9 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    if current_user.super_admin?
-      params.require(:user).permit(:email, :username, :name, :firstname, :age, :role)
-    elsif current_user.admin?
-      params.require(:user).permit(:email, :username, :name, :firstname, :age, :role) unless params[:user][:role] == "super_admin"
-    else
-      params.require(:user).permit(:email, :username, :name, :firstname, :age)
-    end
+    allowed_params = [:email, :username, :name, :firstname, :age]
+    allowed_params << :role if current_user.admin? || current_user.super_admin?
+    params.require(:user).permit(allowed_params)
   end
 
   def authorize_user!

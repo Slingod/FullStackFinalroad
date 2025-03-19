@@ -1,22 +1,26 @@
-@import "bootstrap";
-
-/*
- *= require_self
- *= require_tree .
- */
-
 /* ==========================
    🌍 Global Styles (Layout)
    ========================== */
 html,
 body {
+  overflow-x: hidden;
   height: 100%;
   margin: 0;
-  display: flex;
-  flex-direction: column;
+  padding: 0;
   font-family: Arial, sans-serif;
   background-color: var(--background-white);
   color: var(--text-black);
+  /* display: flex
+; */
+  align-items: stretch;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+body {
+  background: url("/assets/Cortissera.png") no-repeat center center fixed;
+  background-size: cover;
 }
 
 .wrapper {
@@ -27,61 +31,84 @@ body {
 
 .content {
   flex: 1;
-  padding: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 20px;
   align-items: center;
 }
 
 header {
-  position: fixed; /* Fixes the header at the top of the page */
-  top: 0; /* Ensures it stays at the top */
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%; /* Makes the header span the full width */
-  z-index: 1000; /* Keeps the header above all other elements */
-  background-color: var(--background-gray-light); /* Maintains visibility */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better separation */
-  padding: 10px 20px; /* Adjusts inner spacing */
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--background-gray-light);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+  padding: 10px 20px;
 }
 
-/* Ensures the content starts below the fixed header */
 .page-container {
-  margin-top: 70px; /* Adjust the height based on your header's height */
+  width: 100%;
+  max-width: 800px;
+  padding: 10px;
+  background: var(--background-gray-light);
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0);
+  margin-top: 70px;
+}
+
+.footer {
+  background-color: var(--text-blue-dark);
+  padding: 20px;
+  text-align: center;
+  border-top: 2px solid var(--text-white);
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  margin-top: auto;
+}
+
+.header,
+.content,
+.footer {
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* ==========================
-   🎨 Global Color Palette
-   ========================== */
+      🎨 Global Color Palette
+      ========================== */
 :root {
   --text-black: #000000;
   --background-white: #ffffff;
-
   --text-white: #ffffff;
   --background-black: #000000;
-
   --text-blue-dark: #003366;
   --background-yellow-light: #ffffff;
-
   --text-green-dark: #336600;
   --background-beige: #ffffff;
-
   --text-red-dark: #990000;
   --background-gray-light: #ffffff;
 }
 
 /* ==========================
-   🔝 Header Styles
-   ========================== */
+      🔝 Header Styles
+      ========================== */
 .header {
-  background-color: var(--background-gray-light);
+  background-color: var(--text-blue-dark);
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--text-red-dark);
-  max-width: 100%; /* Ensure it doesn't overflow */
-  overflow: hidden; /* Prevent any elements from overflowing */
-  box-sizing: border-box; /* Include borders/margins in the size */
+  border-bottom: 2px solid var(--text-blue-dark);
+}
+
+.welcome-message p {
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .header-container {
@@ -89,36 +116,35 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px; /* Optional limit if the page is wide */
-  margin: 0 auto; /* Center the content within the page */
-}
-
-.welcome-message {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--text-red-dark);
-  margin: 0;
-}
-
-.nav-buttons {
-  /* Improved alignment to the right */
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: nowrap;
-  margin-left: auto;
-  overflow: hidden; /* Prevent overflow */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* ==========================
-   🔘 Button Styles
-   ========================== */
+      🔘 Button Styles
+      ========================== */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-buttons .btn {
+  color: white;
+  border-color: white;
+}
+
+.nav-buttons .btn:hover {
+  background-color: white;
+  color: black;
+}
+
 .btn {
   display: inline-block;
   padding: 10px 15px;
   text-align: center;
   font-weight: bold;
-  border: 2px solid transparent;
+  border: 2px solid white;
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
@@ -137,18 +163,10 @@ header {
   border-color: #003366;
 }
 
-.btn-primary:hover {
-  background-color: #003366;
-}
-
 .btn-success {
   background-color: #336600;
   color: white;
   border-color: #336600;
-}
-
-.btn-success:hover {
-  background-color: #336600;
 }
 
 .btn-danger {
@@ -157,20 +175,9 @@ header {
   border-color: #990000;
 }
 
-.btn-danger:hover {
-  background-color: #990000;
-}
-
 /* ==========================
-   📜 Footer Styles
-   ========================== */
-.footer {
-  background-color: var(--background-black);
-  padding: 20px;
-  text-align: center;
-  border-top: 2px solid var(--text-white);
-}
-
+      📜 Footer Styles
+      ========================== */
 .footer-content {
   display: flex;
   justify-content: center;
@@ -182,7 +189,6 @@ header {
   text-decoration: none;
   font-weight: bold;
   padding: 10px 15px;
-  border: 2px solid white;
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -194,8 +200,8 @@ header {
 }
 
 /* ==========================
-   ⚠️ Alerts
-   ========================== */
+      ⚠️ Alerts
+      ========================== */
 .alert {
   padding: 10px;
   margin: 10px 0;
@@ -217,404 +223,175 @@ header {
 }
 
 /* ==========================
-   📝 Form Styles
-   ========================== */
-.auth-container {
+      📝 Form Styles
+      ========================== */
+.auth-container,
+.contact-container,
+.edit-profile-container {
   background: var(--background-gray-light);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   max-width: 600px;
+  margin: 20px auto;
+}
+
+.auth-field,
+.contact-field,
+.edit-profile-form-control {
+  margin-bottom: 20px;
+  padding: 10px;
   width: 100%;
-}
-
-.auth-field label {
-  display: block; /* Places the label above the input */
-  margin-bottom: 5px; /* Adds spacing between label and input */
-  font-weight: bold; /* Makes the labels more prominent */
-}
-
-.auth-title {
-  color: var(--text-red-dark);
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.auth-field {
-  margin-bottom: 15px;
-  padding: 10px; /* Added padding for better input usability */
-  width: 100%; /* Standardized input widths */
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-}
-
-.auth-actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-/* ==========================
-   📄 Page Styles
-   ========================== */
-.page-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  background: var(--background-gray-light);
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.page-title {
-  color: var(--text-red-dark);
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.page-content {
-  text-align: left;
-}
-
-/* ==========================
-   📧 Contact Form Styles
-   ========================== */
-.contact-container {
-  background: var(--background-gray-light);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px #000000;
-  text-align: center;
-  max-width: 600px;
-  width: 100%;
-}
-
-.contact-title {
-  color: var(--text-red-dark);
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2rem; /* Enhanced visibility */
-}
-
-.contact-field {
-  margin-bottom: 15px;
-  padding: 10px; /* Uniform padding for inputs */
-  width: 100%; /* Consistent sizing for all inputs */
-  border: 1px solid #ffffff;
   border-radius: 5px;
   box-sizing: border-box;
-}
-
-.contact-actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-/* ==========================
-   🖍 Edit Profile Styles
-   ========================== */
-
-/* Container for the edit profile page */
-.edit-profile-container {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px #000000;
-  background-color: var(--background-white);
-}
-
-/* Title for the edit profile page */
-.edit-profile-title {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.5em;
-  color: var(--text-red-dark);
 }
 
-/* Form group styling for consistency */
-.edit-profile-form-group {
-  margin-bottom: 15px;
+.auth-field label,
+.contact-field label,
+.edit-profile-form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-/* Styling for form controls */
-.edit-profile-form-control {
+.auth-field input,
+.contact-field input,
+.edit-profile-form-control input {
   width: 100%;
   padding: 8px;
   margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ffffff;
-  border-radius: 3px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-/* Align buttons in a row */
+.auth-actions,
+.contact-actions,
 .edit-profile-form-actions {
   display: flex;
-  justify-content: space-between;
-}
-
-/* Specific button styles */
-.edit-profile-btn-success {
-  background-color: #336600;
-  color: white;
-  border-color: #336600;
-}
-
-.edit-profile-btn-success:hover {
-  background-color: #336600;
-}
-
-.edit-profile-btn-danger {
-  background-color: #990000;
-  color: white;
-  border-color: #990000;
-}
-
-.edit-profile-btn-danger:hover {
-  background-color: #990000;
-}
-
-/* ============================
-    Admin Dashboard Styles
-   ============================ */
-.center-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-top: 20px; /* Adjust the position slightly if needed */
-}
-
-.dashboard-title {
-  margin: 50px 0; /* Adds spacing above and below the title */
-  font-size: 2.5rem; /* Make the title larger and more prominent */
-}
-
-.button-container {
-  display: flex;
   justify-content: center;
-  gap: 20px; /* Add space between the buttons */
+  gap: 10px;
   margin-top: 20px;
 }
 
-.button-container .btn-primary {
-  padding: 10px 20px; /* Optional: Add some padding to the buttons */
-  font-size: 1rem; /* Ensure the buttons are easy to read */
+.auth-field.remember-me {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-/* ============================
-    Admin Users Page Styles
-   ============================ */
+.auth-field.remember-me label {
+  margin: 0;
+}
 
-/* Title container styling */
+.auth-field.remember-me input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+/* ==========================
+      📄 Page Styles
+      ========================== */
+.page-title {
+  color: var(--text-red-dark);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.page-content {
+  text-align: center;
+}
+
 .title-container {
   display: flex;
   justify-content: center;
-  align-items: center; /* Center vertically if needed */
-  margin: 20px 0; /* Space above and below the title */
-  text-align: center;
-}
-
-.title-container h1 {
-  font-size: 2.5rem; /* Make the title prominent */
-  font-weight: bold;
-  color: var(--text-black); /* Keep the title readable */
-  margin: 0; /* Remove unnecessary margins */
-}
-
-/* User cards container */
-.users-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
   align-items: center;
-}
-
-/* User cards styling */
-.user-card {
-  border: 1px solid #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  width: 250px;
+  width: 100%;
   text-align: center;
-  background-color: var(--background-white); /* White card background */
-}
-
-/* Buttons specific to "Show" and "Modify" */
-.btn-info {
-  background-color: #003366; /* Dark blue for "Show" */
-  color: #ffffff; /* White text */
-  border: 1px solid #003366; /* Match the background */
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-
-.btn-info:hover {
-  background-color: #003366; /* Slightly darker for hover */
-  color: #ffffff; /* Keep text white */
-}
-
-.btn-warning {
-  background-color: #336600; /* Dark green for "Modify" */
-  color: #ffffff; /* White text */
-  border: 1px solid #336600; /* Match the background */
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-
-.btn-warning:hover {
-  background-color: #336600; /* Slightly darker for hover */
-  color: #ffffff; /* Keep text white */
-}
-
-/* Style for Delete button (unchanged) */
-.btn-danger {
-  background-color: #990000; /* Dark red */
-  color: #ffffff;
-  border: 1px solid #990000;
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-}
-
-.btn-danger:hover {
-  background-color: #990000; /* Darker red */
-  color: #ffffff;
-}
-
-/* ============================
-    Terms and Conditions Styles
-   ============================ */
-
-/* Main container for the page */
-.page-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  background-color: var(--background-white);
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px #000000;
-  text-align: center; /* Aligns all text to the center */
-}
-
-/* Page title (h1) styling */
-.page-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--text-black);
-  margin-bottom: 30px;
-}
-
-/* Section titles (h2) */
-.page-content h2 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--text-blue-dark);
-  margin: 20px 0;
-  text-align: center; /* Centers the titles */
-}
-
-/* Paragraph content styling */
-.page-content p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: var(--text-black);
-  text-align: center; /* Centers the text */
-  margin-bottom: 20px;
-}
-
-/* Optional: Add some spacing for the content */
-.page-content {
   margin-top: 20px;
 }
 
-#cgu-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  background-color: var(--background-white);
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Aligns all text to the center */
-  margin-top: 120px !important; /* Forces priority */
-}
-
-/* ============================
-   About Us Page Styles
-   ============================ */
-
-#about-container {
-  margin-top: 120px; /* Ensures spacing below the fixed header */
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  background-color: var(--background-white); /* Clean background */
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elegance */
-  text-align: center; /* Center all text content */
-}
-
-.page-title {
+.title-container h1 {
   font-size: 2.5rem;
   font-weight: bold;
-  color: var(--text-black); /* High readability */
-  margin-bottom: 30px;
+  color: var(--text-white);
+  margin: 0;
 }
 
-.page-content h2 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--text-blue-dark); /* Accentuate section titles */
-  margin: 20px 0;
+/* ==========================
+      🖍 User Cards
+      ========================== */
+.users-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.user-card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
   text-align: center;
+  background-color: var(--background-white);
 }
 
-.page-content p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: var(--text-black);
-  text-align: center; /* Align paragraphs for consistency */
-  margin-bottom: 20px;
+/* ==========================
+      📄 Responsive Styles
+      ========================== */
+
+/* Small Screen */
+@media (max-width: 600px) {
+  .header-container,
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .page-container,
+  .content {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
 }
 
-.page-content ul {
-  text-align: left; /* Align list items for better readability */
-  margin-left: 20px;
-  padding-left: 20px;
+/* Medium Screen */
+@media (max-width: 1024px) {
+  .header-container,
+  .footer-content {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-container {
+    width: 90%;
+    max-width: 700px;
+    padding: 15px;
+  }
+
+  .users-container {
+    gap: 15px;
+  }
 }
 
-.page-content ul li {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-.input-field {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-}
-
-.btn-primary {
-  background-color: #003366;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #000000;
+/* Large Screen */
+@media (min-width: 1025px) {
+  .page-container {
+    max-width: 1200px;
+  }
 }

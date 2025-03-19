@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   # User resource
   resources :users, only: [:show, :edit, :update, :destroy]
 
+  # Members page
+  resources :members, only: [:index, :show]
+
   # Resources for events
   resources :events do
     member do
@@ -39,7 +42,7 @@ Rails.application.routes.draw do
 
     resources :users do
       member do
-        put "update_role", to: "users#update_role" # To modify permissions
+        put "update_role", to: "users#update_role"      # To modify permissions
         delete "force_delete", to: "users#force_delete" # Super Admin can delete an admin
       end
     end

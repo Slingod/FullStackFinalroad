@@ -1,0 +1,26 @@
+<h1 class="text-center">Member Profile</h1>
+
+<div class="auth-container">
+  <div class="card mx-auto member-profile-card">
+    <div class="card-body text-center">
+      <h2 class="member-name">
+        <% if @member.username.present? %>
+          <%= @member.username %>
+        <% elsif @member.firstname.present? && @member.name.present? %>
+          <%= "#{@member.firstname} #{@member.name}" %>
+        <% else %>
+          User #<%= @member.id %>
+        <% end %>
+      </h2>
+
+      <div class="member-actions">
+        <% if current_user == @member %>
+          <%= link_to 'Modify', edit_user_path(@member), class: "btn btn-success" %>
+          <%= link_to 'Delete Account', user_path(@member), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        <% end %>
+
+        <%= link_to 'Return', members_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

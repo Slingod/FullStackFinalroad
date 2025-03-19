@@ -1,0 +1,21 @@
+<div class="page-container">
+  <h1 class="page-title mt-4 mb-4">Members</h1>
+  <div class="users-container">
+    <% @members.each do |member| %>
+      <div class="user-card">
+        <div class="card-body text-center">
+          <h5 class="card-title">
+            <% if member.username.present? %>
+              <%= member.username %>
+            <% elsif member.firstname.present? && member.name.present? %>
+              <%= "#{member.firstname} #{member.name}" %>
+            <% else %>
+              User #<%= member.id %>
+            <% end %>
+          </h5>
+          <%= link_to 'Show', member_path(member), class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,8 +1,8 @@
-<div class="center-container">
-  <h1 class="dashboard-title">Welcome to the Admin Dashboard</h1>
+<div class="auth-container">
+  <h1 class="page-title">Welcome to the Admin Dashboard</h1>
   <p>Manage your application here.</p>
 
-  <div class="button-container">
+  <div class="auth-actions">
     <%= button_to "Manage Users", admin_users_path, method: :get, class: 'btn btn-primary' %>
     <%= button_to "Access Events Page", admin_events_path, method: :get, class: 'btn btn-primary' %>
   </div>
