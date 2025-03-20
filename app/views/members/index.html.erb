@@ -4,6 +4,16 @@
     <% @members.each do |member| %>
       <div class="user-card">
         <div class="card-body text-center">
+          <!-- Role pictures -->
+          <% if member.super_admin? %>
+            <%= image_tag 'SuperAdmin.png', alt: 'Super Admin', class: 'role-icon' %>
+          <% elsif member.admin? %>
+            <%= image_tag 'king.png', alt: 'Admin', class: 'role-icon' %>
+          <% else %>
+            <%= image_tag 'Member.png', alt: 'User', class: 'role-icon' %>
+          <% end %>
+
+          <!-- Username -->
           <h5 class="card-title">
             <% if member.username.present? %>
               <%= member.username %>
@@ -13,6 +23,7 @@
               User #<%= member.id %>
             <% end %>
           </h5>
+
           <%= link_to 'Show', member_path(member), class: "btn btn-primary" %>
         </div>
       </div>

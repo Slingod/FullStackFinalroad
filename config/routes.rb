@@ -10,23 +10,24 @@ Rails.application.routes.draw do
   # Devise for authentication
   devise_for :users, controllers: { sessions: 'users/sessions' }
 
+  # Custom Devise routes for additional user actions
   devise_scope :user do
-    get "signup", to: "devise/registrations#new", as: :signup
-    get "login", to: "devise/sessions#new", as: :login
-    get "password/new", to: "devise/passwords#new", as: :forgot_password
+    get "signup", to: "devise/registrations#new", as: :signup # Registration page
+    get "login", to: "devise/sessions#new", as: :login        # Login page
+    get "password/new", to: "devise/passwords#new", as: :forgot_password # Forgot password page
   end
 
-  # User resource
+  # User resource (for standard users)
   resources :users, only: [:show, :edit, :update, :destroy]
 
   # Members page
   resources :members, only: [:index, :show]
 
-  # Resources for events
+  # Resources for events (including member actions)
   resources :events do
     member do
-      post "register"
-      delete "unregister"
+      post "register"   # Register for an event
+      delete "unregister" # Unregister from an event
     end
   end
 
@@ -36,25 +37,28 @@ Rails.application.routes.draw do
   # Shop page
   get "shop", to: "home#shop", as: :shop
 
-  # Admin space
+  # Admin namespace
   namespace :admin do
+    # Dashboard as the root for admin namespace
     root to: "dashboard#index"
 
+    # Admin-specific user management
     resources :users do
       member do
-        put "update_role", to: "users#update_role"      # To modify permissions
-        delete "force_delete", to: "users#force_delete" # Super Admin can delete an admin
+        put "update_role", to: "users#update_role"      # Route to modify user roles (permissions)
+        delete "force_delete", to: "users#force_delete" # Super Admin can delete another admin
       end
     end
 
+    # Admin-specific events management
     resources :events
   end
 
-  # Payment process with Stripe
+  # Payment process with Stripe (checkout actions)
   scope '/checkout' do
-    post 'create', to: 'checkout#create', as: 'checkout_create'
-    get 'success', to: 'checkout#success', as: 'checkout_success'
-    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+    post 'create', to: 'checkout#create', as: 'checkout_create'   # Create checkout session
+    get 'success', to: 'checkout#success', as: 'checkout_success' # On successful payment
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'    # On cancelled payment
   end
 
   # Donation page
@@ -63,7 +67,7 @@ Rails.application.routes.draw do
   # CGU page
   get "/cgu", to: "pages#cgu"
 
-  # Application health check
+  # Application health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Contact form

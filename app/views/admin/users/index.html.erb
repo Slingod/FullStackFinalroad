@@ -7,11 +7,20 @@
   <% @users.each do |user| %>
     <!-- Individual User Card -->
     <div class="user-card" id="user-<%= user.id %>">
+      <!-- Administration pictures -->
+      <% if user.super_admin? %>
+        <%= image_tag 'SuperAdmin.png', alt: 'Super Admin', class: 'role-icon' %>
+      <% elsif user.admin? %>
+        <%= image_tag 'king.png', alt: 'Admin', class: 'role-icon' %>
+      <% else %>
+        <%= image_tag 'Member.png', alt: 'User', class: 'role-icon' %>
+      <% end %>
+
       <!-- Display username or email -->
       <h2><%= user.username.present? ? user.username : user.email %></h2>
 
       <!-- Display user role -->
-      <p><strong>Role:</strong> <%= user.admin? ? "Admin" : "Users" %></p>
+      <p><strong>Role:</strong> <%= user.super_admin? ? "Super Admin" : (user.admin? ? "Admin" : "User") %></p>
 
       <!-- Action Buttons: Show, Modify, Delete -->
       <div class="d-flex justify-content-center gap-2 mt-2">

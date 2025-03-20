@@ -11,6 +11,10 @@ class User < ApplicationRecord
     self.super_admin
   end
 
+  def over_18?
+    age.present? && age >= 18
+  end
+
   private
 
   def prevent_admin_change

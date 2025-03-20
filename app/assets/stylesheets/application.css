@@ -148,6 +148,20 @@ header {
   color: black;
 }
 
+/* Uniform button styles */
+.btn {
+  display: inline-block; /* Make buttons inline but block-like for padding */
+  min-width: 150px; /* Minimum width to maintain a consistent size */
+  max-width: 250px; /* Maximum width to avoid overly wide buttons */
+  padding: 10px 20px; /* Equal padding inside the buttons */
+  text-align: center; /* Center the text */
+  font-size: 16px; /* Set font size */
+  border-radius: 5px; /* Rounded corners */
+  white-space: normal; /* Allow text wrapping */
+  overflow: visible; /* Ensure text is not truncated */
+  text-overflow: clip; /* Disable ellipsis, show full text */
+}
+
 .btn {
   display: inline-block;
   padding: 10px 15px;
@@ -237,20 +251,20 @@ header {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
-  width: 80%;
+  z-index: 9999; /* Assure que les messages sont au-dessus de tout */
+  width: 90%;
   max-width: 600px;
-  text-align: center;
+  pointer-events: none; /* Empêche toute interaction si nécessaire */
 }
 
 .flash {
   padding: 15px;
   margin-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   font-weight: bold;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 1;
 }
 
 .flash.alert-notice {
@@ -260,15 +274,20 @@ header {
 }
 
 .flash.alert-alert {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
 }
 
 .flash.alert-error {
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
+}
+
+.flash.fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 /* ==========================
@@ -394,6 +413,15 @@ header {
   ); /* Semi-transparent white background */
 }
 
+/* Uniform card title styles */
+.card-title {
+  font-size: 1.5rem; /* Fix the font size to be the same for all card titles */
+  font-weight: bold; /* Consistent font weight */
+  color: var(--text-black); /* Use a consistent text color */
+  text-align: center; /* Center align the text for consistency */
+  margin-bottom: 10px; /* Add some spacing below the title */
+}
+
 /* ==========================
       📄 Responsive Styles
       ========================== */
@@ -448,4 +476,13 @@ header {
   .page-container {
     max-width: 1200px;
   }
+}
+
+.role-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
