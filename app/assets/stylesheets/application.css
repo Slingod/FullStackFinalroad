@@ -231,7 +231,7 @@ header {
   border: 1px solid #ffffff;
 }
 
-/* Styles pour les messages flash */
+/* Styles flash messages */
 .flash-messages {
   position: fixed;
   top: 20px;
