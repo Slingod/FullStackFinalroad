@@ -1,11 +1,21 @@
 class EventsController < ApplicationController
-  def index
-    @events_by_year = {}
-
-    (2021..2026).each do |year|
-      events = Event.where(date: Date.new(year, 1, 1)..Date.new(year, 12, 31))
-      months = events.group_by { |event| event.date.month }
-      @events_by_year[year] = months
+  def home
+    @events_by_year = Event.all.group_by { |event| event.date.year }
+    @events_by_year.transform_values! do |months|
+      months.group_by { |event| event.date.month }
+            .transform_values do |events|
+              events.map do |e|
+                {
+                  id: e.id,
+                  author: e.author,
+                  location: e.location,
+                  pictures: e.pictures.map { |pic| url_for(pic) }, 
+                  date: e.date.to_s,
+                  duration: e.duration,
+                  price: e.price
+                }
+              end
+            end
     end
   end
 
@@ -51,6 +61,9 @@ class EventsController < ApplicationController
 
   
   def event_params
-    params.require(:event).permit(:author, :title ,:location, :picture, :duration, :price, :date)
+    
+    params.require(:event).permit(:author, :title, :location, :duration, :price, :date, pictures: [])
+    
+    
   end
 end

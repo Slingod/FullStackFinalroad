@@ -1,5 +1,3 @@
-<h1>Edit the event</h1>
-
 <%= form_with(model: @event, local: true) do |form| %>
   <% if @event.errors.any? %>
     <div class="errors">
@@ -22,12 +20,15 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :picture, 'Picture' %>
-    <%= form.file_field :picture, class: 'form-control' %> 
-    <% if @event.picture.attached? %>
+    <%= form.label :pictures, 'Pictures' %>
+    <%= form.file_field :pictures, multiple: true, class: 'form-control' %>
+    
+    <% if @event.pictures.attached? %>
       <div>
-        <strong>Image actuelle:</strong>
-        <%= image_tag @event.picture.variant(resize: "200x200") %> 
+        <strong>Current Image:</strong>
+        <% if @event.pictures.any? %> <!-- Vérifier si des images sont attachées -->
+          <%= image_tag @event.pictures.first.variant(resize: "200x200"), class: 'img-fluid' %>
+        <% end %>
       </div>
     <% end %>
   </div>
@@ -47,7 +48,7 @@
     <%= form.date_select :date, { start_year: 2021, end_year: 2026 }, class: 'form-control' %>
   </div>
 
-  <%= form.submit 'Modifier l\'événement', class: 'btn btn-success' %>
+  <%= form.submit 'Modify Event', class: 'btn btn-success' %>
 <% end %>
 
-<%= link_to 'Retour', event_path(@event), class: 'btn btn-secondary' %>
+<%= link_to 'Back', event_path(@event), class: 'btn btn-secondary' %>

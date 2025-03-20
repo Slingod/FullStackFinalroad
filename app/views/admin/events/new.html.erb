@@ -1,60 +1,64 @@
-<div class="container mt-5">
-  <div class="card">
-    <div class="card-header">
-      <h3 class="card-title text-center">Create New Event</h3>
-    </div>
-    <div class="card-body">
-      <%= form_with(model: @event, local: true, html: { class: 'needs-validation', novalidate: true }) do |form| %>
-        <% if @event.errors.any? %>
-          <div class="alert alert-danger">
-            <h4><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h4>
-            <ul>
-              <% @event.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+<%= form_with(model: @event, local: true) do |form| %>
+  <div class="container py-5">
+    <div class="card shadow-lg rounded">
+      <div class="card-header bg-primary text-white">
+        <h3 class="text-center">Create or Edit Event</h3>
+      </div>
 
-        <div class="form-group">
-          <%= form.label :title, class: 'control-label' %>
+      <div class="card-body">
+        
+        <div class="form-group mb-3">
+          <%= form.label :title, class: 'form-label' %>
           <%= form.text_field :title, class: 'form-control', placeholder: 'Enter event title' %>
         </div>
 
-        <div class="form-group">
-          <%= form.label :author, class: 'control-label' %>
+       
+        <div class="form-group mb-3">
+          <%= form.label :author, class: 'form-label' %>
           <%= form.text_field :author, class: 'form-control', placeholder: 'Enter event author' %>
         </div>
 
-        <div class="form-group">
-          <%= form.label :location, class: 'control-label' %>
+        
+        <div class="form-group mb-3">
+          <%= form.label :location, class: 'form-label' %>
           <%= form.text_field :location, class: 'form-control', placeholder: 'Enter event location' %>
         </div>
 
-        <div class="form-group">
-          <%= form.label :price, class: 'control-label' %>
-          <%= form.number_field :price, class: 'form-control', placeholder: 'Enter event price' %>
+        
+        <div class="form-group mb-3">
+          <%= form.label :duration, class: 'form-label' %>
+          <%= form.number_field :duration, class: 'form-control', placeholder: 'Duration in minutes' %>
         </div>
 
-        <div class="form-group">
-          <%= form.label :duration, class: 'control-label' %>
-          <%= form.number_field :duration, class: 'form-control', placeholder: 'Enter event duration' %>
+        
+        <div class="form-group mb-3">
+          <%= form.label :price, class: 'form-label' %>
+          <%= form.number_field :price, class: 'form-control', placeholder: 'Event price in €' %>
         </div>
 
-        <div class="form-group">
-          <%= form.label :date, class: 'control-label' %>
+        
+        <div class="form-group mb-3">
+          <%= form.label :date, class: 'form-label' %>
           <%= form.date_select :date, class: 'form-control' %>
         </div>
 
-        <div class="form-group">
-          <%= form.label :picture, class: 'control-label' %>
-          <%= form.file_field :picture, class: 'form-control-file' %>
+        
+        <div class="form-group mb-3">
+          <%= form.label :pictures, class: 'form-label' %>
+          <%= form.file_field :pictures, multiple: true, class: 'form-control-file' %>
         </div>
 
-        <div class="form-group text-center">
-          <%= form.submit 'Create Event', class: 'btn btn-primary' %>
+        
+        <div class="form-group mb-3">
+          <%= form.label :videos, "Upload Videos", class: 'form-label' %>
+          <%= form.file_field :videos, multiple: true, accept: 'video/*', class: 'form-control-file' %>
         </div>
-      <% end %>
+
+        
+        <div class="form-group text-center">
+          <%= form.submit 'Save Event', class: 'btn btn-primary btn-lg' %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

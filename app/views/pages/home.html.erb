@@ -28,9 +28,8 @@
     const eventsList = document.getElementById('events-list');
     let lastOpenedYear = null;
 
-    const eventsByYear = <%= raw @events_by_year.transform_values { |months| months.transform_values { |events| events.map { |e| { id: e.id, author: e.author, location: e.location, picture: e.picture, date: e.date.to_s, duration: e.duration, price: e.price } } } }.to_json %>;
+    const eventsByYear = <%= raw @events_by_year.transform_values { |months| months.transform_values { |events| events.map { |e| { id: e.id, author: e.author, location: e.location, date: e.date.to_s, duration: e.duration, price: e.price } } } }.to_json %>;
 
-    
     yearButtons.forEach(button => {
       button.addEventListener('click', function() {
         const year = button.getAttribute('data-year');
@@ -47,7 +46,6 @@
       });
     });
 
-    
     document.querySelectorAll('.month-item').forEach(monthItem => {
       monthItem.addEventListener('click', function() {
         const year = this.closest('.year-container').querySelector('.year-btn').getAttribute('data-year');
@@ -63,9 +61,8 @@
           events.forEach(event => {
             const eventCard = document.createElement('div');
             eventCard.classList.add('event-card');
-            eventCard.innerHTML = ` 
+            eventCard.innerHTML = `
               <div style="background-color: #f8f9fa; padding: 20px; margin: 10px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: left; color: black;">
-                
                 <h3 style="margin-top: 10px; font-size: 18px;">${event.author}</h3>
                 <p><strong>Location:</strong> ${event.location}</p>
                 <p><strong>Date:</strong> ${event.date}</p>
@@ -73,13 +70,6 @@
                 <p><strong>Price:</strong> ${event.price} €</p>
                 <div style="display: flex; justify-content: space-between; margin-top: 10px;">
                   <a href="/events/${event.id}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">View</a>
-                  <% if current_user && current_user.admin? %>
-                    <a href="/events/${event.id}/edit" style="background-color: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">Edit</a>
-                    <form action="/events/${event.id}" method="post" style="display: inline-block; width: 100%; margin-bottom: 10px;">
-                      <input type="hidden" name="_method" value="delete">
-                      <input type="submit" value="Delete" style="background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center;">
-                    </form>
-                  <% end %>
                 </div>
               </div>
             `;
@@ -96,7 +86,6 @@
       });
     });
 
-    
     document.addEventListener('click', function(event) {
       if (!event.target.closest('.year-container')) {
         document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
