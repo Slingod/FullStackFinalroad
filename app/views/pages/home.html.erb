@@ -1,6 +1,6 @@
 <div style="display: flex; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 999;">
   <% (2023..2026).each do |year| %>
-    <div class="year-container" style="margin: 0 10px; text-align: center;">
+    <div class="year-container" style="margin: 0 20px; text-align: center;">
       <button class="year-btn" data-year="<%= year %>" style="background-color: #007bff; color: white; padding: 12px 24px; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: background-color 0.3s, transform 0.2s; min-height: 45px;">
         <%= year %>
       </button>
@@ -17,7 +17,7 @@
 
 <div id="events-container" style="display: none; text-align: center; margin-top: 30px;">
   <h2 id="selected-month" style="color: black; margin-bottom: 20px;"></h2>
-  <div id="events-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;"></div>
+  <div id="events-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 20px;"></div>
 </div>
 
 <script>
@@ -60,16 +60,19 @@
         if (events && events.length > 0) {
           events.forEach(event => {
             const eventCard = document.createElement('div');
-            eventCard.classList.add('event-card');
+            eventCard.classList.add('card', 'shadow', 'rounded', 'col-md-3');
+            eventCard.style.border = "2px solid #007bff";  // Border color and style
+            eventCard.style.borderRadius = "15px";  // Rounded corners
+            eventCard.style.overflow = "hidden";  // Ensures the border-radius works properly
             eventCard.innerHTML = `
-              <div style="background-color: #f8f9fa; padding: 20px; margin: 10px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: left; color: black;">
-                <h3 style="margin-top: 10px; font-size: 18px;">${event.author}</h3>
-                <p><strong>Location:</strong> ${event.location}</p>
-                <p><strong>Date:</strong> ${event.date}</p>
-                <p><strong>Duration:</strong> ${event.duration} minutes</p>
-                <p><strong>Price:</strong> ${event.price} €</p>
-                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-                  <a href="/events/${event.id}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; font-size: 14px; width: 100%; text-align: center; margin-bottom: 10px; display: inline-block;">View</a>
+              <div class="card-body" style="background-color: #f8f9fa; padding: 20px;">
+                <h5 class="card-title" style="font-size: 18px; color: #007bff; margin-bottom: 15px; font-weight: bold; text-align: center;">${event.author}</h5>
+                <p class="card-text"><strong>Location:</strong> ${event.location}</p>
+                <p class="card-text"><strong>Date:</strong> ${event.date}</p>
+                <p class="card-text"><strong>Duration:</strong> ${event.duration} minutes</p>
+                <p class="card-text"><strong>Price:</strong> ${event.price} €</p>
+                <div style="display: flex; justify-content: center; margin-top: 20px;">
+                  <a href="/events/${event.id}" class="btn btn-primary" style="width: 100%; font-size: 14px; font-weight: bold; border-radius: 25px; padding: 10px 20px; text-align: center; display: inline-block;">View Event</a>
                 </div>
               </div>
             `;
@@ -81,7 +84,7 @@
 
         eventsContainer.style.display = 'block';
 
-        // Cacher les mois après avoir sélectionné un mois
+        
         document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
       });
     });

@@ -62,7 +62,7 @@ class EventsController < ApplicationController
   
   def event_params
     
-    params.require(:event).permit(:author, :title, :location, :duration, :price, :date, pictures: [])
+    params.require(:event).permit(:author, :location, :duration, :price, :date, :title, pictures: [], videos: [])
     
     
   end

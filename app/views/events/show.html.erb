@@ -14,32 +14,30 @@
             <p><strong>Date:</strong> <%= @event.date.strftime("%d %B %Y") %></p>
           </div>
 
-          
-          <div class="text-center mb-3">
+          <div style="width: 100%; border-top: 2px solid #007bff; margin-top: 20px; margin-bottom: 20px;"></div>
+
+          <div class="mb-3" style="display: flex; justify-content: flex-end; flex-wrap: wrap;">
             <% if @event.pictures.attached? %>
-              <div class="row">
-                <% @event.pictures.each do |picture| %>
-                  <div class="col-4 mb-3">
-                    <!-- Limiter la taille des images -->
-                    <%= image_tag url_for(picture), alt: "Event Image", class: "img-fluid rounded", style: "max-width: 200px; height: auto;" %>
-                  </div>
-                <% end %>
-              </div>
+              <% @event.pictures.each do |picture| %>
+                <div class="mb-3" style="margin-left: 10px;">
+                  <%= image_tag url_for(picture), alt: "Event Image", class: "img-fluid rounded", style: "max-width: 200px; height: auto;" %>
+                </div>
+              <% end %>
             <% else %>
               <p class="text-muted">No images available</p>
             <% end %>
           </div>
 
-          
-          <div class="text-center mb-3">
+          <div class="mb-3">
             <% if @event.videos.attached? %>
               <div class="row">
-                <% @event.videos.each do |video| %>
-                  <div class="col-4 mb-3">
-                    <video width="100%" controls>
+                <% @event.videos.each_with_index do |video, index| %>
+                  <div class="col-6 col-sm-4 col-md-3 mb-3 text-center">
+                    
+                    <video controls style="width: 100%; max-width: 300px; height: auto; border: 1px solid #ccc;">
                       <source src="<%= url_for(video) %>" type="video/mp4">
                       Your browser does not support the video tag.
-                    </video>
+                    
                   </div>
                 <% end %>
               </div>
