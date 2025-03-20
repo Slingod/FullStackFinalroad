@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
-  has_one_attached :picture  
+  has_many_attached :pictures  
+  has_many_attached :videos    
 
-  
   validates :title, presence: true
   validates :author, presence: true
   validates :location, presence: true
@@ -9,3 +9,4 @@ class Event < ApplicationRecord
   validates :price, presence: true
   validates :date, presence: true
 end
+

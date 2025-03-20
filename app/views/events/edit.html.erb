@@ -1,53 +1,126 @@
-<h1>Edit the event</h1>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          <h2>Modify Event</h2>
+        </div>
 
-<%= form_with(model: @event, local: true) do |form| %>
-  <% if @event.errors.any? %>
-    <div class="errors">
-      <ul>
-        <% @event.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <div class="card-body">
+          <%= form_with(model: @event, local: true) do |form| %>
+            
+            <% if @event.errors.any? %>
+              <div class="alert alert-danger mb-4">
+                <ul>
+                  <% @event.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
 
-  <div class="form-group">
-    <%= form.label :author %>
-    <%= form.text_field :author, class: 'form-control' %>
-  </div>
+            
+            <div class="form-group mb-3">
+              <%= form.label :author, class: 'form-label' %>
+              <%= form.text_field :author, class: 'form-control' %>
+            </div>
 
-  <div class="form-group">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: 'form-control' %>
-  </div>
+            
+            <div class="form-group mb-3">
+              <%= form.label :location, class: 'form-label' %>
+              <%= form.text_field :location, class: 'form-control' %>
+            </div>
 
-  <div class="form-group">
-    <%= form.label :picture, 'Picture' %>
-    <%= form.file_field :picture, class: 'form-control' %> 
-    <% if @event.picture.attached? %>
-      <div>
-        <strong>Image actuelle:</strong>
-        <%= image_tag @event.picture.variant(resize: "200x200") %> 
+            
+            <div class="form-group mb-3">
+              <%= form.label :pictures, 'Pictures', class: 'form-label' %>
+              <%= form.file_field :pictures, multiple: true, class: 'form-control' %>
+              
+              <% if @event.pictures.attached? %>
+                <div class="mt-3">
+                  <strong>Current Image:</strong>
+                  <% if @event.pictures.any? %> 
+                    <%= image_tag @event.pictures.first.variant(resize: "200x200"), class: 'img-fluid' %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+
+            
+            <div class="form-group mb-3">
+              <%= form.label :videos, 'Videos', class: 'form-label' %>
+              <%= form.file_field :videos, multiple: true, class: 'form-control' %>
+
+              <% if @event.videos.attached? %>
+                <div class="mt-3">
+                  <strong>Current Video:</strong>
+                  <% @event.videos.each do |video| %>
+                    <%= video_tag url_for(video), controls: true, class: 'video-fluid', style: 'max-width: 200px; height: auto;' %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+
+            
+            <div class="form-group mb-3">
+              <%= form.label :duration, class: 'form-label' %>
+              <%= form.number_field :duration, class: 'form-control' %>
+            </div>
+
+            
+            <div class="form-group mb-3">
+              <%= form.label :price, class: 'form-label' %>
+              <%= form.number_field :price, step: 0.01, class: 'form-control' %>
+            </div>
+
+            
+            <div class="form-group mb-3">
+              <%= form.label :date, class: 'form-label' %>
+              <%= form.date_select :date, { start_year: 2021, end_year: 2026 }, class: 'form-control' %>
+            </div>
+
+            <%= form.submit 'Modify Event', class: 'btn btn-success btn-block' %>
+          <% end %>
+        </div>
+
+        
+        <div class="card-footer text-center">
+          <%= link_to 'Back', event_path(@event), class: 'btn btn-secondary' %>
+        </div>
       </div>
-    <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="form-group">
-    <%= form.label :duration %>
-    <%= form.number_field :duration, class: 'form-control' %>
-  </div>
+<style>
+  .card {
+    border-radius: 8px;
+  }
 
-  <div class="form-group">
-    <%= form.label :price %>
-    <%= form.number_field :price, step: 0.01, class: 'form-control' %>
-  </div>
+  .card-header {
+    background-color: #f8f9fa; /* Enlève le bleu, met un fond gris clair */
+    color: #000;
+  }
 
-  <div class="form-group">
-    <%= form.label :date %>
-    <%= form.date_select :date, { start_year: 2021, end_year: 2026 }, class: 'form-control' %>
-  </div>
+  .form-control {
+    border-radius: 5px;
+  }
 
-  <%= form.submit 'Modifier l\'événement', class: 'btn btn-success' %>
-<% end %>
+  .btn {
+    border-radius: 5px;
+  }
 
-<%= link_to 'Retour', event_path(@event), class: 'btn btn-secondary' %>
+  .btn:hover {
+    background-color: #0056b3;
+  }
+
+  .shadow-sm {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+</style>
