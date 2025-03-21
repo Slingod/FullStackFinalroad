@@ -27,6 +27,7 @@
     const selectedMonth = document.getElementById('selected-month');
     const eventsList = document.getElementById('events-list');
     let lastOpenedYear = null;
+  
 
     const eventsByYear = <%= raw @events_by_year.transform_values { |months| months.transform_values { |events| events.map { |e| { id: e.id, author: e.author, location: e.location, date: e.date.to_s, duration: e.duration, price: e.price } } } }.to_json %>;
 

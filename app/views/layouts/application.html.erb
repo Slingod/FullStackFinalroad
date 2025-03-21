@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
   <head>
     <title><%= content_for(:title) || "NEL" %></title>
@@ -14,7 +14,7 @@
 
   <body>
     <div class="wrapper">
-      
+      <!-- Flash Messages -->
       <div class="flash-messages">
         <% flash.each do |key, message| %>
           <div class="flash alert-<%= key %>"><%= message %></div>
@@ -31,21 +31,17 @@
             <% end %>
           </div>
 
-          <div class="nav-buttons d-flex">
+          <div class="nav-buttons">
             <% if user_signed_in? %>
-              <%= link_to 'Home', root_path, class: 'btn btn-primary mr-3' %>
-
+              <%= link_to 'Home', root_path, class: 'btn' %> 
+              <%= link_to 'Members', members_path, class: 'btn' %>
               <% if current_user.admin? || current_user.super_admin? %>
-                <%= link_to 'Admin', admin_root_path, class: 'btn btn-success mr-3' %>
+                <%= link_to 'Admin', admin_root_path, class: 'btn' %>
               <% end %>
-
-              <!-- Ajout de la classe d-flex pour aligner le bouton -->
-              <div class="d-flex align-items-center">
-                <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-              </div>
+              <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
             <% else %>
-              <%= link_to 'Sign Up', signup_path, class: 'btn btn-primary mr-3' %>
-              <%= link_to 'Login', login_path, class: 'btn btn-primary mr-3' %>
+              <%= link_to 'Sign Up', signup_path, class: 'btn' %>
+              <%= link_to 'Login', login_path, class: 'btn' %>
             <% end %>
           </div>
         </div>
