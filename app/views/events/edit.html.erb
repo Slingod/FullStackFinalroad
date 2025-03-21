@@ -2,14 +2,12 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       
-      <div class="card shadow-sm">
-        <div class="card-header text-center">
-          <h2>Modify Event</h2>
-        </div>
+      <div class="card shadow-lg" style="border-radius: 20px; background: linear-gradient(135deg, #c1e1ec, #d1c4e9); padding: 20px;">
+        <div class="card-body text-center">
+          <h2 style="font-weight: bold;">Modify Event</h2>
 
-        <div class="card-body">
           <%= form_with(model: @event, local: true) do |form| %>
-            
+
             <% if @event.errors.any? %>
               <div class="alert alert-danger mb-4">
                 <ul>
@@ -20,41 +18,35 @@
               </div>
             <% end %>
 
-            
             <div class="form-group mb-3">
               <%= form.label :author, class: 'form-label' %>
               <%= form.text_field :author, class: 'form-control' %>
             </div>
 
-            
             <div class="form-group mb-3">
               <%= form.label :location, class: 'form-label' %>
               <%= form.text_field :location, class: 'form-control' %>
             </div>
 
-            
             <div class="form-group mb-3">
               <%= form.label :pictures, 'Pictures', class: 'form-label' %>
               <%= form.file_field :pictures, multiple: true, class: 'form-control' %>
-              
+
               <% if @event.pictures.attached? %>
                 <div class="mt-3">
-                  <strong>Current Image:</strong>
                   <% if @event.pictures.any? %> 
-                    <%= image_tag @event.pictures.first.variant(resize: "200x200"), class: 'img-fluid' %>
+                    <%= image_tag @event.pictures.first.variant(resize: "200x200"), class: 'img-fluid rounded' %>
                   <% end %>
                 </div>
               <% end %>
             </div>
 
-            
             <div class="form-group mb-3">
               <%= form.label :videos, 'Videos', class: 'form-label' %>
               <%= form.file_field :videos, multiple: true, class: 'form-control' %>
 
               <% if @event.videos.attached? %>
                 <div class="mt-3">
-                  <strong>Current Video:</strong>
                   <% @event.videos.each do |video| %>
                     <%= video_tag url_for(video), controls: true, class: 'video-fluid', style: 'max-width: 200px; height: auto;' %>
                   <% end %>
@@ -62,31 +54,26 @@
               <% end %>
             </div>
 
-            
             <div class="form-group mb-3">
               <%= form.label :duration, class: 'form-label' %>
               <%= form.number_field :duration, class: 'form-control' %>
             </div>
 
-            
             <div class="form-group mb-3">
               <%= form.label :price, class: 'form-label' %>
               <%= form.number_field :price, step: 0.01, class: 'form-control' %>
             </div>
 
-            
             <div class="form-group mb-3">
               <%= form.label :date, class: 'form-label' %>
               <%= form.date_select :date, { start_year: 2021, end_year: 2026 }, class: 'form-control' %>
             </div>
 
-            <%= form.submit 'Modify Event', class: 'btn btn-success btn-block' %>
+            <div class="d-flex justify-content-between mt-4">
+              <%= link_to 'Back to Event', event_path(@event), class: 'btn btn-primary' %>
+              <%= form.submit 'Modify Event', class: 'btn btn-success' %>
+            </div>
           <% end %>
-        </div>
-
-        
-        <div class="card-footer text-center">
-          <%= link_to 'Back', event_path(@event), class: 'btn btn-secondary' %>
         </div>
       </div>
     </div>
@@ -94,33 +81,11 @@
 </div>
 
 <style>
+  body {
+    background-image: url('https://www.transparenttextures.com/patterns/dark-fish-skin.png');
+    background-size: cover;
+  }
   .card {
-    border-radius: 8px;
-  }
-
-  .card-header {
-    background-color: #f8f9fa; /* Enlève le bleu, met un fond gris clair */
-    color: #000;
-  }
-
-  .form-control {
-    border-radius: 5px;
-  }
-
-  .btn {
-    border-radius: 5px;
-  }
-
-  .btn:hover {
-    background-color: #0056b3;
-  }
-
-  .shadow-sm {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
+    background: rgba(255, 255, 255, 0.8);
   }
 </style>

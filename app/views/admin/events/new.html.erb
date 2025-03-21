@@ -1,50 +1,87 @@
-<%= form_with(model: @event, local: true) do |form| %>
-  <div class="auth-container">
-    <h2>Create or Edit Event</h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm rounded-4"> 
+        
+        <div class="card-header text-center">
+          <h2 style="font-weight: bold;">Create or Edit Event</h2>
+        </div>
+        
+        <div class="card-body">
+          <%= form_with(model: @event, local: true) do |form| %>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :title, "Title", class: 'form-label' %>
-      <%= form.text_field :title, class: 'form-control', placeholder: 'Enter event title' %>
-    </div>
+            <div class="form-group mb-3">
+              <%= form.label :title, "Title", class: 'form-label' %>
+              <%= form.text_field :title, class: 'form-control', placeholder: 'Enter event title', style: 'border-radius: 0;' %>
+            </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :author, "Author", class: 'form-label' %>
-      <%= form.text_field :author, class: 'form-control', placeholder: 'Enter event author' %>
-    </div>
+            <div class="form-group mb-3">
+              <%= form.label :author, "Author", class: 'form-label' %>
+              <%= form.text_field :author, class: 'form-control', placeholder: 'Enter event author', style: 'border-radius: 0;' %>
+            </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :location, "Location", class: 'form-label' %>
-      <%= form.text_field :location, class: 'form-control', placeholder: 'Enter event location' %>
-    </div>
+            <div class="form-group mb-3">
+              <%= form.label :location, "Location", class: 'form-label' %>
+              <%= form.text_field :location, class: 'form-control', placeholder: 'Enter event location', style: 'border-radius: 0;' %>
+            </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :duration, "Duration", class: 'form-label' %>
-      <%= form.number_field :duration, class: 'form-control', placeholder: 'Duration in minutes' %>
-    </div>
+            <div class="form-group mb-3">
+              <%= form.label :duration, "Duration (in minutes)", class: 'form-label' %>
+              <%= form.number_field :duration, class: 'form-control', style: 'border-radius: 0;' %>
+            </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :price, "Price", class: 'form-label' %>
-      <%= form.number_field :price, class: 'form-control', placeholder: 'Event price in €' %>
-    </div>
+            <div class="form-group mb-3">
+              <%= form.label :price, "Price (€)", class: 'form-label' %>
+              <%= form.number_field :price, step: 0.01, class: 'form-control', style: 'border-radius: 0;' %>
+            </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :date, "Date", class: 'form-label' %>
-      <%= form.date_select :date, class: 'form-control' %>
-    </div>
+            <div class="form-group mb-3">
+              <%= form.label :date, "Date", class: 'form-label' %>
+              <%= form.date_select :date, { start_year: 2021, end_year: 2026 }, class: 'form-control', style: 'border-radius: 0;' %>
+            </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :pictures, "Pictures", class: 'form-label' %>
-      <%= form.file_field :pictures, multiple: true, class: 'form-control-file' %>
-    </div>
+            <div class="form-group mb-3">
+              <%= form.label :pictures, "Pictures", class: 'form-label' %>
+              <%= form.file_field :pictures, multiple: true, class: 'form-control', style: 'border-radius: 0;' %>
+            </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :videos, "Upload Videos", class: 'form-label' %>
-      <%= form.file_field :videos, multiple: true, accept: 'video/*', class: 'form-control-file' %>
-    </div>
+            <div class="form-group mb-3">
+              <%= form.label :videos, "Upload Videos", class: 'form-label' %>
+              <%= form.file_field :videos, multiple: true, accept: 'video/*', class: 'form-control', style: 'border-radius: 0;' %>
+            </div>
 
-    <div class="auth-actions" style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
-      <%= form.submit 'Save Event', class: 'btn btn-success' %>
-      <a href="/admin/events" class="btn btn-primary">Back to Events</a>
+            <div class="text-center mt-4 mb-2">
+              <%= form.submit 'Save Event', class: 'btn btn-success me-2' %>
+              <%= link_to 'Back', admin_events_path, class: 'btn btn-primary' %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-<% end %>
+</div>
+
+<style>
+  body {
+    background: linear-gradient(135deg, #66d3fa, #e0e0e0);
+  }
+
+  .card {
+    background-color: #eaeff2;
+    border: none;
+    border-radius: 15px; /* Bord arrondi ici */
+  }
+
+  .card-header {
+    background-color: transparent;
+    font-size: 1.5rem;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 0; 
+  }
+</style>
