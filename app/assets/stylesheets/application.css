@@ -417,7 +417,7 @@ header {
 .card-title {
   font-size: 1.5rem; /* Fix the font size to be the same for all card titles */
   font-weight: bold; /* Consistent font weight */
-  color: var(--text-black); /* Use a consistent text color */
+  color: var(--text-red-dark); /* Use a consistent text color */
   text-align: center; /* Center align the text for consistency */
   margin-bottom: 10px; /* Add some spacing below the title */
 }
