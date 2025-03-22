@@ -12,9 +12,9 @@ Rails.application.routes.draw do
 
   # Custom Devise routes for additional user actions
   devise_scope :user do
-    get "signup", to: "devise/registrations#new", as: :signup # Registration page
-    get "login", to: "devise/sessions#new", as: :login        # Login page
-    get "password/new", to: "devise/passwords#new", as: :forgot_password # Forgot password page
+    get "signup", to: "devise/registrations#new", as: :signup
+    get "login", to: "devise/sessions#new", as: :login
+    get "password/new", to: "devise/passwords#new", as: :forgot_password
   end
 
   # User resource (for standard users)
@@ -26,8 +26,7 @@ Rails.application.routes.draw do
   # Resources for events (including member actions)
   resources :events do
     member do
-      post "register"   # Register for an event
-      delete "unregister" # Unregister from an event
+      post "toggle_participation" # Toggle participation for an event
     end
   end
 
@@ -39,26 +38,23 @@ Rails.application.routes.draw do
 
   # Admin namespace
   namespace :admin do
-    # Dashboard as the root for admin namespace
     root to: "dashboard#index"
 
-    # Admin-specific user management
     resources :users do
       member do
-        put "update_role", to: "users#update_role"      # Route to modify user roles (permissions)
-        delete "force_delete", to: "users#force_delete" # Super Admin can delete another admin
+        put "update_role", to: "users#update_role"
+        delete "force_delete", to: "users#force_delete"
       end
     end
 
-    # Admin-specific events management
     resources :events
   end
 
   # Payment process with Stripe (checkout actions)
   scope '/checkout' do
-    post 'create', to: 'checkout#create', as: 'checkout_create'   # Create checkout session
-    get 'success', to: 'checkout#success', as: 'checkout_success' # On successful payment
-    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'    # On cancelled payment
+    post 'create', to: 'checkout#create', as: 'checkout_create'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
   end
 
   # Donation page

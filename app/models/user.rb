@@ -1,7 +1,13 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   before_save :prevent_admin_change
+
+  # Association for event participation
+  has_many :event_users
+  has_many :events, through: :event_users
 
   def admin?
     self.admin

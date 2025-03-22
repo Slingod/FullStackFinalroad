@@ -1,0 +1,15 @@
+<div class="events-container">
+  <h1>All Events</h1>
+
+  <% @events.each do |event| %>
+    <div class="event-card">
+      <h2><%= event.title %></h2>
+      <p><strong>Author:</strong> <%= event.author %></p>
+      <p><strong>Location:</strong> <%= event.location %></p>
+      <p><strong>Date:</strong> <%= event.date.strftime("%d %B %Y") %></p>
+      <p><strong>Duration:</strong> <%= event.duration %> minutes</p>
+      <p><strong>Price:</strong> <%= event.price %> €</p>
+      <%= link_to 'View Event', event_path(event), class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
