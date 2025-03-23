@@ -26,7 +26,6 @@ class UsersController < ApplicationController
       redirect_to user_path(@user), alert: "Failed to delete the account. Please try again." # Failure message
     end
   end
-  
 
   private
 
@@ -36,7 +35,9 @@ class UsersController < ApplicationController
 
   def user_params
     # Allow these fields for updates
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :name, :firstname, :age, :role)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation,
+                                 :name, :firstname, :age, :show_name, :show_firstname,
+                                 :show_email, :show_age)
   end
 
   def authorize_user!
