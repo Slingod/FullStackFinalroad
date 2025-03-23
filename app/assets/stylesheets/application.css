@@ -181,18 +181,30 @@ header {
   background-color: #003366;
   color: white;
   border-color: #003366;
+  padding: 10px 15px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 5px 0;
 }
 
 .btn-success {
   background-color: #336600;
   color: white;
   border-color: #336600;
+  margin: 5px 0;
+  padding: 10px 15px;
+  border-radius: 5px;
+  width: 100%;
 }
 
+/* Logout button */
 .btn-danger {
   background-color: #990000;
   color: white;
-  border-color: #990000;
+  padding: 10px 15px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 5px 0;
 }
 
 /* ==========================
@@ -497,7 +509,7 @@ header {
 
 /* Connexion Form */
 .auth-container {
-  max-width: 400px;
+  /* max-width: 400px; */
   width: 90%;
   margin: 80px auto;
   background: rgba(255, 255, 255, 0.95);
@@ -547,7 +559,6 @@ header {
 
 .auth-actions {
   display: flex;
-  flex-direction: column;
   gap: 10px;
   margin-top: 20px;
   width: 100%;
@@ -646,18 +657,8 @@ header {
   }
 }
 
-/* Ensure menu is visible on larger screens */
 @media (min-width: 601px) {
   .nav-menu {
     display: flex !important;
   }
-}
-
-/* Logout button */
-.btn-danger {
-  background-color: #990000;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  width: 100%;
 }
