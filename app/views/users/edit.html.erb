@@ -1,5 +1,5 @@
 <div class="auth-container">
-<h1 class="page-title">Edit Profile</h1>
+  <h1 class="page-title">Edit Profile</h1>
   <div class="auth-field label" style="width: 100%;">
     <div class="card-body">
       <%= form_for(@user) do |f| %>
@@ -11,16 +11,25 @@
         <div class="mb-3">
           <%= f.label :firstname %>
           <%= f.text_field :firstname, class: "form-control" %>
+          <%= f.check_box :show_firstname %> Show First Name
         </div>
 
         <div class="mb-3">
           <%= f.label :name %>
           <%= f.text_field :name, class: "form-control" %>
+          <%= f.check_box :show_name %> Show Last Name
         </div>
 
         <div class="mb-3">
           <%= f.label :email %>
           <%= f.email_field :email, class: "form-control" %>
+          <%= f.check_box :show_email %> Show Email
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :age %>
+          <%= f.number_field :age, class: "form-control", min: 0 %>
+          <%= f.check_box :show_age %> Show Age
         </div>
 
         <%= f.submit "Update", class: "btn btn-success" %>
