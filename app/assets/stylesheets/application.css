@@ -1,9 +1,7 @@
 /* ==========================
    🌍 Global Styles (Layout)
    ========================== */
-html,
-html,
-body {
+html body {
   overflow-x: hidden;
   height: 100%;
   margin: 0;
@@ -55,7 +53,7 @@ header {
   padding: 10px;
   background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
   border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 70px;
 }
 
@@ -70,8 +68,6 @@ header {
   text-align: center;
   border-top: 2px solid var(--text-white);
   width: 100%;
-  position: relative;
-  bottom: 0;
   margin-top: auto;
 }
 
@@ -210,6 +206,7 @@ header {
 
 .footer-links a {
   color: white;
+  background-color: #003366;
   text-decoration: none;
   font-weight: bold;
   padding: 10px 15px;
@@ -218,9 +215,10 @@ header {
 }
 
 .footer-links a:hover {
-  background-color: white;
-  color: black;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
   transform: scale(1.05);
+  border: solid #003366;
 }
 
 /* ==========================
@@ -299,12 +297,20 @@ header {
 .edit-profile-container {
   background: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   max-width: 800px;
   margin: auto;
   margin-top: 80px;
+  border: 4px solid #003366;
+  overflow: hidden;
+}
+
+.card shadow rounded {
+  border: 4px solid #003366;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .auth-field,
@@ -573,4 +579,85 @@ header {
     font-size: 14px;
     padding: 8px;
   }
+}
+
+/* Header container */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 10px;
+}
+
+/* Burger Menu Button (Hidden by default on large screens) */
+.burger-menu {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px;
+  display: none;
+}
+
+/* Welcome Message */
+.welcome-message {
+  font-size: 18px;
+  font-weight: bold;
+  flex-grow: 1;
+  text-align: left;
+}
+
+/* Navigation Menu (Visible by default) */
+.nav-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Mobile Dropdown Menu (Hidden by default) */
+@media (max-width: 600px) {
+  .burger-menu {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    width: 220px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  .nav-menu.active {
+    display: flex;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Ensure menu is visible on larger screens */
+@media (min-width: 601px) {
+  .nav-menu {
+    display: flex !important;
+  }
+}
+
+/* Logout button */
+.btn-danger {
+  background-color: #990000;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  width: 100%;
 }

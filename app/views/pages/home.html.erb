@@ -1,13 +1,13 @@
 <div class="auth-container" style="max-width: 1200px; margin: auto; padding: 20px; text-align: center;">
-  <h1 style="font-size: 32px; color: #007bff; font-weight: bold;">List of Events</h1>
-  <hr style="border: 1px solid #007bff; width: 50%; margin: 20px auto;">
+  <h1 style="font-size: 32px; color: #003366; font-weight: bold;">List of Events</h1>
+  <hr style="border: 1px solid #003366; width: 50%; margin: 20px auto;">
   <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
     You are looking for a past or future event? Look in the years past, present, or future to see our history.
   </p>
   <div style="display: flex; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
     <% (2023..2026).each do |year| %>
-      <div class="year-container" style="margin: 0 20px; text-align: center;">
-        <button class="year-btn" data-year="<%= year %>" style="background-color: #007bff; color: white; padding: 12px 24px; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: background-color 0.3s, transform 0.2s; min-height: 45px;">
+      <div class="year-container" style="margin: 0 20px; text-align: center;padding-bottom: 10px;">
+        <button class="year-btn" data-year="<%= year %>" style="background-color: #003366; color: white; padding: 12px 24px; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: background-color 0.3s, transform 0.2s; min-height: 45px;">
           <%= year %>
         </button>
         <div id="months-<%= year %>" class="month-buttons" style="display: none; margin-top: 10px;">
@@ -74,7 +74,7 @@
             eventCard.style.overflow = "hidden";  // Ensures the border-radius works properly
             eventCard.innerHTML = `
               <div class="card-body" style="background-color: #f8f9fa; padding: 20px;">
-                <h5 class="card-title" style="font-size: 18px; color: #007bff; margin-bottom: 15px; font-weight: bold; text-align: center;">${event.author}</h5>
+                <h5 class="card-title" style="font-size: 18px; color: #003366; margin-bottom: 15px; font-weight: bold; text-align: center;">${event.author}</h5>
                 <p class="card-text"><strong>Location:</strong> ${event.location}</p>
                 <p class="card-text"><strong>Date:</strong> ${event.date}</p>
                 <p class="card-text"><strong>Duration:</strong> ${event.duration} minutes</p>

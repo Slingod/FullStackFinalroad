@@ -23,6 +23,12 @@
 
       <header class="header">
         <div class="header-container">
+          <!-- Burger Menu Button (Visible only on small screens) -->
+          <button class="burger-menu" id="burger-menu">
+            ☰
+          </button>
+
+          <!-- Welcome Message -->
           <div class="welcome-message">
             <% if user_signed_in? %>
               <p>Welcome, <%= current_user.username.presence || "User" %>!</p>
@@ -31,7 +37,8 @@
             <% end %>
           </div>
 
-          <div class="nav-buttons">
+          <!-- Navigation Menu -->
+          <nav class="footer-content footer-links nav-menu active desktop-visible" id="nav-menu">
             <% if user_signed_in? %>
               <%= link_to 'Home', root_path, class: 'btn' %> 
               <%= link_to 'Members', members_path, class: 'btn' %>
@@ -43,7 +50,7 @@
               <%= link_to 'Sign Up', signup_path, class: 'btn' %>
               <%= link_to 'Login', login_path, class: 'btn' %>
             <% end %>
-          </div>
+          </nav>
         </div>
       </header>
 
@@ -62,5 +69,38 @@
         </div>
       </footer>
     </div>
+
+    <!-- JavaScript for the burger menu -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const burgerMenu = document.getElementById("burger-menu");
+        const navMenu = document.getElementById("nav-menu");
+
+        // Toggle navigation menu when burger button is clicked
+        burgerMenu.addEventListener("click", function (event) {
+          event.stopPropagation(); // Prevents immediate closing
+          navMenu.classList.toggle("active");
+        });
+
+        // Close the menu if a click happens outside
+        document.addEventListener("click", function (event) {
+          if (!burgerMenu.contains(event.target) && !navMenu.contains(event.target)) {
+            navMenu.classList.remove("active");
+          }
+        });
+
+        // Ensure the menu is always visible on larger screens
+        function checkScreenSize() {
+          if (window.innerWidth > 600) {
+            navMenu.classList.add("desktop-visible");
+          } else {
+            navMenu.classList.remove("desktop-visible");
+          }
+        }
+
+        checkScreenSize(); // Initial check
+        window.addEventListener("resize", checkScreenSize); // Check on resize
+      });
+    </script>
   </body>
 </html>
