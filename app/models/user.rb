@@ -19,12 +19,15 @@ class User < ApplicationRecord
   end
 
   def can_manage?(other_user)
-    return false if other_user.super_admin? && !self.super_admin? # an Admin cannot manage a Super Admin
-    return false if other_user.admin? && !self.super_admin? # an Admin cannot manage another Admin
-    true # if the other user is a regular user or if the current user is a super admin
+    # Admins cannot manage SuperAdmins
+    return false if other_user.super_admin? && !self.super_admin?
+    # Admins cannot manage other Admins unless they are SuperAdmins
+    return false if other_user.admin? && !self.super_admin?
+    # Regular users can be managed by Admins and SuperAdmins
+    true
   end
 
-  # add a method to check if the user is over 18
+  # Check if the user is over 18
   def over_18?
     age.present? && age >= 18
   end
