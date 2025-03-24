@@ -38,13 +38,11 @@
           </div>
 
           
-          <nav class="footer-content footer-links nav-menu active desktop-visible" id="nav-menu">
-            
-            <%= link_to 'Weather', 'http://127.0.0.1:3000/weather', class: 'btn' %>
-
+          <nav class="footer-content footer-links nav-menu active desktop-visible" id="nav-menu">            
             <% if user_signed_in? %>
               <%= link_to 'Home', root_path, class: 'btn' %> 
               <%= link_to 'Members', members_path, class: 'btn' %>
+              <%= link_to 'Weather', 'http://127.0.0.1:3000/weather', class: 'btn' %>
               <% if current_user.admin? || current_user.super_admin? %>
                 <%= link_to 'Admin', admin_root_path, class: 'btn' %>
               <% end %>
