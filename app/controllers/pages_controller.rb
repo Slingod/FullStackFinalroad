@@ -1,12 +1,14 @@
 class PagesController < ApplicationController
   def home
-    @events = Event.all
-    @events_by_year = @events.group_by { |event| event.date.year }
-    @events_by_year.each do |year, events|
-      @events_by_year[year] = events.group_by { |event| event.date.month }
+    @events = Event.all.order(date: :asc) # Fetch all events and sort them by date
+
+    # Group events by year and then by month
+    @events_by_year = @events.group_by { |event| event.date.year }.transform_values do |events|
+      events.group_by { |event| event.date.month }
     end
-    @months = ["January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"]
+
+    # List of months for display
+    @months = Date::MONTHNAMES.compact
   end
 
   def about
@@ -18,5 +20,3 @@ class PagesController < ApplicationController
   def cgu
   end
 end
-
-
