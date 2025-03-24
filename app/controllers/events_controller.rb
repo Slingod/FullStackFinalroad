@@ -1,4 +1,8 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, except: [:home, :index, :show]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :toggle_participation]
+  before_action :authorize_admin_or_superadmin, only: [:destroy]
+
   def home
     @events_by_year = Event.all.group_by { |event| event.date.year }
     @events_by_year.transform_values! do |months|
@@ -24,8 +28,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find_by(id: params[:id])
-  
     if @event
       @participant_count = @event.participants.count
     else
@@ -48,12 +50,10 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
+    # Load event info for editing
   end
 
   def update
-    @event = Event.find(params[:id])
-
     if @event.update(event_params)
       redirect_to @event, notice: 'The event has been successfully modified.'
     else
@@ -62,8 +62,6 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find_by(id: params[:id])
-
     if @event
       @event.destroy
       redirect_to root_path, notice: "Event successfully deleted."
@@ -73,14 +71,23 @@ class EventsController < ApplicationController
   end
 
   def toggle_participation
-    @event = Event.find(params[:id])
     @event.toggle_participation(current_user)
     redirect_to @event, notice: "Your participation status has been updated."
   end
 
   private
 
+  def set_event
+    @event = Event.find_by(id: params[:id])
+    redirect_to root_path, alert: "Event not found." unless @event
+  end
+
   def event_params
     params.require(:event).permit(:author, :location, :duration, :price, :date, :title, pictures: [], videos: [])
+  end
+
+  def authorize_admin_or_superadmin
+    # Ensure only admins or super-admins can delete events
+    redirect_to root_path, alert: "Access Denied" unless current_user.admin? || current_user.super_admin?
   end
 end

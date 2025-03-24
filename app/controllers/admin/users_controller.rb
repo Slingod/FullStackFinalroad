@@ -12,22 +12,26 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+    # Prevent non-SuperAdmins from editing SuperAdmins
     if @user.super_admin? && !current_user.super_admin?
       redirect_to admin_users_path, alert: "You cannot edit a SuperAdmin!"
     end
   end
 
   def update
+    # Prevent non-SuperAdmins from modifying SuperAdmins
     if @user.super_admin? && !current_user.super_admin?
       return redirect_to admin_users_path, alert: "You cannot modify a SuperAdmin!"
     end
 
     safe_params = params.require(:user).permit(:email, :username, :name, :firstname, :age, :role)
 
+    # Prevent non-SuperAdmins from promoting users to SuperAdmin
     if safe_params[:role] == "super_admin" && !current_user.super_admin?
       return redirect_to admin_users_path, alert: "You are not allowed to promote users to SuperAdmin!"
     end
 
+    # Update boolean fields based on role
     case safe_params[:role]
     when "admin"
       safe_params[:admin] = true
@@ -49,6 +53,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
+    # Prevent non-SuperAdmins from deleting SuperAdmins
     if @user.super_admin? && !current_user.super_admin?
       return redirect_to admin_users_path, alert: "You cannot delete a SuperAdmin!"
     end
@@ -70,6 +75,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def authorize_admin_or_superadmin
+    # Ensure only admins or super-admins can access these actions
     redirect_to root_path, alert: "Access Denied" unless current_user.admin? || current_user.super_admin?
   end
 end
