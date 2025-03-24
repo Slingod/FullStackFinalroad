@@ -66,6 +66,8 @@ Rails.application.routes.draw do
   # Application health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
+  get 'weather', to: 'weather#show'
+
   # Contact form
   resources :contacts, only: [:new, :create]
 end

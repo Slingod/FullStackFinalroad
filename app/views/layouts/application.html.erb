@@ -8,13 +8,13 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag "application", defer: true %>
 
-    <!-- Favicon -->
+    
     <link rel="icon" href="/assets/New%20era%20lissoise.png" type="image/png" style="width: 32px; height: 32px;">
   </head>
 
   <body>
     <div class="wrapper">
-      <!-- Flash Messages -->
+      
       <div class="flash-messages">
         <% flash.each do |key, message| %>
           <div class="flash alert-<%= key %>"><%= message %></div>
@@ -23,12 +23,12 @@
 
       <header class="header">
         <div class="header-container">
-          <!-- Burger Menu Button (Visible only on small screens) -->
+          
           <button class="burger-menu" id="burger-menu">
             ☰
           </button>
 
-          <!-- Welcome Message -->
+          
           <div class="welcome-message">
             <% if user_signed_in? %>
               <p>Welcome, <%= current_user.username.presence || "User" %>!</p>
@@ -37,8 +37,11 @@
             <% end %>
           </div>
 
-          <!-- Navigation Menu -->
+          
           <nav class="footer-content footer-links nav-menu active desktop-visible" id="nav-menu">
+            
+            <%= link_to 'Weather', 'http://127.0.0.1:3000/weather', class: 'btn' %>
+
             <% if user_signed_in? %>
               <%= link_to 'Home', root_path, class: 'btn' %> 
               <%= link_to 'Members', members_path, class: 'btn' %>
@@ -70,26 +73,26 @@
       </footer>
     </div>
 
-    <!-- JavaScript for the burger menu -->
+    
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const burgerMenu = document.getElementById("burger-menu");
         const navMenu = document.getElementById("nav-menu");
 
-        // Toggle navigation menu when burger button is clicked
+        
         burgerMenu.addEventListener("click", function (event) {
           event.stopPropagation(); // Prevents immediate closing
           navMenu.classList.toggle("active");
         });
 
-        // Close the menu if a click happens outside
+        
         document.addEventListener("click", function (event) {
           if (!burgerMenu.contains(event.target) && !navMenu.contains(event.target)) {
             navMenu.classList.remove("active");
           }
         });
 
-        // Ensure the menu is always visible on larger screens
+        
         function checkScreenSize() {
           if (window.innerWidth > 600) {
             navMenu.classList.add("desktop-visible");

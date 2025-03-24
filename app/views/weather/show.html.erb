@@ -1,0 +1,16 @@
+<div class="auth-container" style="max-width: 600px; margin: 40px auto; background-color: white; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <div class="card-body">
+    <h1 class="card-title" style="text-align: center; color: #003366; font-weight: bold;">Current weather in Lisse</h1>
+    <% if @weather_data && @weather_data['current_weather'] %>
+      <h5 class="card-title" style="text-align: center; font-size: 1.2em; color: #333;">Weather Information</h5>
+      <div style="border-top: 2px solid #003366; margin-top: 20px; padding-top: 20px;">
+        <p class="card-text"><strong>Temperature :</strong> <%= @weather_data['current_weather']['temperature'] %>°C</p>
+        <p class="card-text"><strong>Wind speed :</strong> <%= @weather_data['current_weather']['windspeed'] %> km/h</p>
+        <p class="card-text"><strong>Wind direction :</strong> <%= @weather_data['current_weather']['winddirection'] %>°</p>
+        <p class="card-text"><strong>Last updated :</strong> <%= @weather_data['current_weather']['time'] %></p>
+      </div>
+    <% else %>
+      <p class="card-text" style="color: #ff6f61; font-weight: bold;">Unable to retrieve weather data at this time.</p>
+    <% end %>
+  </div>
+</div>

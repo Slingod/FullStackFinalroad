@@ -53,9 +53,13 @@ Rails.application.configure do
     domain: "myapp.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: Rails.application.credentials.dig(:smtp, :user_name),
-    password: Rails.application.credentials.dig(:smtp, :password)
+    user_name: Rails.application.credentials.dig(:smtp, :user_name),  # Stocké en toute sécurité
+    password: Rails.application.credentials.dig(:smtp, :password)     # Stocké en toute sécurité
   }
+
+  # ✅ Envoi d'emails de confirmation d'inscription Devise
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n
   config.i18n.fallbacks = true

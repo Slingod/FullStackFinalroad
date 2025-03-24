@@ -20,23 +20,30 @@ Rails.application.configure do
   # Store uploaded files on the local file system
   config.active_storage.service = :local
 
-  # Email settings for development
+  # =============================
+  # 📧 EMAIL CONFIGURATION
+  # =============================
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
   config.mailer_sender = 'no-reply@myapp.com'
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-  # SMTP configuration (ensure ENV variables are set)
   config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+    user_name: ENV["GMAIL_USERNAME"],    # Remplace par ton adresse Gmail si tu ne veux pas utiliser .env
+    password: ENV["GMAIL_PASSWORD"]      # Remplace par ton mot de passe ou clé d'application Gmail si tu ne veux pas utiliser .env
   }
+
+  # =============================
+  # 🚀 ASSET CONFIGURATION
+  # =============================
+  config.assets.debug = true
+  config.assets.check_precompiled_asset = false
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -52,14 +59,4 @@ Rails.application.configure do
 
   # Debugging: Show which layout is being used in logs
   config.action_view.annotate_rendered_view_with_filenames = true
-
-  # =============================
-  # 🚀 ASSET CONFIGURATION
-  # =============================
-
-  # Prevent assets from being cached
-  config.assets.debug = true
-
-  # Disable checking of precompiled assets
-  config.assets.check_precompiled_asset = false
 end
