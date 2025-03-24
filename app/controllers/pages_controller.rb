@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  # Skip authentication for the home action
+  skip_before_action :authenticate_user!, only: [:home, :about, :contact, :cgu]
+
   def home
     @events = Event.all.order(date: :asc) # Fetch all events and sort them by date
 
@@ -16,7 +19,7 @@ class PagesController < ApplicationController
 
   def contact
   end
-  
+
   def cgu
   end
 end

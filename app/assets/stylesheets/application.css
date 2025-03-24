@@ -132,6 +132,13 @@ header {
   gap: 10px;
 }
 
+.btn {
+  font-size: 14px;
+  padding: 10px;
+  width: 90%;
+  max-width: 200px;
+}
+
 .nav-buttons .btn {
   color: white;
   border-color: white;
@@ -153,6 +160,8 @@ header {
   white-space: normal; /* Allow text wrapping */
   overflow: visible; /* Ensure text is not truncated */
   text-overflow: clip; /* Disable ellipsis, show full text */
+  width: 100%; /* Full width by default */
+  transition: all 0.3s ease-in-out;
 }
 
 .btn {
@@ -613,6 +622,13 @@ header {
   flex-direction: row;
   gap: 10px;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+  .auth-actions {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (max-width: 600px) {

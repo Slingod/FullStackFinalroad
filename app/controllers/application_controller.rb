@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :debug_layout # Log the layout being used
+  before_action :authenticate_user!
 
   # Force Rails to use the correct layout
   layout "application"

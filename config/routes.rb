@@ -33,9 +33,6 @@ Rails.application.routes.draw do
   # Resources for pictures
   resources :pictures, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
-  # Shop page
-  get "shop", to: "home#shop", as: :shop
-
   # Admin namespace
   namespace :admin do
     root to: "dashboard#index"
