@@ -1,10 +1,10 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_user! # Ensure the user is logged in
-  before_action :authorize_admin_or_superadmin # Restrict access to admins/super-admins
-  before_action :set_user, only: [:show, :edit, :update, :destroy] # Find user before specific actions
+  before_action :authenticate_user!
+  before_action :authorize_admin_or_superadmin
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all # Fetch all users for display
+    @users = User.all
   end
 
   def show
@@ -12,55 +12,64 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    # Load user info for editing
+    if @user.super_admin? && !current_user.super_admin?
+      redirect_to admin_users_path, alert: "You cannot edit a SuperAdmin!"
+    end
   end
 
   def update
-    # Permit specific parameters for update
+    if @user.super_admin? && !current_user.super_admin?
+      return redirect_to admin_users_path, alert: "You cannot modify a SuperAdmin!"
+    end
+
     safe_params = params.require(:user).permit(:email, :username, :name, :firstname, :age, :role)
 
-    # Update boolean fields based on role
+    if safe_params[:role] == "super_admin" && !current_user.super_admin?
+      return redirect_to admin_users_path, alert: "You are not allowed to promote users to SuperAdmin!"
+    end
+
     case safe_params[:role]
     when "admin"
       safe_params[:admin] = true
       safe_params[:super_admin] = false
     when "super_admin"
-      safe_params[:admin] = true # Super admin should also have admin privileges
+      safe_params[:admin] = true
       safe_params[:super_admin] = true
     else
       safe_params[:admin] = false
       safe_params[:super_admin] = false
     end
 
-    # Perform the update and handle the response
     if @user.update(safe_params)
-      redirect_to admin_users_path, notice: "User updated successfully." # Success message
+      redirect_to admin_users_path, notice: "User updated successfully."
     else
-      flash[:alert] = "Failed to update user. Please try again." # Error message
-      render :edit # Show the edit form with errors
+      flash[:alert] = "Failed to update user. Please try again."
+      render :edit
     end
   end
 
   def destroy
-    # Attempt to delete the user and respond accordingly
+    if @user.super_admin? && !current_user.super_admin?
+      return redirect_to admin_users_path, alert: "You cannot delete a SuperAdmin!"
+    end
+
+    # Delete dependencies before deleting the user
+    @user.event_users.destroy_all   # Delete all event associations of the user
+
     if @user.destroy
-      respond_to do |format|
-        format.html { redirect_to admin_users_path, notice: "User deleted successfully." } # Success message
-        format.turbo_stream
-      end
+      redirect_to admin_users_path, notice: "User deleted successfully."
     else
-      redirect_to admin_users_path, alert: "Failed to delete user. Please try again." # Error message
+      redirect_to admin_users_path, alert: "Failed to delete user. Please try again."
     end
   end
 
   private
 
   def set_user
-    @user = User.find(params[:id]) # Find the user by ID
+    @user = User.find(params[:id])
   end
 
   def authorize_admin_or_superadmin
-    # Ensure only admins or super-admins can access these actions
     redirect_to root_path, alert: "Access Denied" unless current_user.admin? || current_user.super_admin?
   end
 end
