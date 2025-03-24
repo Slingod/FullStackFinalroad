@@ -17,10 +17,14 @@ class Event < ApplicationRecord
   end
 
   def toggle_participation(user)
-    if user_participating?(user)
-      event_users.find_by(user_id: user.id).destroy
+    if user.confirmed?  
+      if user_participating?(user)
+        event_users.find_by(user_id: user.id).destroy
+      else
+        event_users.create(user_id: user.id)
+      end
     else
-      event_users.create(user_id: user.id)
+      raise "L'utilisateur doit confirmer son inscription avant de participer."
     end
   end
 end
