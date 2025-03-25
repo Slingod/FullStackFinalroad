@@ -8,7 +8,7 @@ html body {
   padding: 0;
   padding-top: 80px;
   font-family: Arial, sans-serif;
-  background: url("/assets/night.png") no-repeat center center fixed;
+  background: url("/assets/quantum.webp") no-repeat center center fixed;
   background-size: cover;
   color: var(--text-black);
   display: flex;
@@ -130,8 +130,6 @@ header {
 .btn {
   font-size: 14px;
   padding: 10px;
-  width: 90%;
-
   max-width: 200px;
 }
 
@@ -156,8 +154,6 @@ header {
   white-space: normal; /* Allow text wrapping */
   overflow: visible; /* Ensure text is not truncated */
   text-overflow: clip; /* Disable ellipsis, show full text */
-  width: 100%; /* Full width by default */
-
   transition: all 0.3s ease-in-out;
 }
 
@@ -720,7 +716,6 @@ header {
   align-items: center; /* Centers items vertically */
   justify-content: space-between; /* Ensures proper spacing */
   padding: 10px 20px;
-  background-color: #003366; /* Change as needed */
   color: white;
 }
 

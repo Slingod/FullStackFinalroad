@@ -8,11 +8,11 @@
         <!-- Images de Rôle -->
         
         <% if member.super_admin? %>
-            <%= image_tag 'SuperAdmin.png', alt: 'Super Admin', class: 'role-icon' %>
+            <%= image_tag 'superadmin.webp', alt: 'Super Admin', class: 'role-icon' %>
           <% elsif member.admin? %>
-            <%= image_tag 'king.png', alt: 'Admin', class: 'role-icon' %>
+            <%= image_tag 'king.webp', alt: 'Admin', class: 'role-icon' %>
           <% else %>
-            <%= image_tag 'Member.png', alt: 'Utilisateur', class: 'role-icon' %>
+            <%= image_tag 'member.webp', alt: 'Utilisateur', class: 'role-icon' %>
           <% end %>
 
           <!-- Nom d'Utilisateur -->
