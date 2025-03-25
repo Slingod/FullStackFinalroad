@@ -1,7 +1,7 @@
 <%= form_with model: @event, url: admin_events_path, local: true do |form| %>
   <div class="auth-field">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: 'form-control' %>
+    <%= form.label :titre %>
+    <%= form.text_field :titre, class: 'form-control' %>
   </div>
 
   <div class="auth-field">
@@ -10,19 +10,19 @@
   </div>
 
   <div class="auth-field">
-    <%= form.label :price %>
-    <%= form.number_field :price, step: 0.01, class: 'form-control' %>
+    <%= form.label :prix %>
+    <%= form.number_field :prix, step: 0.01, class: 'form-control' %>
   </div>
 
   <div class="auth-field">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: 'form-control' %>
+    <%= form.label :emplacement %>
+    <%= form.text_field :emplacement, class: 'form-control' %>
   </div>
 
   <div class="auth-field">
-    <%= form.label :media_files %>
+    <%= form.label :fichiers_medias %>
     <%= form.file_field :media_files, multiple: true, accept: "image/*,video/*", class: 'form-control' %>
   </div>
 
-  <%= form.submit "Save", class: "btn btn-primary" %>
+  <%= form.submit "Sauvegarder", class: "btn btn-primary" %>
 <% end %>

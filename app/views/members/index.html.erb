@@ -1,32 +1,34 @@
-<div class="page-container">
-  <h1 class="page-title mt-4 mb-4">Members</h1>
+<section class="page-container">
+  <h1 class="page-title mt-4 mb-4">Membres</h1>
   <div class="users-container">
     <% @members.each do |member| %>
-      <div class="user-card">
+      <article class="user-card">
         <div class="card-body text-center">
-          <!-- Role pictures -->
-          <% if member.super_admin? %>
+          
+        <!-- Images de Rôle -->
+        
+        <% if member.super_admin? %>
             <%= image_tag 'SuperAdmin.png', alt: 'Super Admin', class: 'role-icon' %>
           <% elsif member.admin? %>
             <%= image_tag 'king.png', alt: 'Admin', class: 'role-icon' %>
           <% else %>
-            <%= image_tag 'Member.png', alt: 'User', class: 'role-icon' %>
+            <%= image_tag 'Member.png', alt: 'Utilisateur', class: 'role-icon' %>
           <% end %>
 
-          <!-- Username -->
+          <!-- Nom d'Utilisateur -->
           <h5 class="card-title">
             <% if member.username.present? %>
               <%= member.username %>
             <% elsif member.firstname.present? && member.name.present? %>
               <%= "#{member.firstname} #{member.name}" %>
             <% else %>
-              User #<%= member.id %>
+              Utilisateur #<%= member.id %>
             <% end %>
           </h5>
 
-          <%= link_to 'Show', member_path(member), class: "btn btn-primary" %>
+          <%= link_to 'Voir', member_path(member), class: "btn btn-primary" %>
         </div>
-      </div>
+      </article>
     <% end %>
   </div>
-</div>
+</section>

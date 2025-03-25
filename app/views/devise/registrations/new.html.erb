@@ -1,35 +1,35 @@
-<div class="auth-container">
-  <h2 class="auth-title">Sign Up</h2>
+<section class="auth-container">
+  <h2 class="auth-title">Inscription</h2>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="auth-field">
-      <%= f.label :username, "Username" %>
-      <%= f.text_field :username, required: true, placeholder: "Your username" %>
+      <%= f.label :username, "Nom d'utilisateur" %>
+      <%= f.text_field :username, required: true, placeholder: "Votre nom d'utilisateur", class: "auth-input" %>
     </div>
 
     <div class="auth-field">
       <%= f.label :email, "Email" %>
-      <%= f.email_field :email, autocomplete: "email", required: true, placeholder: "Email" %>
+      <%= f.email_field :email, autocomplete: "email", required: true, placeholder: "Email", class: "auth-input" %>
     </div>
 
     <div class="auth-field">
-      <%= f.label :password, "Password" %>
+      <%= f.label :password, "Mot de Passe" %>
       <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em></br>
+        <em>(<%= @minimum_password_length %> caractères minimum)</em><br>
       <% end %>
-      <%= f.password_field :password, autocomplete: "new-password", required: true %>
+      <%= f.password_field :password, autocomplete: "new-password", required: true, class: "auth-input" %>
     </div>
 
     <div class="auth-field">
-      <%= f.label :password_confirmation, "Confirm your password" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
+      <%= f.label :password_confirmation, "Confirmez votre mot de passe" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "auth-input" %>
     </div>
 
     <div class="auth-actions">
-      <%= f.submit "Sign Up", class: "btn btn-primary" %>
-      <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-primary" %>
-  </div>
+      <%= f.submit "S'Inscrire", class: "btn btn-primary" %>
+      <%= link_to "Se Connecter", new_session_path(resource_name), class: "btn btn-success" %>
     </div>
   <% end %>
+</section>

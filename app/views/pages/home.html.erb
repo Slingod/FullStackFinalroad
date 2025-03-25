@@ -1,25 +1,24 @@
-<div class="auth-container" style="max-width: 1200px; margin: auto; padding: 20px; text-align: center;">
-  <h1 style="font-size: 32px; color: #003366; font-weight: bold;">List of Events</h1>
-  <hr style="border: 1px solid #003366; width: 50%; margin: 20px auto;">
-  <strong> Together, let's make a difference </strong>
-  <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
-    You are looking for a past or future event? Look in the years past, present, or future to see our history.
+<main class="auth-container">
+  <h1>Liste des Événements</h1>
+  <hr>
+  <p>
+    Vous cherchez un événement passé ou futur ? Consultez les années passées, présentes ou futures pour découvrir notre histoire.
   </p>
 
   <!-- Year Buttons -->
-  <div style="display: flex; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
+  <section class="year-buttons-container">
     <% @events_by_year.keys.each do |year| %>
-      <div class="year-container" style="margin: 0 20px; text-align: center;padding-bottom: 10px;">
-        <button class="year-btn" data-year="<%= year %>" style="background-color: #003366; color: white; padding: 12px 24px; border: none; cursor: pointer; border-radius: 25px; font-size: 16px; font-weight: bold; transition: background-color 0.3s, transform 0.2s; min-height: 45px;">
+      <div class="year-container">
+        <button class="year-btn" data-year="<%= year %>">
           <%= year %>
         </button>
 
         <!-- Month Buttons -->
-        <div id="months-<%= year %>" class="month-buttons" style="display: none; margin-top: 10px;">
+        <div id="months-<%= year %>" class="month-buttons">
           <% (1..12).each do |month| %>
             <% has_events = @events_by_year[year]&.key?(month) %>
             <% if has_events %>
-              <div class="month-item" data-month="<%= month %>" data-year="<%= year %>" style="padding: 8px 18px; cursor: pointer; color: #333; font-size: 14px; border: 1px solid #ccc; margin-bottom: 5px; border-radius: 5px; background-color: #f1f1f1; transition: background-color 0.3s, transform 0.2s; width: 100%; text-align: center;">
+              <div class="month-item" data-month="<%= month %>" data-year="<%= year %>">
                 <%= Date::MONTHNAMES[month] %>
               </div>
             <% end %>
@@ -27,32 +26,32 @@
         </div>
       </div>
     <% end %>
-  </div>
+  </section>
 
   <!-- Show All Events Button -->
-  <button id="show-all-events" style="margin-top: 20px; padding: 10px 20px; background-color: #336600; color: white; border: none; cursor: pointer; border-radius: 5px; font-size: 16px; font-weight: bold; transition: background-color 0.3s;">Show All Events</button>
+  <button id="show-all-events">Afficher Tous les Événements</button>
 
   <!-- Events Display -->
-  <div id="events-container" style="text-align: center; margin-top: 30px;">
-    <h2 id="selected-month" style="color: black; margin-bottom: 20px;">All Events</h2>
-    <div id="events-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding: 20px;">
+  <section id="events-container">
+    <h2 id="selected-month">Tous les Événements</h2>
+    <div id="events-list">
       <% @events.each do |event| %>
-        <div class="event-card card shadow rounded col-md-3" data-year="<%= event.date.year %>" data-month="<%= event.date.month %>" style="border: 2px solid #007bff; border-radius: 15px; overflow: hidden;">
-          <div class="card-body" style="background-color: #f8f9fa; padding: 20px;">
-            <h5 class="card-title" style="font-size: 18px; color: #003366; margin-bottom: 15px; font-weight: bold; text-align: center;"><%= event.author %></h5>
-            <p class="card-text"><strong>Location:</strong> <%= event.location %></p>
-            <p class="card-text"><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y") %></p>
-            <p class="card-text"><strong>Duration:</strong> <%= event.duration %> minutes</p>
-            <p class="card-text"><strong>Price:</strong> <%= event.price %> €</p>
-            <div style="display: flex; justify-content: center; margin-top: 20px;">
-              <a href="/events/<%= event.id %>" class="btn btn-primary" style="width: 100%; font-size: 14px; font-weight: bold; border-radius: 25px; padding: 10px 20px; text-align: center; display: inline-block;">View Event</a>
+        <article class="event-card" data-year="<%= event.date.year %>" data-month="<%= event.date.month %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= event.author %></h5>
+            <p class="card-text"><strong>Lieu :</strong> <%= event.location %></p>
+            <p class="card-text"><strong>Date :</strong> <%= event.date.strftime("%B %d, %Y") %></p>
+            <p class="card-text"><strong>Durée :</strong> <%= event.duration %> minutes</p>
+            <p class="card-text"><strong>Prix :</strong> <%= event.price %> €</p>
+            <div class="event-actions">
+              <a href="/events/<%= event.id %>" class="btn btn-primary">Voir l'Événement</a>
             </div>
           </div>
-        </div>
+        </article>
       <% end %>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -64,13 +63,13 @@
 
     function showAllEvents() {
       eventCards.forEach(card => card.style.display = "block");
-      selectedMonth.textContent = "All Events";
+      selectedMonth.textContent = "Tous les Événements";
     }
 
     yearButtons.forEach(button => {
       button.addEventListener('click', function() {
         const year = button.getAttribute('data-year');
-        selectedMonth.textContent = `Events of ${year}`;
+        selectedMonth.textContent = `Événements de ${year}`;
 
         eventCards.forEach(card => {
           card.style.display = card.getAttribute('data-year') === year ? "block" : "none";
@@ -85,7 +84,7 @@
       monthItem.addEventListener('click', function() {
         const year = this.getAttribute('data-year');
         const month = this.getAttribute('data-month');
-        selectedMonth.textContent = `Events of ${this.textContent} ${year}`;
+        selectedMonth.textContent = `Événements de ${this.textContent} ${year}`;
 
         eventCards.forEach(card => {
           card.style.display = (card.getAttribute('data-year') === year && card.getAttribute('data-month') === month) ? "block" : "none";

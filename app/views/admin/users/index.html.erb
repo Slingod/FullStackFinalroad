@@ -1,45 +1,45 @@
-<div class="title-container">
-  <h1>Users List</h1>
-</div>
+<header class="title-container">
+  <h1>Liste des Utilisateurs</h1>
+</header>
 
 <!-- Users Cards Section -->
-<div class="users-container" id="users-list">
+<section class="users-container" id="users-list">
   <% @users.each do |user| %>
     <!-- Individual User Card -->
-    <div class="user-card" id="user-<%= user.id %>">
+    <article class="user-card" id="user-<%= user.id %>">
       <!-- Administration pictures -->
       <% if user.super_admin? %>
         <%= image_tag 'SuperAdmin.png', alt: 'Super Admin', class: 'role-icon' %>
       <% elsif user.admin? %>
         <%= image_tag 'king.png', alt: 'Admin', class: 'role-icon' %>
       <% else %>
-        <%= image_tag 'Member.png', alt: 'User', class: 'role-icon' %>
+        <%= image_tag 'Member.png', alt: 'Utilisateur', class: 'role-icon' %>
       <% end %>
 
       <!-- Display username or email -->
       <h2><%= user.username.present? ? user.username : user.email %></h2>
 
       <!-- Display user role -->
-      <p><strong>Role:</strong> <%= user.super_admin? ? "Super Admin" : (user.admin? ? "Admin" : "User") %></p>
+      <p><strong>Rôle :</strong> <%= user.super_admin? ? "Super Administrateur" : (user.admin? ? "Administrateur" : "Utilisateur") %></p>
 
       <!-- Action Buttons: Show, Modify, Delete -->
-      <div class="d-flex justify-content-center gap-2 mt-2">
+      <div class="actions">
         <!-- Show Button -->
         <%= link_to admin_user_path(user), class: "btn btn-primary" do %>
-          <i class="fas fa-eye"></i> Show
+          <i class="fas fa-eye"></i> Voir
         <% end %>
 
         <!-- Modify Button -->
         <%= link_to edit_admin_user_path(user), class: "btn btn-success" do %>
-          <i class="fas fa-edit"></i> Modify
+          <i class="fas fa-edit"></i> Modifier
         <% end %>
 
         <!-- Delete Button -->
-        <%= button_to "Delete", admin_user_path(user), method: :delete, form: { data: { turbo_confirm: "Are you sure ?" } }, class: "btn btn-danger", id: "delete-user-#{user.id}" %>
+        <%= button_to "Supprimer", admin_user_path(user), method: :delete, form: { data: { turbo_confirm: "Êtes-vous sûr ?" } }, class: "btn btn-danger", id: "delete-user-#{user.id}" %>
       </div>
-    </div>
+    </article>
   <% end %>
-</div>
+</section>
 
 <!-- JavaScript to handle user deletion -->
 <script>

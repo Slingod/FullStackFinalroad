@@ -1,14 +1,14 @@
-<div class="auth-container">
-  <h2 class="auth-title">Log in</h2>
+<section class="auth-container">
+  <h2 class="auth-title">Connexion</h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
     <div class="auth-field">
-      <%= f.label :email %><br />
+      <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-input" %>
     </div>
 
     <div class="auth-field">
-      <%= f.label :password %><br />
+      <%= f.label :password %>
       <%= f.password_field :password, autocomplete: "current-password", class: "auth-input" %>
     </div>
 
@@ -20,9 +20,9 @@
     <% end %>
 
     <div class="auth-actions">
-      <%= link_to "Sign up", new_registration_path(resource_name), class: "btn btn-primary" %>
-      <%= f.submit "Log in", class: "btn btn-primary" %>
-      <%= link_to "Reset password?", new_password_path(resource_name), class: "btn btn-success" %>
+      <%= link_to "S'Inscrire", new_registration_path(resource_name), class: "btn btn-primary" %>
+      <%= f.submit "Se Connecter", class: "btn btn-primary" %>
+      <%= link_to "Mot de Passe Oublié ?", new_password_path(resource_name), class: "btn btn-success" %>
     </div>
   <% end %>
-</div>
+</section>

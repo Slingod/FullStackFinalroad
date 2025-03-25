@@ -1,7 +1,7 @@
-<div class="auth-container">
-  <h1 class="page-title">User Profile</h1>
+<section class="auth-container">
+  <h1 class="page-title">Profil Utilisateur</h1>
 
-  <div class="card mx-auto user-profile-card">
+  <article class="card mx-auto user-profile-card">
     <div class="card-body text-center">
       <h2 class="user-name">
         <% if user.username.present? %>
@@ -9,34 +9,34 @@
         <% elsif user.firstname.present? && user.name.present? %>
           <%= "#{user.firstname} #{user.name}" %>
         <% else %>
-          User #<%= user.id %>
+          Utilisateur #<%= user.id %>
         <% end %>
       </h2>
 
       <% if user.show_firstname %>
-        <p><strong>First Name:</strong> <%= user.firstname %></p>
+        <p><strong>Prénom :</strong> <%= user.firstname %></p>
       <% end %>
 
       <% if user.show_name %>
-        <p><strong>Last Name:</strong> <%= user.name %></p>
+        <p><strong>Nom :</strong> <%= user.name %></p>
       <% end %>
 
       <% if user.show_email %>
-        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>Email :</strong> <%= user.email %></p>
       <% end %>
 
       <% if user.show_age && user.age.present? %>
-        <p><strong>Age:</strong> <%= user.age %></p>
+        <p><strong>Âge :</strong> <%= user.age %></p>
       <% end %>
 
       <div class="user-actions">
         <% if current_user == user %>
-          <%= link_to 'Modify', edit_user_path(user), class: "btn btn-success" %>
-          <%= button_to "Delete My Account", user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <%= link_to 'Modifier', edit_user_path(user), class: "btn btn-success" %>
+          <%= button_to "Supprimer Mon Compte", user_path(user), method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger" %>
         <% end %>
 
-        <%= link_to 'Return', members_path, class: "btn btn-primary" %>
+        <%= link_to 'Retour', members_path, class: "btn btn-primary" %>
       </div>
     </div>
-  </div>
-</div>
+  </article>
+</section>

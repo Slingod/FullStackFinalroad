@@ -1,50 +1,50 @@
 <%= form_with(model: @event, local: true) do |form| %>
-  <div class="auth-container">
-    <h2>Create or Edit Event</h2>
+  <section class="auth-container">
+    <h2>Créer un événement</h2>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :title, "Title", class: 'form-label' %>
-      <%= form.text_field :title, class: 'form-control', placeholder: 'Enter event title' %>
+    <div class="auth-field">
+      <%= form.label :title, "Titre", class: 'form-label' %>
+      <%= form.text_field :title, class: 'form-control', placeholder: 'Entrez le titre de l\'événement' %>
     </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :author, "Author", class: 'form-label' %>
-      <%= form.text_field :author, class: 'form-control', placeholder: 'Enter event author' %>
+    <div class="auth-field">
+      <%= form.label :author, "Auteur", class: 'form-label' %>
+      <%= form.text_field :author, class: 'form-control', placeholder: 'Entrez l\'auteur de l\'événement' %>
     </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :location, "Location", class: 'form-label' %>
-      <%= form.text_field :location, class: 'form-control', placeholder: 'Enter event location' %>
+    <div class="auth-field">
+      <%= form.label :location, "Lieu", class: 'form-label' %>
+      <%= form.text_field :location, class: 'form-control', placeholder: 'Entrez le lieu de l\'événement' %>
     </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :duration, "Duration", class: 'form-label' %>
-      <%= form.number_field :duration, class: 'form-control', placeholder: 'Duration in minutes' %>
+    <div class="auth-field">
+      <%= form.label :duration, "Durée", class: 'form-label' %>
+      <%= form.number_field :duration, class: 'form-control', placeholder: 'Durée en minutes' %>
     </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :price, "Price", class: 'form-label' %>
-      <%= form.number_field :price, class: 'form-control', placeholder: 'Event price in €' %>
+    <div class="auth-field">
+      <%= form.label :price, "Prix", class: 'form-label' %>
+      <%= form.number_field :price, class: 'form-control', placeholder: 'Prix de l\'événement en €' %>
     </div>
 
-    <div class="auth-field" style="margin-bottom">
+    <div class="auth-field">
       <%= form.label :date, "Date", class: 'form-label' %>
       <%= form.date_select :date, class: 'form-control' %>
     </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :pictures, "Pictures", class: 'form-label' %>
+    <div class="auth-field">
+      <%= form.label :pictures, "Images", class: 'form-label' %>
       <%= form.file_field :pictures, multiple: true, class: 'form-control-file' %>
     </div>
 
-    <div class="auth-field" style="margin-bottom">
-      <%= form.label :videos, "Upload Videos", class: 'form-label' %>
+    <div class="auth-field">
+      <%= form.label :videos, "Vidéos", class: 'form-label' %>
       <%= form.file_field :videos, multiple: true, accept: 'video/*', class: 'form-control-file' %>
     </div>
 
-    <div class="auth-actions" style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
-      <%= form.submit 'Save Event', class: 'btn btn-success' %>
-      <a href="/admin/events" class="btn btn-primary">Back to Events</a>
+    <div class="auth-actions">
+      <%= form.submit 'Enregistrer l\'Événement', class: 'btn btn-success' %>
+      <a href="/admin/events" class="btn btn-primary">Retour aux Événements</a>
     </div>
-  </div>
+  </section>
 <% end %>

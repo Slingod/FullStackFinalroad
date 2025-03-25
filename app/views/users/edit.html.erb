@@ -1,40 +1,40 @@
-<div class="auth-container">
-  <h1 class="page-title">Edit Profile</h1>
-  <div class="auth-field label" style="width: 100%;">
+<section class="auth-container">
+  <h1 class="page-title">Modifier le Profil</h1>
+  <div class="auth-field label">
     <div class="card-body">
       <%= form_for(@user) do |f| %>
         <div class="mb-3">
-          <%= f.label :username %>
+          <%= f.label :username, "Nom d'utilisateur" %>
           <%= f.text_field :username, class: "form-control" %>
         </div>
 
         <div class="mb-3">
-          <%= f.label :firstname %>
+          <%= f.label :firstname, "Prénom" %>
           <%= f.text_field :firstname, class: "form-control" %>
-          <%= f.check_box :show_firstname %> Show First Name
+          <%= f.check_box :show_firstname %> Afficher le Prénom
         </div>
 
         <div class="mb-3">
-          <%= f.label :name %>
+          <%= f.label :name, "Nom" %>
           <%= f.text_field :name, class: "form-control" %>
-          <%= f.check_box :show_name %> Show Last Name
+          <%= f.check_box :show_name %> Afficher le Nom
         </div>
 
         <div class="mb-3">
-          <%= f.label :email %>
+          <%= f.label :email, "Email" %>
           <%= f.email_field :email, class: "form-control" %>
-          <%= f.check_box :show_email %> Show Email
+          <%= f.check_box :show_email %> Afficher l'Email
         </div>
 
         <div class="mb-3">
-          <%= f.label :age %>
+          <%= f.label :age, "Âge" %>
           <%= f.number_field :age, class: "form-control", min: 0 %>
-          <%= f.check_box :show_age %> Show Age
+          <%= f.check_box :show_age %> Afficher l'Âge
         </div>
 
-        <%= f.submit "Update", class: "btn btn-success" %>
-        <%= link_to "Cancel", @user, class: "btn btn-danger" %>
+        <%= f.submit "Mettre à Jour", class: "btn btn-success" %>
+        <%= link_to "Annuler", @user, class: "btn btn-danger" %>
       <% end %>
     </div>
   </div>
-</div>
+</section>

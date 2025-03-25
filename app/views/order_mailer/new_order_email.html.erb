@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta charset="UTF-8">
+    <title>Nouvelle Commande</title>
   </head>
   <body>
-    <p>New order received from <%= @order.name %> !</p>
-    <p>
-      <strong>Détails de la commande :</strong><br>
-      --------------------------
-    </p>
-    <p>Name : <%= @order.name %></p>
-    <p>Email : <%= @order.email %></p>
-    <p>
-      <strong>Message :</strong><br>
-      ----------
-    </p>
-    <p><%= @order.message %></p>
+    <section class="order-details">
+      <p>Nouvelle commande reçue de <%= @order.name %> !</p>
+      <div class="order-info">
+        <strong>Détails de la Commande :</strong>
+        <hr>
+        <p>Nom : <%= @order.name %></p>
+        <p>Email : <%= @order.email %></p>
+        <div class="order-message">
+          <strong>Message :</strong>
+          <hr>
+          <p><%= @order.message %></p>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

@@ -1,17 +1,17 @@
-<div class="auth-container" style="display: flex; flex-direction: column; align-items: center;">
-  <h1>Profil user</h1>
+<section class="auth-container">
+  <h1>Profil Utilisateur</h1>
 
   <p><strong>ID :</strong> <%= @user.id %></p>
   <p><strong>Email :</strong> <%= @user.email %></p>
-  <p><strong>Role :</strong> <%= @user.admin? ? "Admin" : "User" %></p>
+  <p><strong>Rôle :</strong> <%= @user.super_admin? ? "Super Administrateur" : (@user.admin? ? "Administrateur" : "Utilisateur") %></p>
 
-  <div class="buttons" style="margin-top: 20px;">
-    <%= link_to "Modify", edit_admin_user_path(@user), class: "btn btn-success" %>
-    <%= link_to "Return", admin_users_path, class: "btn btn-primary" %>
+  <div class="buttons">
+    <%= link_to "Modifier", edit_admin_user_path(@user), class: "btn btn-success" %>
+    <%= link_to "Retour", admin_users_path, class: "btn btn-primary" %>
 
-    <%= link_to "Delete", admin_user_path(@user), method: :delete, remote: true, data: { confirm: "Are you sure ?" }, class: "btn btn-danger delete-user", id: "delete-user-#{@user.id}" %>
+    <%= link_to "Supprimer", admin_user_path(@user), method: :delete, remote: true, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger delete-user", id: "delete-user-#{@user.id}" %>
   </div>
-</div>
+</section>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {

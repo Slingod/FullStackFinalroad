@@ -1,24 +1,24 @@
-<div class="auth-container">
-  <h1 class="page-title">Contact Us</h1>
+<section class="auth-container">
+  <h1 class="page-title">Contactez-Nous</h1>
 
   <%= form_with(model: @contact, url: contact_path, method: :post, local: true) do |f| %>
     <div class="auth-field">
-      <%= f.label :name, "Name", class: "auth-label" %><br />
-      <%= f.text_field :name, required: true, placeholder: "Your name", class: "auth-input" %>
+      <%= f.label :name, "Nom", class: "auth-label" %>
+      <%= f.text_field :name, required: true, placeholder: "Votre nom", class: "auth-input" %>
     </div>
 
     <div class="auth-field">
-      <%= f.label :email, "Email", class: "auth-label" %><br />
-      <%= f.email_field :email, required: true, placeholder: "Your email", class: "auth-input" %>
+      <%= f.label :email, "Email", class: "auth-label" %>
+      <%= f.email_field :email, required: true, placeholder: "Votre email", class: "auth-input" %>
     </div>
 
     <div class="auth-field">
-      <%= f.label :message, "Message", class: "auth-label" %><br />
-      <%= f.text_area :message, required: true, placeholder: "Your message", class: "auth-textarea" %>
+      <%= f.label :message, "Message", class: "auth-label" %>
+      <%= f.text_area :message, required: true, placeholder: "Votre message", class: "auth-textarea" %>
     </div>
 
     <div class="auth-actions">
-      <%= f.submit "Send Message", class: "btn btn-primary" %>
+      <%= f.submit "Envoyer le Message", class: "btn btn-primary" %>
     </div>
   <% end %>
-</div>
+</section>
