@@ -31,19 +31,6 @@ class Admin::UsersController < ApplicationController
       return redirect_to admin_users_path, alert: "You are not allowed to promote users to SuperAdmin!"
     end
 
-    # Update boolean fields based on role
-    case safe_params[:role]
-    when "admin"
-      safe_params[:admin] = true
-      safe_params[:super_admin] = false
-    when "super_admin"
-      safe_params[:admin] = true
-      safe_params[:super_admin] = true
-    else
-      safe_params[:admin] = false
-      safe_params[:super_admin] = false
-    end
-
     if @user.update(safe_params)
       redirect_to admin_users_path, notice: "User updated successfully."
     else

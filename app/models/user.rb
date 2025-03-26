@@ -11,7 +11,7 @@ class User < ApplicationRecord
   after_initialize :set_default_visibility
 
   def admin?
-    role == "admin"
+    role == "admin" || role == "administrateur"
   end
 
   def super_admin?

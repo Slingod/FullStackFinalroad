@@ -14,22 +14,35 @@
   <!-- Users Cards Section -->
   <section class="users-container" id="users-list">
     <% @users.each do |user| %>
+      <!-- Debug: Afficher le rôle de l'utilisateur -->
+      <%= logger.debug "Rôle de l'utilisateur #{user.username || user.email} : #{user.role}" %>
+
       <!-- Individual User Card -->
       <article class="user-card" id="user-<%= user.id %>">
         <!-- Administration pictures -->
         <% if user.super_admin? %>
-          <%= image_tag 'superadmin.webp', alt: 'Super Admin', class: 'role-icon' %>
+        <%= image_tag 'superadmin.webp', alt: 'Super Administrateur', class: 'role-icon' %>
         <% elsif user.admin? %>
-          <%= image_tag 'king.webp', alt: 'Admin', class: 'role-icon' %>
-        <% else %>
-          <%= image_tag 'member.webp', alt: 'Utilisateur', class: 'role-icon' %>
-        <% end %>
+        <%= image_tag 'king.webp', alt: 'Administrateur', class: 'role-icon' %>
+        <% elsif user.role == "user" || user.role == "Utilisateur" %>
+        <%= image_tag 'member.webp', alt: 'Utilisateur', class: 'role-icon' %>
+      <% end %>
 
         <!-- Display username or email -->
         <h2><%= user.username.present? ? user.username : user.email %></h2>
 
-        <!-- Display user role -->
-        <p><strong>Rôle :</strong> <%= user.super_admin? ? "Super Administrateur" : (user.admin? ? "Administrateur" : "Utilisateur") %></p>
+        <p><strong>Rôle :</strong>
+          <%= case user.role
+               when "super_admin"
+                 "Super Administrateur"
+               when "admin"
+                 "Administrateur"
+               when "administrateur"
+                 "Administrateur"
+               else
+                 "Utilisateur"
+               end %>
+        </p>
 
         <!-- Action Buttons: Show, Modify, Delete -->
         <div class="actions">
