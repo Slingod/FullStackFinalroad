@@ -2,118 +2,46 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des Événements</title>
-    <meta name="description" content="Explorez la liste des événements de Nouvelle Ère Lissoise. Parcourez les événements passés, présents et futurs, et découvrez comment participer à notre histoire.">
+    <title>Accueil - Nouvelle Ère Lissoise</title>
+    <meta name="description" content="Rejoignez-nous et partagez nos valeurs à travers nos événements. Découvrez l’événement en cours ou le prochain à venir !">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <main class="auth-container">
-    <h1>Liste des Événements</h1>
+    <h1>Bienvenue sur Nouvelle Ère Lissoise</h1>
     <hr>
     <p>
-      <strong>Ensemble, faisons la différence</strong><br>
-      Vous cherchez un événement passé ou futur ? Consultez les années passées, présentes ou futures pour découvrir notre histoire.
+      <strong>Chers utilisateurs,</strong><br>
+      Nous vous invitons à nous rejoindre et à partager nos valeurs au sein de nos événements.
+      Vous retrouverez ci-dessous l'événement en cours ou le prochain à venir. Nous vous attendons, petits et grands !
     </p>
 
-    <!-- Year Buttons -->
-    <section class="year-buttons-container">
-      <% @events_by_year.keys.each do |year| %>
-        <div class="year-container">
-          <button class="year-btn" data-year="<%= year %>">
-            <%= year %>
-          </button>
-
-          <!-- Month Buttons -->
-          <div id="months-<%= year %>" class="month-buttons">
-            <% (1..12).each do |month| %>
-              <% has_events = @events_by_year[year]&.key?(month) %>
-              <% if has_events %>
-                <div class="month-item" data-month="<%= month %>" data-year="<%= year %>">
-                  <%= Date::MONTHNAMES[month] %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </section>
-
-    <!-- Show All Events Button -->
-    <button id="show-all-events">Afficher Tous les Événements</button>
-
-    <!-- Events Display -->
-    <section id="events-container">
-      <h2 id="selected-month">Tous les Événements</h2>
-      <div id="events-list">
-        <% @events.each do |event| %>
-          <article class="event-card" data-year="<%= event.date.year %>" data-month="<%= event.date.month %>">
-            <div class="card-body">
-              <strong class="card-title"><%= event.author %></strong>
-              <p class="card-text"><strong>Lieu :</strong> <%= event.location %></p>
-              <p class="card-text"><strong>Date :</strong> <%= event.date.strftime("%B %d, %Y") %></p>
-              <p class="card-text"><strong>Durée :</strong> <%= event.duration %> minutes</p>
-              <p class="card-text"><strong>Prix :</strong> <%= event.price %> €</p>
-              <div class="event-actions">
-                <a href="/events/<%= event.id %>" class="btn btn-primary">Voir l'Événement</a>
-              </div>
+    <% if @next_event %>
+      <section class="featured-event">
+        <h2>Prochain Événement</h2>
+        <article class="event-card">
+          <div class="card-body">
+            <strong class="card-title"><%= @next_event.author %></strong>
+            <p class="card-text"><strong>Lieu :</strong> <%= @next_event.location %></p>
+            <p class="card-text"><strong>Date :</strong> <%= @next_event.date.strftime("%B %d, %Y") %></p>
+            <p class="card-text"><strong>Durée :</strong> <%= @next_event.duration %> minutes</p>
+            <p class="card-text"><strong>Prix :</strong> <%= @next_event.price %> €</p>
+            <div class="event-actions">
+              <a href="/events/<%= @next_event.id %>" class="btn btn-primary">Voir l'Événement</a>
             </div>
-          </article>
-        <% end %>
-      </div>
-    </section>
+          </div>
+        </article>
+      </section>
+    <% else %>
+      <p>Aucun événement prévu pour le moment.</p>
+    <% end %>
+
+    <!-- Bouton pour voir plus d'événements -->
+    <div class="event-actions">
+      <a href="<%= events_path %>" class="btn btn-success">
+        👉 Pour plus d'événements, cliquez ici !
+      </a>
+    </div>
   </main>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const yearButtons = document.querySelectorAll('.year-btn');
-      const monthItems = document.querySelectorAll('.month-item');
-      const eventCards = document.querySelectorAll('.event-card');
-      const showAllEventsBtn = document.getElementById('show-all-events');
-      const selectedMonth = document.getElementById('selected-month');
-
-      function showAllEvents() {
-        eventCards.forEach(card => card.style.display = "block");
-        selectedMonth.textContent = "Tous les Événements";
-      }
-
-      yearButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const year = button.getAttribute('data-year');
-          selectedMonth.textContent = `Événements de ${year}`;
-
-          eventCards.forEach(card => {
-            card.style.display = card.getAttribute('data-year') === year ? "block" : "none";
-          });
-
-          document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
-          document.getElementById(`months-${year}`).style.display = 'block';
-        });
-      });
-
-      monthItems.forEach(monthItem => {
-        monthItem.addEventListener('click', function() {
-          const year = this.getAttribute('data-year');
-          const month = this.getAttribute('data-month');
-          selectedMonth.textContent = `Événements de ${this.textContent} ${year}`;
-
-          eventCards.forEach(card => {
-            card.style.display = (card.getAttribute('data-year') === year && card.getAttribute('data-month') === month) ? "block" : "none";
-          });
-
-          document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
-        });
-      });
-
-      showAllEventsBtn.addEventListener('click', showAllEvents);
-
-      document.addEventListener('click', function(event) {
-        if (!event.target.closest('.year-container')) {
-          document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
-        }
-      });
-
-      showAllEvents();
-    });
-  </script>
 </body>
 </html>

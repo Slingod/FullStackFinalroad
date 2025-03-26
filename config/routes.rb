@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do 
   # Homepage
   root "pages#home"
 
@@ -23,10 +23,13 @@ Rails.application.routes.draw do
   # Members page
   resources :members, only: [:index, :show]
 
-  # Resources for events (including member actions)
+  # Nouvelle page Events
+  get "/events", to: "pages#events"
+
+  # Resources for events (y compris participation)
   resources :events do
     member do
-      post "toggle_participation" # Toggle participation for an event
+      post "toggle_participation"
     end
   end
 

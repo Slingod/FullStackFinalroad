@@ -308,7 +308,7 @@ header {
 .auth-container,
 .contact-container,
 .edit-profile-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -494,7 +494,7 @@ header {
 }
 .auth-container {
   margin: 180px;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -723,8 +723,6 @@ header {
 /* Logo image */
 .header-logo {
   height: 125px; /* Adjust size as needed */
-  width: auto;
-  margin-right: 20px; /* Adds spacing between logo and menu */
 }
 
 /* Navigation menu */
@@ -741,7 +739,8 @@ header {
   }
 
   .header-logo {
-    height: 40px; /* Reduce logo size for smaller screens */
+    height: 80px;
+    width: 80px;
   }
 
   .nav-menu {
@@ -901,7 +900,7 @@ header {
   margin-bottom: 20px;
 }
 .auth-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -913,7 +912,7 @@ header {
 /* Conteneurs généraux */
 .contact-container,
 .edit-profile-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);

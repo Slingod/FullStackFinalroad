@@ -70,7 +70,7 @@
       <div class="footer-content footer-links">
         <%= link_to 'Contactez-Nous', contact_path, class: 'btn' %>
         <%= link_to 'À Propos', about_path, class: 'btn' %>
-        <%= link_to 'Politique de Confidentialité', cgu_path, class: 'btn' %>
+        <%= link_to 'Nos CGU', cgu_path, class: 'btn' %>
         <% if user_signed_in? && current_user.over_18? %>
           <%= link_to 'Faire un Don', 'https://donate.stripe.com/test_6oE9CBaC09Nj1dScMM', class: 'btn', target: '_blank', rel: 'noopener noreferrer' %>
         <% end %>
