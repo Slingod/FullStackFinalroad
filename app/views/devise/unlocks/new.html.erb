@@ -1,18 +1,29 @@
-<section class="auth-container">
-  <h2 class="auth-title">Renvoyer les Instructions de Déverrouillage</h2>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Renvoyer les Instructions de Déverrouillage</title>
+    <meta name="description" content="Renvoyez les instructions de déverrouillage pour votre compte sur Nouvelle Ère Lissoise. Entrez votre adresse email pour recevoir les instructions nécessaires.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="auth-container">
+    <h2 class="auth-title">Renvoyer les Instructions de Déverrouillage</h2>
 
-  <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-    <div class="auth-field">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-input" %>
-    </div>
+      <div class="auth-field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-input" %>
+      </div>
 
-    <div class="auth-actions">
-      <%= f.submit "Renvoyer les Instructions de Déverrouillage", class: "btn btn-primary" %>
-    </div>
-  <% end %>
+      <div class="auth-actions">
+        <%= f.submit "Renvoyer les Instructions de Déverrouillage", class: "btn btn-primary" %>
+      </div>
+    <% end %>
 
-  <%= render "devise/shared/links" %>
-</section>
+    <%= render "devise/shared/links" %>
+  </section>
+</body>
+</html>

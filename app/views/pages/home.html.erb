@@ -1,107 +1,119 @@
-<main class="auth-container">
-  <h1>Liste des Événements</h1>
-  <hr>
-  <p>
-    Vous cherchez un événement passé ou futur ? Consultez les années passées, présentes ou futures pour découvrir notre histoire.
-  </p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Événements</title>
+    <meta name="description" content="Explorez la liste des événements de Nouvelle Ère Lissoise. Parcourez les événements passés, présents et futurs, et découvrez comment participer à notre histoire.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <main class="auth-container">
+    <h1>Liste des Événements</h1>
+    <hr>
+    <p>
+      <strong>Ensemble, faisons la différence</strong><br>
+      Vous cherchez un événement passé ou futur ? Consultez les années passées, présentes ou futures pour découvrir notre histoire.
+    </p>
 
-  <!-- Year Buttons -->
-  <section class="year-buttons-container">
-    <% @events_by_year.keys.each do |year| %>
-      <div class="year-container">
-        <button class="year-btn" data-year="<%= year %>">
-          <%= year %>
-        </button>
+    <!-- Year Buttons -->
+    <section class="year-buttons-container">
+      <% @events_by_year.keys.each do |year| %>
+        <div class="year-container">
+          <button class="year-btn" data-year="<%= year %>">
+            <%= year %>
+          </button>
 
-        <!-- Month Buttons -->
-        <div id="months-<%= year %>" class="month-buttons">
-          <% (1..12).each do |month| %>
-            <% has_events = @events_by_year[year]&.key?(month) %>
-            <% if has_events %>
-              <div class="month-item" data-month="<%= month %>" data-year="<%= year %>">
-                <%= Date::MONTHNAMES[month] %>
-              </div>
+          <!-- Month Buttons -->
+          <div id="months-<%= year %>" class="month-buttons">
+            <% (1..12).each do |month| %>
+              <% has_events = @events_by_year[year]&.key?(month) %>
+              <% if has_events %>
+                <div class="month-item" data-month="<%= month %>" data-year="<%= year %>">
+                  <%= Date::MONTHNAMES[month] %>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </section>
-
-  <!-- Show All Events Button -->
-  <button id="show-all-events">Afficher Tous les Événements</button>
-
-  <!-- Events Display -->
-  <section id="events-container">
-    <h2 id="selected-month">Tous les Événements</h2>
-    <div id="events-list">
-      <% @events.each do |event| %>
-        <article class="event-card" data-year="<%= event.date.year %>" data-month="<%= event.date.month %>">
-          <div class="card-body">
-            <h5 class="card-title"><%= event.author %></h5>
-            <p class="card-text"><strong>Lieu :</strong> <%= event.location %></p>
-            <p class="card-text"><strong>Date :</strong> <%= event.date.strftime("%B %d, %Y") %></p>
-            <p class="card-text"><strong>Durée :</strong> <%= event.duration %> minutes</p>
-            <p class="card-text"><strong>Prix :</strong> <%= event.price %> €</p>
-            <div class="event-actions">
-              <a href="/events/<%= event.id %>" class="btn btn-primary">Voir l'Événement</a>
-            </div>
           </div>
-        </article>
+        </div>
       <% end %>
-    </div>
-  </section>
-</main>
+    </section>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const yearButtons = document.querySelectorAll('.year-btn');
-    const monthItems = document.querySelectorAll('.month-item');
-    const eventCards = document.querySelectorAll('.event-card');
-    const showAllEventsBtn = document.getElementById('show-all-events');
-    const selectedMonth = document.getElementById('selected-month');
+    <!-- Show All Events Button -->
+    <button id="show-all-events">Afficher Tous les Événements</button>
 
-    function showAllEvents() {
-      eventCards.forEach(card => card.style.display = "block");
-      selectedMonth.textContent = "Tous les Événements";
-    }
+    <!-- Events Display -->
+    <section id="events-container">
+      <h2 id="selected-month">Tous les Événements</h2>
+      <div id="events-list">
+        <% @events.each do |event| %>
+          <article class="event-card" data-year="<%= event.date.year %>" data-month="<%= event.date.month %>">
+            <div class="card-body">
+              <strong class="card-title"><%= event.author %></strong>
+              <p class="card-text"><strong>Lieu :</strong> <%= event.location %></p>
+              <p class="card-text"><strong>Date :</strong> <%= event.date.strftime("%B %d, %Y") %></p>
+              <p class="card-text"><strong>Durée :</strong> <%= event.duration %> minutes</p>
+              <p class="card-text"><strong>Prix :</strong> <%= event.price %> €</p>
+              <div class="event-actions">
+                <a href="/events/<%= event.id %>" class="btn btn-primary">Voir l'Événement</a>
+              </div>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </section>
+  </main>
 
-    yearButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const year = button.getAttribute('data-year');
-        selectedMonth.textContent = `Événements de ${year}`;
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const yearButtons = document.querySelectorAll('.year-btn');
+      const monthItems = document.querySelectorAll('.month-item');
+      const eventCards = document.querySelectorAll('.event-card');
+      const showAllEventsBtn = document.getElementById('show-all-events');
+      const selectedMonth = document.getElementById('selected-month');
 
-        eventCards.forEach(card => {
-          card.style.display = card.getAttribute('data-year') === year ? "block" : "none";
-        });
-
-        document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
-        document.getElementById(`months-${year}`).style.display = 'block';
-      });
-    });
-
-    monthItems.forEach(monthItem => {
-      monthItem.addEventListener('click', function() {
-        const year = this.getAttribute('data-year');
-        const month = this.getAttribute('data-month');
-        selectedMonth.textContent = `Événements de ${this.textContent} ${year}`;
-
-        eventCards.forEach(card => {
-          card.style.display = (card.getAttribute('data-year') === year && card.getAttribute('data-month') === month) ? "block" : "none";
-        });
-
-        document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
-      });
-    });
-
-    showAllEventsBtn.addEventListener('click', showAllEvents);
-
-    document.addEventListener('click', function(event) {
-      if (!event.target.closest('.year-container')) {
-        document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
+      function showAllEvents() {
+        eventCards.forEach(card => card.style.display = "block");
+        selectedMonth.textContent = "Tous les Événements";
       }
-    });
 
-    showAllEvents();
-  });
-</script>
+      yearButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const year = button.getAttribute('data-year');
+          selectedMonth.textContent = `Événements de ${year}`;
+
+          eventCards.forEach(card => {
+            card.style.display = card.getAttribute('data-year') === year ? "block" : "none";
+          });
+
+          document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
+          document.getElementById(`months-${year}`).style.display = 'block';
+        });
+      });
+
+      monthItems.forEach(monthItem => {
+        monthItem.addEventListener('click', function() {
+          const year = this.getAttribute('data-year');
+          const month = this.getAttribute('data-month');
+          selectedMonth.textContent = `Événements de ${this.textContent} ${year}`;
+
+          eventCards.forEach(card => {
+            card.style.display = (card.getAttribute('data-year') === year && card.getAttribute('data-month') === month) ? "block" : "none";
+          });
+
+          document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
+        });
+      });
+
+      showAllEventsBtn.addEventListener('click', showAllEvents);
+
+      document.addEventListener('click', function(event) {
+        if (!event.target.closest('.year-container')) {
+          document.querySelectorAll('.month-buttons').forEach(m => m.style.display = 'none');
+        }
+      });
+
+      showAllEvents();
+    });
+  </script>
+</body>
+</html>

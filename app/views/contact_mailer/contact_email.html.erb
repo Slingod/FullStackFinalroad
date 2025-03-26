@@ -1,5 +1,18 @@
-<h1>New Contact Message</h1>
-<p><strong>Name:</strong> <%= @contact.name %></p>
-<p><strong>Email:</strong> <%= @contact.email %></p>
-<p><strong>Message:</strong></p>
-<p><%= @contact.message %></p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouveau Message de Contact</title>
+    <meta name="description" content="Affichez un nouveau message de contact sur Nouvelle Ère Lissoise. Consultez les détails du message, y compris le nom, l'email et le contenu du message.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="auth-container">
+    <h1>Nouveau Message de Contact</h1>
+    <p><strong>Nom :</strong> <%= @contact.name %></p>
+    <p><strong>Email :</strong> <%= @contact.email %></p>
+    <p><strong>Message :</strong></p>
+    <p><%= @contact.message %></p>
+  </section>
+</body>
+</html>

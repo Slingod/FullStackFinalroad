@@ -1,59 +1,70 @@
-<header class="title-container">
-  <h1>Liste des Utilisateurs</h1>
-</header>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Utilisateurs</title>
+    <meta name="description" content="Consultez et gérez la liste des utilisateurs sur Nouvelle Ère Lissoise. Affichez, modifiez ou supprimez les utilisateurs et leurs rôles administratifs.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header class="title-container">
+    <h1>Liste des Utilisateurs</h1>
+  </header>
 
-<!-- Users Cards Section -->
-<section class="users-container" id="users-list">
-  <% @users.each do |user| %>
-    <!-- Individual User Card -->
-    <article class="user-card" id="user-<%= user.id %>">
-      <!-- Administration pictures -->
-      <% if user.super_admin? %>
-        <%= image_tag 'superadmin.webp', alt: 'Super Admin', class: 'role-icon' %>
-      <% elsif user.admin? %>
-        <%= image_tag 'king.webp', alt: 'Admin', class: 'role-icon' %>
-      <% else %>
-        <%= image_tag 'member.webp', alt: 'Utilisateur', class: 'role-icon' %>
-      <% end %>
-
-      <!-- Display username or email -->
-      <h2><%= user.username.present? ? user.username : user.email %></h2>
-
-      <!-- Display user role -->
-      <p><strong>Rôle :</strong> <%= user.super_admin? ? "Super Administrateur" : (user.admin? ? "Administrateur" : "Utilisateur") %></p>
-
-      <!-- Action Buttons: Show, Modify, Delete -->
-      <div class="actions">
-        <!-- Show Button -->
-        <%= link_to admin_user_path(user), class: "btn btn-primary" do %>
-          <i class="fas fa-eye"></i> Voir
+  <!-- Users Cards Section -->
+  <section class="users-container" id="users-list">
+    <% @users.each do |user| %>
+      <!-- Individual User Card -->
+      <article class="user-card" id="user-<%= user.id %>">
+        <!-- Administration pictures -->
+        <% if user.super_admin? %>
+          <%= image_tag 'superadmin.webp', alt: 'Super Admin', class: 'role-icon' %>
+        <% elsif user.admin? %>
+          <%= image_tag 'king.webp', alt: 'Admin', class: 'role-icon' %>
+        <% else %>
+          <%= image_tag 'member.webp', alt: 'Utilisateur', class: 'role-icon' %>
         <% end %>
 
-        <!-- Modify Button -->
-        <%= link_to edit_admin_user_path(user), class: "btn btn-success" do %>
-          <i class="fas fa-edit"></i> Modifier
-        <% end %>
+        <!-- Display username or email -->
+        <h2><%= user.username.present? ? user.username : user.email %></h2>
 
-        <!-- Delete Button -->
-        <%= button_to "Supprimer", admin_user_path(user), method: :delete, form: { data: { turbo_confirm: "Êtes-vous sûr ?" } }, class: "btn btn-danger", id: "delete-user-#{user.id}" %>
-      </div>
-    </article>
-  <% end %>
-</section>
+        <!-- Display user role -->
+        <p><strong>Rôle :</strong> <%= user.super_admin? ? "Super Administrateur" : (user.admin? ? "Administrateur" : "Utilisateur") %></p>
 
-<!-- JavaScript to handle user deletion -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Select all delete buttons
-    document.querySelectorAll(".btn-danger").forEach(button => {
-      button.addEventListener("ajax:success", function(event) {
-        // Remove the user card upon successful deletion
-        let userId = this.id.replace("delete-user-", "");
-        let userCard = document.getElementById("user-" + userId);
-        if (userCard) {
-          userCard.remove();
-        }
+        <!-- Action Buttons: Show, Modify, Delete -->
+        <div class="actions">
+          <!-- Show Button -->
+          <%= link_to admin_user_path(user), class: "btn btn-primary" do %>
+            <i class="fas fa-eye"></i> Voir
+          <% end %>
+
+          <!-- Modify Button -->
+          <%= link_to edit_admin_user_path(user), class: "btn btn-success" do %>
+            <i class="fas fa-edit"></i> Modifier
+          <% end %>
+
+          <!-- Delete Button -->
+          <%= button_to "Supprimer", admin_user_path(user), method: :delete, form: { data: { turbo_confirm: "Êtes-vous sûr ?" } }, class: "btn btn-danger", id: "delete-user-#{user.id}" %>
+        </div>
+      </article>
+    <% end %>
+  </section>
+
+  <!-- JavaScript to handle user deletion -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Select all delete buttons
+      document.querySelectorAll(".btn-danger").forEach(button => {
+        button.addEventListener("ajax:success", function(event) {
+          // Remove the user card upon successful deletion
+          let userId = this.id.replace("delete-user-", "");
+          let userCard = document.getElementById("user-" + userId);
+          if (userCard) {
+            userCard.remove();
+          }
+        });
       });
     });
-  });
-</script>
+  </script>
+</body>
+</html>

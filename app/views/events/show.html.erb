@@ -1,79 +1,89 @@
-<section class="auth-container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <article class="card shadow-lg rounded">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de l'Événement</title>
+    <meta name="description" content="Découvrez les détails de l'événement sur Nouvelle Ère Lissoise. Consultez les informations, les images, les vidéos, et gérez votre participation ou les options d'administration.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="auth-container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <article class="card shadow-lg rounded">
+          <div class="card-body">
+            <!-- Event Details -->
+            <div class="event-details mb-3">
+              <strong class="card-title text-center"><%= @event.author %></strong>
+              <p><strong>Lieu :</strong> <%= @event.location %></p>
+              <p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
+              <p><strong>Prix :</strong> <%= @event.price %> €</p>
+              <p><strong>Date :</strong> <%= @event.date.strftime("%d %B %Y") %></p>
+              <p><strong>Participants :</strong> <%= @participant_count %></p>
+            </div>
 
-        <div class="card-body">
-          <!-- Event Details -->
-          <div class="event-details mb-3">
-            <strong class="card-title text-center"><%= @event.author %></strong>
-            <p><strong>Lieu :</strong> <%= @event.location %></p>
-            <p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
-            <p><strong>Prix :</strong> <%= @event.price %> €</p>
-            <p><strong>Date :</strong> <%= @event.date.strftime("%d %B %Y") %></p>
-            <p><strong>Participants :</strong> <%= @participant_count %></p>
-          </div>
+            <hr>
 
-          <hr>
-
-          <!-- Event Pictures -->
-          <div class="event-pictures mb-3">
-            <h4>Images</h4>
-            <% if @event.pictures.attached? %>
-              <div class="row custom-image-grid">
-                <% @event.pictures.each do |picture| %>
-                  <div class="col-6 col-sm-4 col-md-3 mb-3 custom-image-item">
-                    <%= image_tag url_for(picture), alt: "Image de l'événement", class: "custom-image" %>
-                  </div>
-                <% end %>
-              </div>
-            <% else %>
-              <p class="text-muted">Aucune image disponible</p>
-            <% end %>
-          </div>
-
-          <!-- Event Videos -->
-          <div class="event-videos mb-3">
-            <h4>Vidéos</h4>
-            <% if @event.videos.attached? %>
-              <div class="row custom-video-grid">
-                <% @event.videos.each do |video| %>
-                  <div class="col-6 col-sm-4 col-md-3 mb-3 custom-video-item">
-                    <video controls class="custom-video img-fluid">
-                      <source src="<%= url_for(video) %>" type="video/mp4">
-                      Votre navigateur ne supporte pas la balise vidéo.
-                    </video>
-                  </div>
-                <% end %>
-              </div>
-            <% else %>
-              <p class="text-muted">Aucune vidéo disponible</p>
-            <% end %>
-          </div>
-
-          <hr>
-
-          <!-- Action Buttons -->
-          <div class="auth-actions">
-            <a href="<%= root_path %>" class="btn btn-primary">Retour à l'Accueil</a>
-
-            <!-- Registration/Unsubscription Button -->
-            <% if current_user && @event.date >= Date.today %>
-              <% if @event.user_participating?(current_user) %>
-                <%= button_to "Se Désinscrire", toggle_participation_event_path(@event), method: :post, class: "btn btn-danger" %>
+            <!-- Event Pictures -->
+            <div class="event-pictures mb-3">
+              <h4>Images</h4>
+              <% if @event.pictures.attached? %>
+                <div class="row custom-image-grid">
+                  <% @event.pictures.each do |picture| %>
+                    <div class="col-6 col-sm-4 col-md-3 mb-3 custom-image-item">
+                      <%= image_tag url_for(picture), alt: "image_de_l_evenement", class: "custom-image" %>
+                    </div>
+                  <% end %>
+                </div>
               <% else %>
-                <%= button_to "S'Inscrire", toggle_participation_event_path(@event), method: :post, class: "btn btn-success" %>
+                <p class="text-muted">Aucune image disponible</p>
               <% end %>
-            <% end %>
+            </div>
 
-            <!-- Admin and Super Admin Actions -->
-            <% if current_user && (current_user.admin? || current_user.super_admin?) %>
-              <a href="<%= edit_event_path(@event) %>" class="btn btn-success">Modifier l'Événement</a>
-              <%= button_to "Supprimer", event_path(@event), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cet événement ?" }, class: "btn btn-danger" %>
-            <% end %>
+            <!-- Event Videos -->
+            <div class="event-videos mb-3">
+              <h4>Vidéos</h4>
+              <% if @event.videos.attached? %>
+                <div class="row custom-video-grid">
+                  <% @event.videos.each do |video| %>
+                    <div class="col-6 col-sm-4 col-md-3 mb-3 custom-video-item">
+                      <video controls class="custom-video img-fluid">
+                        <source src="<%= url_for(video) %>" type="video/mp4">
+                        Votre navigateur ne supporte pas la balise vidéo.
+                      </video>
+                    </div>
+                  <% end %>
+                </div>
+              <% else %>
+                <p class="text-muted">Aucune vidéo disponible</p>
+              <% end %>
+            </div>
+
+            <hr>
+
+            <!-- Action Buttons -->
+            <div class="auth-actions">
+              <a href="<%= root_path %>" class="btn btn-primary">Retour à l'Accueil</a>
+
+              <!-- Registration/Unsubscription Button -->
+              <% if current_user && @event.date >= Date.today %>
+                <% if @event.user_participating?(current_user) %>
+                  <%= button_to "Se Désinscrire", toggle_participation_event_path(@event), method: :post, class: "btn btn-danger" %>
+                <% else %>
+                  <%= button_to "S'Inscrire", toggle_participation_event_path(@event), method: :post, class: "btn btn-success" %>
+                <% end %>
+              <% end %>
+
+              <!-- Admin and Super Admin Actions -->
+              <% if current_user && (current_user.admin? || current_user.super_admin?) %>
+                <a href="<%= edit_event_path(@event) %>" class="btn btn-success">Modifier l'Événement</a>
+                <%= button_to "Supprimer", event_path(@event), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer cet événement ?" }, class: "btn btn-danger" %>
+              <% end %>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</body>
+</html>

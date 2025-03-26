@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title><%= content_for(:title) || "Nouvelle ère Lissoise" %></title>
+<head>
+    <title><%= content_for(:title) || "Nouvelle Ère Lissoise" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Bienvenue sur Nouvelle Ère Lissoise. Explorez notre site, connectez-vous ou inscrivez-vous, et découvrez nos fonctionnalités pour les membres et les administrateurs.">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
@@ -10,71 +11,104 @@
 
     <!-- Favicon -->
     <link rel="icon" href="<%= asset_path('nel_logo.webp') %>" type="image/webp" sizes="32x32">
-  </head>
-  <body>
-    <div class="wrapper">
-      <!-- Flash Messages -->
-      <div class="flash-messages">
-        <% flash.each do |key, message| %>
-          <div class="flash alert-<%= key %>"><%= message %></div>
-        <% end %>
-      </div>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Flash Messages -->
+    <div class="flash-messages">
+      <% flash.each do |key, message| %>
+        <div class="flash alert-<%= key %>"><%= message %></div>
+      <% end %>
+    </div>
 
-      <header class="header">
-        <div class="header-container">
-          <!-- Logo -->
-          <div class="logo-container">
-            <%= link_to root_path do %>
-              <%= image_tag 'nel_logo.webp', alt: "logo_de_nouvelle_ere_lissoise", class: "header-logo" %>
-            <% end %>
-          </div>
-
-          <!-- Burger Menu Button (Visible only on small screens) -->
-          <button class="burger-menu" id="burger-menu">
-            ☰
-          </button>
-
-          <!-- Welcome Message -->
-          <div class="welcome-message">
-            <% if user_signed_in? %>
-              <p>Welcome, <%= current_user.username.presence || "User" %>!</p>
-            <% else %>
-              <p>Welcome to our website!</p>
-            <% end %>
-          </div>
-
-          <!-- Navigation Menu -->
-          <nav class="footer-content footer-links nav-menu active desktop-visible" id="nav-menu">
-            <%= link_to 'Accueil', root_path, class: 'btn' %>
-            <% if user_signed_in? %>
-              <%= link_to 'Membres', members_path, class: 'btn' %>
-              <%= link_to 'Météo', weather_path, class: 'btn' %>
-              <% if current_user.admin? || current_user.super_admin? %>
-                <%= link_to 'Admin', admin_root_path, class: 'btn' %>
-              <% end %>
-              <%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-            <% else %>
-              <%= link_to 'Inscription', signup_path, class: 'btn' %>
-              <%= link_to 'Connexion', login_path, class: 'btn' %>
-            <% end %>
-          </nav>
-        </div>
-      </header>
-
-      <main class="content">
-        <%= yield %>
-      </main>
-
-      <footer class="footer">
-        <div class="footer-content footer-links">
-          <%= link_to 'Contactez-Nous', contact_path, class: 'btn' %>
-          <%= link_to 'À Propos', about_path, class: 'btn' %>
-          <%= link_to 'Politique de Confidentialité', cgu_path, class: 'btn' %>
-          <% if user_signed_in? && current_user.over_18? %>
-            <%= link_to 'Faire un Don', 'https://donate.stripe.com/test_6oE9CBaC09Nj1dScMM', class: 'btn', target: '_blank', rel: 'noopener noreferrer' %>
+    <header class="header">
+      <div class="header-container">
+        <!-- Logo -->
+        <div class="logo-container">
+          <%= link_to root_path do %>
+            <%= image_tag 'nel_logo.webp', alt: "logo_de_nouvelle_ere_lissoise", class: "header-logo" %>
           <% end %>
         </div>
-      </footer>
-    </div>
-  </body>
+
+        <!-- Burger Menu Button (Visible only on small screens) -->
+        <button class="burger-menu" id="burger-menu">
+          ☰
+        </button>
+
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+          <% if user_signed_in? %>
+            <p>Bienvenue, <%= current_user.username.presence || "Utilisateur" %>!</p>
+          <% else %>
+            <p>Nouvelle ère Lissoise vous souhaite la bienvenue sur sont site web !</p>
+          <% end %>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="footer-content footer-links nav-menu active desktop-visible" id="nav-menu">
+          <%= link_to 'Accueil', root_path, class: 'btn' %>
+          <% if user_signed_in? %>
+            <%= link_to 'Membres', members_path, class: 'btn' %>
+            <%= link_to 'Météo', weather_path, class: 'btn' %>
+            <% if current_user.admin? || current_user.super_admin? %>
+              <%= link_to 'Admin', admin_root_path, class: 'btn' %>
+            <% end %>
+            <%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+          <% else %>
+            <%= link_to 'Inscription', signup_path, class: 'btn' %>
+            <%= link_to 'Connexion', login_path, class: 'btn' %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="content">
+      <%= yield %>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content footer-links">
+        <%= link_to 'Contactez-Nous', contact_path, class: 'btn' %>
+        <%= link_to 'À Propos', about_path, class: 'btn' %>
+        <%= link_to 'Politique de Confidentialité', cgu_path, class: 'btn' %>
+        <% if user_signed_in? && current_user.over_18? %>
+          <%= link_to 'Faire un Don', 'https://donate.stripe.com/test_6oE9CBaC09Nj1dScMM', class: 'btn', target: '_blank', rel: 'noopener noreferrer' %>
+        <% end %>
+      </div>
+    </footer>
+  </div>
+
+  <!-- JavaScript for the burger menu -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const burgerMenu = document.getElementById("burger-menu");
+      const navMenu = document.getElementById("nav-menu");
+
+      // Toggle navigation menu when burger button is clicked
+      burgerMenu.addEventListener("click", function (event) {
+        event.stopPropagation(); // Prevents immediate closing
+        navMenu.classList.toggle("active");
+      });
+
+      // Close the menu if a click happens outside
+      document.addEventListener("click", function (event) {
+        if (!burgerMenu.contains(event.target) && !navMenu.contains(event.target)) {
+          navMenu.classList.remove("active");
+        }
+      });
+
+      // Ensure the menu is always visible on larger screens
+      function checkScreenSize() {
+        if (window.innerWidth > 600) {
+          navMenu.classList.add("desktop-visible");
+        } else {
+          navMenu.classList.remove("desktop-visible");
+        }
+      }
+
+      checkScreenSize(); // Initial check
+      window.addEventListener("resize", checkScreenSize); // Check on resize
+    });
+  </script>
+</body>
 </html>

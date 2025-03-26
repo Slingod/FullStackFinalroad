@@ -1,9 +1,20 @@
-<div class="auth-container">
-  <h1 class="page-title">Bienvenue sur le tableau de bord d'administration</h1>
-  <p>Gérez votre application ici.</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de Bord d'Administration</title>
+    <meta name="description" content="Accédez au tableau de bord d'administration de Nouvelle Ère Lissoise pour gérer les utilisateurs et les événements. Optimisez votre application en toute simplicité.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <main class="auth-container">
+    <h1 class="page-title">Bienvenue sur le tableau de bord d'administration</h1>
+    <p>Gérez votre application ici.</p>
 
-  <div class="auth-actions">
-    <%= button_to "Gérer les utilisateurs", admin_users_path, method: :get, class: 'btn btn-primary' %>
-    <%= button_to "Accéder à la page des événements", admin_events_path, method: :get, class: 'btn btn-primary' %>
-  </div>
-</div>
+    <div class="auth-actions">
+      <%= button_to "Gérer les utilisateurs", admin_users_path, method: :get, class: 'btn btn-primary' %>
+      <%= button_to "Accéder à la page des événements", admin_events_path, method: :get, class: 'btn btn-primary' %>
+    </div>
+  </main>
+</body>
+</html>

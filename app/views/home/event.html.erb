@@ -1,33 +1,44 @@
-<section class="event-page">
-  <h1>Page des Événements</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page des Événements</title>
+    <meta name="description" content="Explorez la page des événements sur Nouvelle Ère Lissoise. Visualisez et gérez les événements, créez-en de nouveaux, et accédez aux détails de chaque événement.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="event-page">
+    <h1>Page des Événements</h1>
 
-  <% if current_user&.admin? %>
-    <div class="text-center mb-4">
-      <%= link_to 'Créer un Nouvel Événement', new_picture_path, class: 'btn btn-primary' %>
-    </div>
-  <% end %>
-
-  <div class="pictures-container">
-    <% @pictures.each do |picture| %>
-      <article class="card">
-        <div class="card-body">
-          <% if picture.image.attached? %>
-            <%= image_tag picture.image, class: "card-img-top", alt: picture.name %>
-          <% else %>
-            <%= image_tag 'default_image.jpg', class: "card-img-top", alt: "Image par défaut" %>
-          <% end %>
-
-          <h5 class="card-title"><%= picture.name %></h5>
-          <p class="card-text"><%= picture.breed %></p>
-          <p class="card-text"><strong>Prix :</strong> <%= number_to_currency(picture.price, unit: "€", delimiter: " ", format: "%n %u") %></p>
-
-          <div class="card-actions">
-            <%= link_to 'Voir', picture_path(picture), class: 'btn btn-info btn-sm' %>
-            <%= link_to 'Modifier', edit_picture_path(picture), class: 'btn btn-warning btn-sm' %>
-            <%= link_to 'Supprimer', picture_path(picture), method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class: 'btn btn-danger btn-sm' %>
-          </div>
-        </div>
-      </article>
+    <% if current_user&.admin? %>
+      <div class="text-center mb-4">
+        <%= link_to 'Créer un Nouvel Événement', new_picture_path, class: 'btn btn-primary' %>
+      </div>
     <% end %>
-  </div>
-</section>
+
+    <div class="pictures-container">
+      <% @pictures.each do |picture| %>
+        <article class="card">
+          <div class="card-body">
+            <% if picture.image.attached? %>
+              <%= image_tag picture.image, class: "card-img-top", alt: picture.name %>
+            <% else %>
+              <%= image_tag 'default_image.jpg', class: "card-img-top", alt: "Image par défaut" %>
+            <% end %>
+
+            <h5 class="card-title"><%= picture.name %></h5>
+            <p class="card-text"><%= picture.breed %></p>
+            <p class="card-text"><strong>Prix :</strong> <%= number_to_currency(picture.price, unit: "€", delimiter: " ", format: "%n %u") %></p>
+
+            <div class="card-actions">
+              <%= link_to 'Voir', picture_path(picture), class: 'btn btn-info btn-sm' %>
+              <%= link_to 'Modifier', edit_picture_path(picture), class: 'btn btn-warning btn-sm' %>
+              <%= link_to 'Supprimer', picture_path(picture), method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class: 'btn btn-danger btn-sm' %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </section>
+</body>
+</html>

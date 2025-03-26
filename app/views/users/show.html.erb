@@ -1,42 +1,53 @@
-<section class="auth-container">
-  <h1 class="page-title">Profil Utilisateur</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil Utilisateur</title>
+    <meta name="description" content="Consultez le profil utilisateur sur Nouvelle Ère Lissoise. Affichez les informations personnelles et gérez votre compte avec des options de modification et de suppression.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="auth-container">
+    <h1 class="page-title">Profil Utilisateur</h1>
 
-  <article class="card mx-auto user-profile-card">
-    <div class="card-body text-center">
-      <h2 class="user-name">
-        <% if user.username.present? %>
-          <%= user.username %>
-        <% elsif user.firstname.present? && user.name.present? %>
-          <%= "#{user.firstname} #{user.name}" %>
-        <% else %>
-          Utilisateur #<%= user.id %>
-        <% end %>
-      </h2>
+    <article class="card mx-auto user-profile-card">
+      <div class="card-body text-center">
+        <h2 class="user-name">
+          <% if user.username.present? %>
+            <%= user.username %>
+          <% elsif user.firstname.present? && user.name.present? %>
+            <%= "#{user.firstname} #{user.name}" %>
+          <% else %>
+            Utilisateur #<%= user.id %>
+          <% end %>
+        </h2>
 
-      <% if user.show_firstname %>
-        <p><strong>Prénom :</strong> <%= user.firstname %></p>
-      <% end %>
-
-      <% if user.show_name %>
-        <p><strong>Nom :</strong> <%= user.name %></p>
-      <% end %>
-
-      <% if user.show_email %>
-        <p><strong>Email :</strong> <%= user.email %></p>
-      <% end %>
-
-      <% if user.show_age && user.age.present? %>
-        <p><strong>Âge :</strong> <%= user.age %></p>
-      <% end %>
-
-      <div class="user-actions">
-        <% if current_user == user %>
-          <%= link_to 'Modifier', edit_user_path(user), class: "btn btn-success" %>
-          <%= button_to "Supprimer Mon Compte", user_path(user), method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger" %>
+        <% if user.show_firstname %>
+          <p><strong>Prénom :</strong> <%= user.firstname %></p>
         <% end %>
 
-        <%= link_to 'Retour', members_path, class: "btn btn-primary" %>
+        <% if user.show_name %>
+          <p><strong>Nom :</strong> <%= user.name %></p>
+        <% end %>
+
+        <% if user.show_email %>
+          <p><strong>Email :</strong> <%= user.email %></p>
+        <% end %>
+
+        <% if user.show_age && user.age.present? %>
+          <p><strong>Âge :</strong> <%= user.age %></p>
+        <% end %>
+
+        <div class="user-actions">
+          <% if current_user == user %>
+            <%= link_to 'Modifier', edit_user_path(user), class: "btn btn-success" %>
+            <%= button_to "Supprimer Mon Compte", user_path(user), method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger" %>
+          <% end %>
+
+          <%= link_to 'Retour', members_path, class: "btn btn-primary" %>
+        </div>
       </div>
-    </div>
-  </article>
-</section>
+    </article>
+  </section>
+</body>
+</html>

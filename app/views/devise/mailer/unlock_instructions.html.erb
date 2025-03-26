@@ -1,7 +1,18 @@
-<p>Bonjours <%= @resource.email %>!</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Compte Verrouillé</title>
+    <meta name="description" content="Votre compte Nouvelle Ère Lissoise a été verrouillé après plusieurs tentatives de connexion infructueuses. Cliquez sur le lien pour le déverrouiller.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <p>Bonjour <%= @resource.email %>!</p>
 
-<p>Votre compte a été verrouillé en raison d'un nombre excessif de tentatives de connexion infructueuses.</p>
+    <p>Votre compte a été verrouillé en raison d'un nombre excessif de tentatives de connexion infructueuses.</p>
 
-<p>Cliquez sur le lien ci-dessous pour déverrouiller votre compte:</p>
+    <p>Cliquez sur le lien ci-dessous pour déverrouiller votre compte :</p>
 
-<p><%= link_to 'Débloquer mon compte', unlock_url(@resource, unlock_token: @token) %></p>
+    <p><%= link_to 'Débloquer mon compte', unlock_url(@resource, unlock_token: @token) %></p>
+</body>
+</html>

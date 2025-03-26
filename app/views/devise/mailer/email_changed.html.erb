@@ -1,7 +1,20 @@
-<p>Bonjours <%= @email %>!</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification de Modification d'Email</title>
+    <meta name="description" content="Notification de modification d'adresse email sur Nouvelle Ère Lissoise. Vérifiez les changements apportés à votre adresse email et assurez-vous qu'ils sont corrects.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="auth-container">
+    <p>Bonjour <%= @email %>!</p>
 
-<% if @resource.try(:unconfirmed_email?) %>
-  <p>Nous vous contactons pour vous informer que votre adresse e-mail est en cours de modification. <%= @resource.unconfirmed_email %>.</p>
-<% else %>
-  <p>Nous vous contactons pour vous informer que votre adresse e-mail a été modifiée en <%= @resource.email %>.</p>
-<% end %>
+    <% if @resource.try(:unconfirmed_email?) %>
+      <p>Nous vous contactons pour vous informer que votre adresse e-mail est en cours de modification vers <%= @resource.unconfirmed_email %>.</p>
+    <% else %>
+      <p>Nous vous contactons pour vous informer que votre adresse e-mail a été modifiée en <%= @resource.email %>.</p>
+    <% end %>
+  </section>
+</body>
+</html>

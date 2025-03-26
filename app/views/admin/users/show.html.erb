@@ -1,22 +1,33 @@
-<section class="auth-container">
-  <h1>Profil Utilisateur</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil Utilisateur</title>
+    <meta name="description" content="Affichez le profil utilisateur sur Nouvelle Ère Lissoise. Consultez les détails de l'utilisateur, y compris l'ID, l'email et le rôle, et gérez les informations avec des options de modification et de suppression.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="auth-container">
+    <h1>Profil Utilisateur</h1>
 
-  <p><strong>ID :</strong> <%= @user.id %></p>
-  <p><strong>Email :</strong> <%= @user.email %></p>
-  <p><strong>Rôle :</strong> <%= @user.super_admin? ? "Super Administrateur" : (@user.admin? ? "Administrateur" : "Utilisateur") %></p>
+    <p><strong>ID :</strong> <%= @user.id %></p>
+    <p><strong>Email :</strong> <%= @user.email %></p>
+    <p><strong>Rôle :</strong> <%= @user.super_admin? ? "Super Administrateur" : (@user.admin? ? "Administrateur" : "Utilisateur") %></p>
 
-  <div class="buttons">
-    <%= link_to "Modifier", edit_admin_user_path(@user), class: "btn btn-success" %>
-    <%= link_to "Retour", admin_users_path, class: "btn btn-primary" %>
+    <div class="buttons">
+      <%= link_to "Modifier", edit_admin_user_path(@user), class: "btn btn-success" %>
+      <%= link_to "Retour", admin_users_path, class: "btn btn-primary" %>
 
-    <%= link_to "Supprimer", admin_user_path(@user), method: :delete, remote: true, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger delete-user", id: "delete-user-#{@user.id}" %>
-  </div>
-</section>
+      <%= link_to "Supprimer", admin_user_path(@user), method: :delete, remote: true, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger delete-user", id: "delete-user-#{@user.id}" %>
+    </div>
+  </section>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector(".delete-user").addEventListener("ajax:success", function(event) {
-      window.location.href = "/admin/users"; // Redirection after deletion
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelector(".delete-user").addEventListener("ajax:success", function(event) {
+        window.location.href = "/admin/users"; // Redirection after deletion
+      });
     });
-  });
-</script>
+  </script>
+</body>
+</html>

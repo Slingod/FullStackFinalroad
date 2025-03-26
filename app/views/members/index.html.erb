@@ -1,34 +1,44 @@
-<section class="page-container">
-  <h1 class="page-title mt-4 mb-4">Membres</h1>
-  <div class="users-container">
-    <% @members.each do |member| %>
-      <article class="user-card">
-        <div class="card-body text-center">
-          
-        <!-- Images de Rôle -->
-        
-        <% if member.super_admin? %>
-            <%= image_tag 'superadmin.webp', alt: 'Super Admin', class: 'role-icon' %>
-          <% elsif member.admin? %>
-            <%= image_tag 'king.webp', alt: 'Admin', class: 'role-icon' %>
-          <% else %>
-            <%= image_tag 'member.webp', alt: 'Utilisateur', class: 'role-icon' %>
-          <% end %>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Membres</title>
+    <meta name="description" content="Explorez la liste des membres de Nouvelle Ère Lissoise. Découvrez les rôles et les informations de chaque membre et accédez à leurs profils.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="page-container">
+    <h1 class="page-title mt-4 mb-4">Membres</h1>
+    <div class="users-container">
+      <% @members.each do |member| %>
+        <article class="user-card">
+          <div class="card-body text-center">
 
-          <!-- Nom d'Utilisateur -->
-          <h5 class="card-title">
-            <% if member.username.present? %>
-              <%= member.username %>
-            <% elsif member.firstname.present? && member.name.present? %>
-              <%= "#{member.firstname} #{member.name}" %>
+            <!-- Images de Rôle -->
+            <% if member.super_admin? %>
+              <%= image_tag 'superadmin.webp', alt: 'Super Admin', class: 'role-icon' %>
+            <% elsif member.admin? %>
+              <%= image_tag 'king.webp', alt: 'Admin', class: 'role-icon' %>
             <% else %>
-              Utilisateur #<%= member.id %>
+              <%= image_tag 'member.webp', alt: 'Utilisateur', class: 'role-icon' %>
             <% end %>
-          </h5>
 
-          <%= link_to 'Voir', member_path(member), class: "btn btn-primary" %>
-        </div>
-      </article>
-    <% end %>
-  </div>
-</section>
+            <!-- Nom d'Utilisateur -->
+            <h5 class="card-title">
+              <% if member.username.present? %>
+                <%= member.username %>
+              <% elsif member.firstname.present? && member.name.present? %>
+                <%= "#{member.firstname} #{member.name}" %>
+              <% else %>
+                Utilisateur #<%= member.id %>
+              <% end %>
+            </h5>
+
+            <%= link_to 'Voir', member_path(member), class: "btn btn-primary" %>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </section>
+</body>
+</html>

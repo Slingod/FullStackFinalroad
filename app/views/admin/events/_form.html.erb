@@ -1,28 +1,42 @@
-<%= form_with model: @event, url: admin_events_path, local: true do |form| %>
-  <div class="auth-field">
-    <%= form.label :titre %>
-    <%= form.text_field :titre, class: 'form-control' %>
-  </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire d'Événement</title>
+    <meta name="description" content="Gérez les événements sur Nouvelle Ère Lissoise avec ce formulaire d'administration. Ajoutez des détails, des prix, des emplacements et des fichiers médias pour chaque événement.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <main class="auth-container">
+    <h1 class="page-title">Formulaire d'Événement</h1>
+    <%= form_with model: @event, url: admin_events_path, local: true do |form| %>
+      <div class="auth-field">
+        <%= form.label :titre %>
+        <%= form.text_field :titre, class: 'form-control' %>
+      </div>
 
-  <div class="auth-field">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: 'form-control' %>
-  </div>
+      <div class="auth-field">
+        <%= form.label :description %>
+        <%= form.text_area :description, class: 'form-control' %>
+      </div>
 
-  <div class="auth-field">
-    <%= form.label :prix %>
-    <%= form.number_field :prix, step: 0.01, class: 'form-control' %>
-  </div>
+      <div class="auth-field">
+        <%= form.label :prix %>
+        <%= form.number_field :prix, step: 0.01, class: 'form-control' %>
+      </div>
 
-  <div class="auth-field">
-    <%= form.label :emplacement %>
-    <%= form.text_field :emplacement, class: 'form-control' %>
-  </div>
+      <div class="auth-field">
+        <%= form.label :emplacement %>
+        <%= form.text_field :emplacement, class: 'form-control' %>
+      </div>
 
-  <div class="auth-field">
-    <%= form.label :fichiers_medias %>
-    <%= form.file_field :media_files, multiple: true, accept: "image/*,video/*", class: 'form-control' %>
-  </div>
+      <div class="auth-field">
+        <%= form.label :fichiers_medias %>
+        <%= form.file_field :media_files, multiple: true, accept: "image/*,video/*", class: 'form-control' %>
+      </div>
 
-  <%= form.submit "Sauvegarder", class: "btn btn-primary" %>
-<% end %>
+      <%= form.submit "Sauvegarder", class: "btn btn-primary" %>
+    <% end %>
+  </main>
+</body>
+</html>

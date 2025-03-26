@@ -1,17 +1,28 @@
-<section class="auth-container">
-  <div class="card-body">
-    <h1 class="card-title">Météo Actuelle à Lisses</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Météo Actuelle à Lisses</title>
+    <meta name="description" content="Consultez la météo actuelle à Lisses sur Nouvelle Ère Lissoise. Obtenez des informations précises sur la température, la vitesse et la direction du vent.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <section class="auth-container">
+    <div class="card-body">
+      <h1 class="card-title">Météo Actuelle à Lisses</h1>
 
-    <% if @weather_data && @weather_data['current_weather'] %>
-      <h5 class="card-subtitle">Informations Météorologiques</h5>
-      <div class="weather-details">
-        <p class="card-text"><strong>Température :</strong> <%= @weather_data['current_weather']['temperature'] %>°C</p>
-        <p class="card-text"><strong>Vitesse du Vent :</strong> <%= @weather_data['current_weather']['windspeed'] %> km/h</p>
-        <p class="card-text"><strong>Direction du Vent :</strong> <%= @weather_data['current_weather']['winddirection'] %>°</p>
-        <p class="card-text"><strong>Dernière Mise à Jour :</strong> <%= @weather_data['current_weather']['time'] %></p>
-      </div>
-    <% else %>
-      <p class="card-text error-message">Impossible de récupérer les données météorologiques pour le moment.</p>
-    <% end %>
-  </div>
-</section>
+      <% if @weather_data && @weather_data['current_weather'] %>
+        <h5 class="card-subtitle">Informations Météorologiques</h5>
+        <div class="weather-details">
+          <p class="card-text"><strong>Température :</strong> <%= @weather_data['current_weather']['temperature'] %>°C</p>
+          <p class="card-text"><strong>Vitesse du Vent :</strong> <%= @weather_data['current_weather']['windspeed'] %> km/h</p>
+          <p class="card-text"><strong>Direction du Vent :</strong> <%= @weather_data['current_weather']['winddirection'] %>°</p>
+          <p class="card-text"><strong>Dernière Mise à Jour :</strong> <%= @weather_data['current_weather']['time'] %></p>
+        </div>
+      <% else %>
+        <p class="card-text error-message">Impossible de récupérer les données météorologiques pour le moment.</p>
+      <% end %>
+    </div>
+  </section>
+</body>
+</html>
