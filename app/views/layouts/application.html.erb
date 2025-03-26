@@ -12,7 +12,8 @@
     <!-- Favicon -->
     <link rel="icon" href="<%= asset_path('nel_logo.webp') %>" type="image/webp" sizes="32x32">
 </head>
-<body>
+<!-- 🔹 AJOUT DU DATA ATTRIBUTE -->
+<body data-user-logged-in="<%= user_signed_in? %>">
   <div class="wrapper">
     <!-- Flash Messages -->
     <div class="flash-messages">

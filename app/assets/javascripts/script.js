@@ -2,7 +2,7 @@ function toggleMenu() {
     const navLinks = document.getElementById("navLinks");
     navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
 }
-const isLoggedIn = <%= user_signed_in? ? 'true' : 'false' %>;
+const isLoggedIn = document.body.dataset.userLoggedIn === "true";
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("login-btn");
