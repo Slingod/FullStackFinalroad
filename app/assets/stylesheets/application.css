@@ -739,8 +739,9 @@ header {
   }
 
   .header-logo {
-    height: 80px;
     width: 80px;
+    height: 80px;
+    object-fit: cover;
   }
 
   .nav-menu {

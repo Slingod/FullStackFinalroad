@@ -14,18 +14,17 @@
   <!-- Users Cards Section -->
   <section class="users-container" id="users-list">
     <% @users.each do |user| %>
-      <!-- Individual User Card -->
       <article class="user-card" id="user-<%= user.id %>">
-        <!-- Administration pictures -->
+        <!-- Role icon -->
         <% if user.super_admin? %>
           <%= image_tag 'superadmin.webp', alt: 'Super Administrateur', class: 'role-icon' %>
         <% elsif user.admin? %>
           <%= image_tag 'king.webp', alt: 'Administrateur', class: 'role-icon' %>
-        <% elsif user.role == "user" || user.role == "Utilisateur" %>
+        <% else %>
           <%= image_tag 'member.webp', alt: 'Utilisateur', class: 'role-icon' %>
         <% end %>
 
-        <!-- Display username or email -->
+        <!-- Username or email -->
         <h2><%= user.username.present? ? user.username : user.email %></h2>
 
         <p><strong>Rôle :</strong>
@@ -39,19 +38,10 @@
                end %>
         </p>
 
-        <!-- Action Buttons: Show, Modify, Delete -->
+        <!-- Action Buttons -->
         <div class="actions">
-          <!-- Show Button -->
-          <%= link_to admin_user_path(user), class: "btn btn-primary" do %>
-            <i class="fas fa-eye"></i> Voir
-          <% end %>
-
-          <!-- Modify Button -->
-          <%= link_to edit_admin_user_path(user), class: "btn btn-success" do %>
-            <i class="fas fa-edit"></i> Modifier
-          <% end %>
-
-          <!-- Delete Button -->
+          <%= link_to "Voir", admin_user_path(user), class: "btn btn-primary" %>  <!-- 🔹 Corrigé -->
+          <%= link_to "Modifier", edit_admin_user_path(user), class: "btn btn-success" %>
           <%= button_to "Supprimer", admin_user_path(user), method: :delete, form: { data: { turbo_confirm: "Êtes-vous sûr ?" } }, class: "btn btn-danger", id: "delete-user-#{user.id}" %>
         </div>
       </article>

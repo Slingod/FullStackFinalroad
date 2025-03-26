@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # Load user info for editing
   end
 
   def update
@@ -20,8 +19,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    # Delete dependencies before deleting the user
-    @user.event_users.destroy_all   # Delete all event associations of the user
+    @user.event_users.destroy_all
 
     if @user.destroy
       redirect_to root_path, notice: "Votre compte a été supprimé avec succès."
@@ -33,7 +31,8 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    Rails.logger.debug "PARAMS[:id]: #{params[:id]}"
+    @user = User.find_by(id: params[:id].to_i) || redirect_to(root_path, alert: "Utilisateur introuvable") # 🔹 Sécurisé
   end
 
   def user_params

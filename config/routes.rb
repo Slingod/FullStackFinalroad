@@ -15,25 +15,25 @@ Rails.application.routes.draw do
     get "signup", to: "devise/registrations#new", as: :signup
     get "login", to: "devise/sessions#new", as: :login
     get "password/new", to: "devise/passwords#new", as: :forgot_password
+    get "users/password", to: "devise/passwords#new" # 🔹 Évite le conflit avec /users/:id
   end
 
-  # User resource (for standard users)
-  resources :users, only: [:show, :edit, :update, :destroy]
+  # User resource (évite le conflit avec Devise)
+  resources :users, only: [:index, :edit, :update, :destroy]
+  get "/users/:id", to: "users#show" # 🔹 Suppression du `as: :user` pour éviter le conflit
 
   # Members page
   resources :members, only: [:index, :show]
 
-  # Nouvelle page Events
+  # Events
   get "/events", to: "pages#events"
-
-  # Resources for events (y compris participation)
   resources :events do
     member do
       post "toggle_participation"
     end
   end
 
-  # Resources for pictures
+  # Pictures
   resources :pictures, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   # Admin namespace
@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     resources :events
   end
 
-  # Payment process with Stripe (checkout actions)
+  # Payment process with Stripe
   scope '/checkout' do
     post 'create', to: 'checkout#create', as: 'checkout_create'
     get 'success', to: 'checkout#success', as: 'checkout_success'
@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   # CGU page
   get "/cgu", to: "pages#cgu"
 
-  # Application health check route
+  # Application health check
   get "up" => "rails/health#show", as: :rails_health_check
 
   get 'weather', to: 'weather#show'
