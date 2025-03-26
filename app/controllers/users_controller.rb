@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: "User was successfully updated."
+      redirect_to @user, notice: "L'utilisateur a été mis à jour avec succès."
     else
       render :edit
     end
@@ -24,9 +24,9 @@ class UsersController < ApplicationController
     @user.event_users.destroy_all   # Delete all event associations of the user
 
     if @user.destroy
-      redirect_to root_path, notice: "Your account has been successfully deleted."
+      redirect_to root_path, notice: "Votre compte a été supprimé avec succès."
     else
-      redirect_to user_path(@user), alert: "Failed to delete the account. Please try again."
+      redirect_to user_path(@user), alert: "Échec de la suppression du compte. Veuillez réessayer."
     end
   end
 
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     return if current_user == @user
 
     unless current_user.super_admin? || (current_user.admin? && @user.user?)
-      redirect_to root_path, alert: "You are not authorized to perform this action."
+      redirect_to root_path, alert: "Vous n'êtes pas autorisé à effectuer cette action."
     end
   end
 end

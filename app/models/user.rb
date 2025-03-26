@@ -46,7 +46,7 @@ class User < ApplicationRecord
 
     current_user = self.class.find_by(id: self[:current_user_id]) if self[:current_user_id]
     if current_user && !current_user.super_admin? && self.super_admin?
-      errors.add(:role, "cannot be changed by a non-superadmin")
+      errors.add(:role, "ne peut pas être modifié par un non-superadministrateur")
       throw(:abort)
     end
   end

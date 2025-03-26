@@ -7,9 +7,9 @@ class PaymentsController < ApplicationController
       amount: 5000,
       currency: "eur",
       source: params[:stripeToken],
-      description: "Donate"
+      description: "Faire un don"
     )
-    flash[:notice] = "Thanks for you're Donation !"
+    flash[:notice] = "Merci pour votre don !"
     redirect_to root_path
   rescue Stripe::CardError => e
     flash[:alert] = e.message

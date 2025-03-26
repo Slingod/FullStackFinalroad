@@ -1,4 +1,6 @@
 fr:
+  hello: "Bonjour le monde"
+
   devise:
     confirmations:
       confirmed: "Votre adresse e-mail a été confirmée avec succès."

@@ -17,7 +17,7 @@ class Admin::EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to admin_events_path, notice: "Event successfully created."
+      redirect_to admin_events_path, notice: "Événement créé avec succès."
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class Admin::EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to admin_events_path, notice: "Event successfully updated."
+      redirect_to admin_events_path, notice: "L'événement a été mis à jour avec succès."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class Admin::EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to admin_events_path, notice: "Event deleted."
+    redirect_to admin_events_path, notice: "Événement supprimé."
   end
 
   private

@@ -1,6 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
     def destroy
-      puts "Destroying session..."
+      puts "Séance de destruction..."
       super
     end
   end

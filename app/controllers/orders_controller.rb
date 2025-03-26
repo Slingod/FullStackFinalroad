@@ -5,10 +5,10 @@ class OrdersController < ApplicationController
       if @order.save
         OrderMailer.with(order: @order).new_order_email.deliver_later
   
-        flash[:success] = "Thank you for your order! We will contact you soon."
+        flash[:success] = "Merci pour votre commande ! Nous vous contacterons prochainement."
         redirect_to root_path
       else
-        flash.now[:error] = "Error in the form. Please check and try again."
+        flash.now[:error] = "Erreur dans le formulaire. Veuillez vérifier et réessayer."
         render :new
       end
     end

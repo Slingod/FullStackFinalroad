@@ -31,7 +31,7 @@ class EventsController < ApplicationController
     if @event
       @participant_count = @event.participants.count
     else
-      redirect_to events_path, alert: "Event not found."
+      redirect_to events_path, alert: "Événement non trouvé."
     end
   end
 
@@ -43,7 +43,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     if @event.save
-      redirect_to @event, notice: "Event successfully created!"
+      redirect_to @event, notice: "Événement créé avec succès!"
     else
       render :new
     end
@@ -55,31 +55,31 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to @event, notice: 'The event has been successfully modified.'
+      redirect_to @event, notice: 'L\'événement a été modifié avec succès.'
     else
       render :edit
     end
-  end
+  end  
 
   def destroy
     if @event
       @event.destroy
-      redirect_to root_path, notice: "Event successfully deleted."
+      redirect_to root_path, notice: "L'événement a été supprimé avec succès."
     else
-      redirect_to root_path, alert: "Event not found."
+      redirect_to root_path, alert: "Événement non trouvé."
     end
   end
 
   def toggle_participation
     @event.toggle_participation(current_user)
-    redirect_to @event, notice: "Your participation status has been updated."
+    redirect_to @event, notice: "Votre statut de participation a été mis à jour."
   end
 
   private
 
   def set_event
     @event = Event.find_by(id: params[:id])
-    redirect_to root_path, alert: "Event not found." unless @event
+    redirect_to root_path, alert: "Événement non trouvé." unless @event
   end
 
   def event_params
@@ -88,6 +88,6 @@ class EventsController < ApplicationController
 
   def authorize_admin_or_superadmin
     # Ensure only admins or super-admins can delete events
-    redirect_to root_path, alert: "Access Denied" unless current_user.admin? || current_user.super_admin?
+    redirect_to root_path, alert: "Accès refusé" unless current_user.admin? || current_user.super_admin?
   end
 end

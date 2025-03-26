@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   # Allow both Admins and Super Admins to access Admin panel
   def authorize_admin_or_superadmin
     unless current_user&.admin? || current_user&.super_admin?
-      redirect_to root_path, alert: "You are not authorized to access this page."
+      redirect_to root_path, alert: "Vous n'êtes pas autorisé à accéder à cette page."
     end
   end
 
