@@ -9,7 +9,7 @@
     <%= javascript_include_tag "application", defer: true %>
 
     <!-- Favicon -->
-    <link rel="icon" href="/assets/nel_logo.webp" type="image/webp" style="width: 32px; height: 32px;">
+    <link rel="icon" href="<%= asset_path('nel_logo.webp') %>" type="image/webp" sizes="32x32">
   </head>
   <body>
     <div class="wrapper">
@@ -22,6 +22,13 @@
 
       <header class="header">
         <div class="header-container">
+          <!-- Logo -->
+          <div class="logo-container">
+            <%= link_to root_path do %>
+              <%= image_tag 'nel_logo.webp', alt: "logo_de_nouvelle_ere_lissoise", class: "header-logo" %>
+            <% end %>
+          </div>
+
           <!-- Burger Menu Button (Visible only on small screens) -->
           <button class="burger-menu" id="burger-menu">
             ☰
@@ -69,38 +76,5 @@
         </div>
       </footer>
     </div>
-
-    <!-- JavaScript for the burger menu -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const burgerMenu = document.getElementById("burger-menu");
-        const navMenu = document.getElementById("nav-menu");
-
-        // Toggle navigation menu when burger button is clicked
-        burgerMenu.addEventListener("click", function (event) {
-          event.stopPropagation(); // Prevents immediate closing
-          navMenu.classList.toggle("active");
-        });
-
-        // Close the menu if a click happens outside
-        document.addEventListener("click", function (event) {
-          if (!burgerMenu.contains(event.target) && !navMenu.contains(event.target)) {
-            navMenu.classList.remove("active");
-          }
-        });
-
-        // Ensure the menu is always visible on larger screens
-        function checkScreenSize() {
-          if (window.innerWidth > 600) {
-            navMenu.classList.add("desktop-visible");
-          } else {
-            navMenu.classList.remove("desktop-visible");
-          }
-        }
-
-        checkScreenSize(); // Initial check
-        window.addEventListener("resize", checkScreenSize); // Check on resize
-      });
-    </script>
   </body>
 </html>
