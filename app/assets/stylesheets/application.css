@@ -426,10 +426,8 @@ header {
 }
 
 .card-title {
-  font-weight: bold; /* Consistent font weight */
   color: var(--text-blue-dark); /* Use a consistent text color */
   text-align: center; /* Center align the text for consistency */
-  margin-bottom: 10px; /* Add some spacing below the title */
 }
 /* ==========================
         📄 Responsive Styles
@@ -450,12 +448,7 @@ header {
   .page-container,
   .content {
     width: 95%;
-    padding: 10px;
-  }
-
-  .btn {
-    font-size: 0.9rem;
-    padding: 8px 10px;
+    padding: 5px;
   }
 }
 
@@ -611,6 +604,7 @@ header {
   flex-direction: row;
   gap: 10px;
   align-items: center;
+  margin-right: 10px;
 }
 
 @media (max-width: 600px) {
@@ -622,6 +616,7 @@ header {
 @media (max-width: 600px) {
   .burger-menu {
     display: block; /* Mobile Dropdown Menu (Hidden by default) */
+    color: white;
   }
 
   .nav-menu {
@@ -674,14 +669,14 @@ header {
 
 .custom-image {
   width: 100%;
-  height: 150px; /* Fixed height for uniformity */
+  height: 100%; /* Fixed height for uniformity */
   object-fit: cover; /* Ensures the image covers the area without distortion */
   border-radius: 8px; /* Optional: rounded corners */
 }
 
 .custom-video {
   width: 100%;
-  height: 150px; /* Fixed height for uniformity */
+  height: 100%; /* Fixed height for uniformity */
   object-fit: cover; /* Ensures the video covers the area without distortion */
   border-radius: 8px; /* Optional: rounded corners */
 }
@@ -861,10 +856,6 @@ header {
   transform: scale(1.05); /* Effet de zoom au survol */
 }
 
-.card-text {
-  margin-bottom: 10px;
-}
-
 .event-actions {
   display: flex;
   justify-content: center;
@@ -958,17 +949,143 @@ header {
     padding: 10px;
     margin-top: 100px;
     border-width: 2px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-right: 10px;
+    padding-left: 5px;
   }
 
   .auth-container h1 {
     font-size: 1.5rem;
   }
 
-  .auth-container p {
-    font-size: 0.9rem;
-  }
-
   .auth-container hr {
     width: 80%;
   }
+}
+
+/* Style général des boutons */
+.btn-event-s,
+.btn-event-p,
+.btn-event-d,
+.btn-admin-s,
+.btn-admin-p,
+.btn-admin-d {
+  display: inline-block;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  min-width: 150px; /* Assure une taille uniforme */
+}
+
+/* Alignement des boutons sur une ligne */
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centre horizontalement */
+  gap: 15px; /* Espacement entre les boutons */
+}
+
+/* Boutons Event */
+.btn-event-s {
+  background-color: #28a745; /* Vert (Success) */
+  color: white;
+  border: 2px solid #218838;
+}
+
+.btn-event-p {
+  background-color: #007bff; /* Bleu (Primary) */
+  color: white;
+  border: 2px solid #0056b3;
+}
+
+.btn-event-d {
+  background-color: #dc3545; /* Rouge (Danger) */
+  color: white;
+  border: 2px solid #c82333;
+}
+
+/* Boutons Admin */
+.btn-admin-s {
+  background-color: #28a745;
+  color: white;
+  border: 2px solid #218838;
+}
+
+.btn-admin-p {
+  background-color: #007bff;
+  color: white;
+  border: 2px solid #0056b3;
+}
+
+.btn-admin-d {
+  background-color: #dc3545;
+  color: white;
+  border: 2px solid #c82333;
+}
+
+/* Effet au survol */
+.btn-event-s:hover,
+.btn-admin-s:hover {
+  background-color: #218838;
+}
+
+.btn-event-p:hover,
+.btn-admin-p:hover {
+  background-color: #0056b3;
+}
+
+.btn-event-d:hover,
+.btn-admin-d:hover {
+  background-color: #c82333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-event-s,
+  .btn-event-p,
+  .btn-event-d,
+  .btn-admin-s,
+  .btn-admin-p,
+  .btn-admin-d {
+    width: 100%; /* Sur mobile, les boutons prennent toute la largeur */
+    max-width: 300px;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  width: 200px;
+  height: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-content {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  overflow: hidden;
 }
