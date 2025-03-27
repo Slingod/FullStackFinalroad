@@ -27,7 +27,7 @@ html body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  padding: 20px;
+
   align-items: center;
 }
 
@@ -706,7 +706,6 @@ header {
   display: flex; /* Uses flexbox to align items */
   align-items: center; /* Centers items vertically */
   justify-content: space-between; /* Ensures proper spacing */
-  padding: 10px 20px;
   color: white;
 }
 
@@ -844,7 +843,6 @@ header {
   justify-content: center; /* Centre horizontalement */
   align-items: center; /* Centre verticalement si nécessaire */
   padding: 20px;
-  min-height: 100vh; /* Pour que ça prenne toute la hauteur de l'écran */
 }
 
 .event-card {
@@ -861,10 +859,6 @@ header {
 
 .event-card:hover {
   transform: scale(1.05); /* Effet de zoom au survol */
-}
-
-.card-body {
-  padding: 20px;
 }
 
 .card-text {
