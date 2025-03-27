@@ -70,7 +70,7 @@
                 <% if @event.user_participating?(current_user) %>
                   <%= button_to "Se Désinscrire", toggle_participation_event_path(@event), method: :post, class: "btn btn-danger" %>
                 <% else %>
-                  <%= button_to "S'Inscrire", toggle_participation_event_path(@event), method: :post, class: "btn btn-success" %>
+                  <%= button_to "Participer", toggle_participation_event_path(@event), method: :post, class: "btn btn-success" %>
                 <% end %>
               <% end %>
 
