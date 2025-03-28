@@ -29,7 +29,7 @@
               <% has_events = @events_by_year[year]&.key?(month) %>
               <% if has_events %>
                 <div class="month-item" data-month="<%= month %>" data-year="<%= year %>">
-                  <%= Date::MONTHNAMES[month] %>
+                  <%= ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"][month - 1] %>
                 </div>
               <% end %>
             <% end %>
@@ -50,13 +50,8 @@
             <div class="card-body">
               <strong class="card-title"><%= event.author %></strong>
               <p class="card-text"><strong>Lieu :</strong> <%= event.location %></p>
-              <!-- Manually mapping the month name to French -->
-              <% month_names = {
-                "January" => "janvier", "February" => "février", "March" => "mars", "April" => "avril",
-                "May" => "mai", "June" => "juin", "July" => "juillet", "August" => "août",
-                "September" => "septembre", "October" => "octobre", "November" => "novembre", "December" => "décembre"
-              } %>
-              <p class="card-text"><strong>Date :</strong> <%= event.date.strftime("%d") %> <%= month_names[event.date.strftime("%B")] %> <%= event.date.strftime("%Y") %></p>
+              <!-- Affichage de la date avec les mois en français -->
+              <p class="card-text"><strong>Date :</strong> <%= event.date.strftime("%d") %> <%= ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"][event.date.month - 1] %> <%= event.date.strftime("%Y") %></p>
               <p class="card-text"><strong>Durée :</strong> <%= event.duration %> minutes</p>
               <p class="card-text"><strong>Prix :</strong> <%= event.price %> €</p>
               <div class="event-actions">
