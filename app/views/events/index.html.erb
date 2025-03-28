@@ -7,20 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div class="events-container">
-    <h1>Tous les Événements</h1>
+  <section class="events-container">
+    <header>
+      <h1>Tous les Événements</h1>
+    </header>
 
     <% @events.each do |event| %>
-      <div class="event-card">
-        <h2><%= event.title %></h2>
-        <p><strong>Auteur:</strong> <%= event.author %></p>
-        <p><strong>Emplacement:</strong> <%= event.location %></p>
-        <p><strong>Date:</strong> <%= event.date.strftime("%d %B %Y") %></p>
-        <p><strong>Durée:</strong> <%= event.duration %> Heures</p>
-        <p><strong>Prix:</strong> <%= event.price %> €</p>
-        <%= link_to 'Voir l\'événement', event_path(event), class: 'btn btn-primary' %>
-      </div>
+      <article class="event-card">
+        <header>
+          <h2><%= event.title %></h2>
+        </header>
+        <p><strong>Auteur :</strong> <%= event.author %></p>
+        <p><strong>Emplacement :</strong> <%= event.location %></p>
+        <p><strong>Date :</strong> <%= l(event.date, locale: :fr, format: "%d %B %Y") %></p>
+        <p><strong>Durée :</strong> <%= event.duration %> heures</p>
+        <p><strong>Prix :</strong> <%= event.price %> €</p>
+        <footer>
+          <%= link_to 'Voir l\'événement', event_path(event), class: 'btn btn-primary' %>
+        </footer>
+      </article>
     <% end %>
-  </div>
+  </section>
 </body>
 </html>

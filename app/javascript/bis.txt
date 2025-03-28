@@ -1,0 +1,256 @@
+weather
+.auth-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  text-align: center;
+  color: #003366;
+  font-weight: bold;
+}
+
+.card-title + .card-title {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.weather-info {
+  border-top: 2px solid #003366;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.error-message {
+  color: #ff6f61;
+  font-weight: bold;
+}
+
+
+.auth-container {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2em;
+  color: #003366;
+}
+
+.user-profile-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #003366;
+}
+
+
+
+
+show user
+.user-actions {
+  margin-top: 20px;
+}
+
+.user-actions .btn {
+  margin: 5px;
+}
+
+
+
+
+
+edit user
+
+
+
+.auth-container {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2em;
+  color: #003366;
+}
+
+.auth-field {
+  margin-top: 20px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.mb-3 {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+.btn {
+  margin-top: 20px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+ page-home
+
+
+
+ .auth-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 32px;
+  color: #003366;
+  font-weight: bold;
+}
+
+.separator {
+  border: 1px solid #003366;
+  width: 50%;
+  margin: 20px auto;
+}
+
+.description {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.year-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.year-container {
+  margin: 0 20px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.year-btn {
+  background-color: #003366;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  min-height: 45px;
+}
+
+.month-buttons {
+  display: none;
+  margin-top: 10px;
+}
+
+.month-item {
+  padding: 8px 18px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-show-all-events {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #336600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+#events-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.events-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+.event-card {
+  border: 2px solid #007bff;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 300px;
+}
+
+.card-body {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 18px;
+  color: #003366;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.event-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+}

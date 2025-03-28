@@ -18,7 +18,15 @@
               <p><strong>Lieu :</strong> <%= @event.location %></p>
               <p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
               <p><strong>Prix :</strong> <%= @event.price %> €</p>
-              <p><strong>Date :</strong> <%= @event.date.strftime("%d %B %Y") %></p>
+
+              <!-- Manually mapping the month name to French -->
+              <% month_names = {
+                "January" => "janvier", "February" => "février", "March" => "mars", "April" => "avril",
+                "May" => "mai", "June" => "juin", "July" => "juillet", "August" => "août",
+                "September" => "septembre", "October" => "octobre", "November" => "novembre", "December" => "décembre"
+              } %>
+
+              <p><strong>Date :</strong> <%= @event.date.strftime("%d") %> <%= month_names[@event.date.strftime("%B")] %> <%= @event.date.strftime("%Y") %></p>
               <p><strong>Participants :</strong> <%= @participant_count %></p>
             </div>
 

@@ -50,7 +50,13 @@
             <div class="card-body">
               <strong class="card-title"><%= event.author %></strong>
               <p class="card-text"><strong>Lieu :</strong> <%= event.location %></p>
-              <p class="card-text"><strong>Date :</strong> <%= event.date.strftime("%B %d, %Y") %></p>
+              <!-- Manually mapping the month name to French -->
+              <% month_names = {
+                "January" => "janvier", "February" => "février", "March" => "mars", "April" => "avril",
+                "May" => "mai", "June" => "juin", "July" => "juillet", "August" => "août",
+                "September" => "septembre", "October" => "octobre", "November" => "novembre", "December" => "décembre"
+              } %>
+              <p class="card-text"><strong>Date :</strong> <%= event.date.strftime("%d") %> <%= month_names[event.date.strftime("%B")] %> <%= event.date.strftime("%Y") %></p>
               <p class="card-text"><strong>Durée :</strong> <%= event.duration %> minutes</p>
               <p class="card-text"><strong>Prix :</strong> <%= event.price %> €</p>
               <div class="event-actions">
