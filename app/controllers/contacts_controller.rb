@@ -4,16 +4,14 @@ class ContactsController < ApplicationController
   end
 
   def create
-    puts "=== Received Params ==="
-    puts params.inspect  # Debugging: Check received parameters in the console
-
     @contact = Contact.new(contact_params)
+
     if @contact.save
       ContactMailer.contact_email(@contact).deliver_now
       flash[:success] = "Votre message a bien été envoyé. Merci de nous avoir contactés!"
       redirect_to root_path
     else
-      flash[:error] = "Une erreur s'est produite. Veuillez vérifier les informations saisies."
+      flash.now[:error] = "Une erreur s'est produite. Veuillez vérifier les informations saisies."
       render :new, status: :unprocessable_entity
     end
   end

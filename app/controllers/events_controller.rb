@@ -71,9 +71,15 @@ class EventsController < ApplicationController
   end
 
   def toggle_participation
-    @event.toggle_participation(current_user)
-    redirect_to @event, notice: "Votre statut de participation a été mis à jour."
-  end
+    if current_user.participating?(@event)
+      current_user.leave_event(@event)
+      flash[:notice] = "Vous vous êtes désinscrit de l'événement."
+    else
+      current_user.join_event(@event)
+      flash[:notice] = "Vous êtes maintenant inscrit à l'événement."
+    end
+    redirect_to @event
+  end  
 
   private
 

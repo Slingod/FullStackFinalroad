@@ -17,16 +17,8 @@
               <strong class="card-title text-center"><%= @event.author %></strong>
               <p><strong>Lieu :</strong> <%= @event.location %></p>
               <p><strong>Durée :</strong> <%= @event.duration %> minutes</p>
-              <p><strong>Prix :</strong> <%= @event.price %> €</p>
-
-              <!-- Manually mapping the month name to French -->
-              <% month_names = {
-                "January" => "janvier", "February" => "février", "March" => "mars", "April" => "avril",
-                "May" => "mai", "June" => "juin", "July" => "juillet", "August" => "août",
-                "September" => "septembre", "October" => "octobre", "November" => "novembre", "December" => "décembre"
-              } %>
-
-              <p><strong>Date :</strong> <%= @event.date.strftime("%d") %> <%= month_names[@event.date.strftime("%B")] %> <%= @event.date.strftime("%Y") %></p>
+              <p><strong>Prix :</strong> <%= @event.price.zero? ? "Gratuit" : "#{@event.price} €" %></p>
+              <p><strong>Date :</strong> <%= I18n.l(@event.date, format: :long, locale: :fr) %></p>
               <p><strong>Participants :</strong> <%= @participant_count %></p>
             </div>
 
@@ -54,12 +46,14 @@
               <% if @event.videos.attached? %>
                 <div class="row custom-video-grid">
                   <% @event.videos.each do |video| %>
-                    <div class="col-6 col-sm-4 col-md-3 mb-3 custom-video-item">
-                      <video controls class="custom-video img-fluid">
-                        <source src="<%= url_for(video) %>" type="video/mp4">
-                        Votre navigateur ne supporte pas la balise vidéo.
-                      </video>
-                    </div>
+                    <% if video.content_type.start_with?('video/') %>
+                      <div class="col-6 col-sm-4 col-md-3 mb-3 custom-video-item">
+                        <video controls class="custom-video img-fluid">
+                          <source src="<%= url_for(video) %>" type="<%= video.content_type %>">
+                          Votre navigateur ne supporte pas la balise vidéo.
+                        </video>
+                      </div>
+                    <% end %>
                   <% end %>
                 </div>
               <% else %>
@@ -76,9 +70,13 @@
               <!-- Registration/Unsubscription Button -->
               <% if current_user && @event.date >= Date.today %>
                 <% if @event.user_participating?(current_user) %>
-                  <%= button_to "Se Désinscrire", toggle_participation_event_path(@event), method: :post, class: "btn btn-danger" %>
+                  <div class="mt-2">
+                  <%= button_to "Se Désinscrire", toggle_participation_event_path(@event), method: :patch, class: "btn btn-danger" %>
+                  </div>
                 <% else %>
-                  <%= button_to "S'Inscrire", toggle_participation_event_path(@event), method: :post, class: "btn btn-success" %>
+                  <div class="mt-2">
+                  <%= button_to "Participer", toggle_participation_event_path(@event), method: :patch, class: "btn btn-success" %>
+                  </div>
                 <% end %>
               <% end %>
 

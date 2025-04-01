@@ -69,7 +69,7 @@
 
     <footer class="footer">
       <div class="footer-content footer-links">
-        <%= link_to 'Contactez-Nous', contact_path, class: 'btn' %>
+        <%= link_to 'Contactez-Nous', new_contact_path, class: 'btn' %>
         <%= link_to 'À Propos', about_path, class: 'btn' %>
         <%= link_to 'Nos CGU', cgu_path, class: 'btn' %>
         <% if user_signed_in? && current_user.over_18? %>

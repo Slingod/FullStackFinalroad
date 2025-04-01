@@ -10,7 +10,7 @@
   <section class="auth-container">
     <h1 class="page-title">Contactez-Nous</h1>
 
-    <%= form_with(model: @contact, url: contact_path, method: :post, local: true) do |f| %>
+    <%= form_with(model: @contact, url: contacts_path, method: :post, local: true) do |f| %>
       <div class="auth-field">
         <%= f.label :name, "Nom", class: "auth-label" %>
         <%= f.text_field :name, required: true, placeholder: "Votre nom", class: "auth-input" %>
