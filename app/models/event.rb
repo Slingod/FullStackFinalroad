@@ -12,10 +12,12 @@ class Event < ApplicationRecord
   validates :price, presence: true
   validates :date, presence: true
 
+  # Vérifie si un utilisateur participe à cet événement
   def user_participating?(user)
     event_users.exists?(user_id: user.id)
   end
 
+  # Inscrire ou désinscrire un utilisateur de l'événement
   def toggle_participation(user)
     if user_participating?(user)
       event_users.find_by(user_id: user.id).destroy

@@ -5,11 +5,11 @@ class EventsController < ApplicationController
 
   def home
     @events_by_year = Event.all.group_by { |event| event.date.year }
-    @events_by_year.transform_values! do |months|
+    @events_by_year.transform_values! do |months| 
       months.group_by { |event| event.date.month }
-            .transform_values do |events|
-              events.map do |e|
-                {
+            .transform_values do |events| 
+              events.map do |e| 
+                { 
                   id: e.id,
                   author: e.author,
                   location: e.location,
@@ -50,7 +50,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-    # Load event info for editing
+    # Chargement des informations de l'événement pour la modification
   end
 
   def update
@@ -93,7 +93,6 @@ class EventsController < ApplicationController
   end
 
   def authorize_admin_or_superadmin
-    # Ensure only admins or super-admins can delete events
     redirect_to root_path, alert: "Accès refusé" unless current_user.admin? || current_user.super_admin?
   end
 end

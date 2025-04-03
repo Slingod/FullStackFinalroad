@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Membres</title>
+    <meta name="description" content="Explorez la liste des membres de Nouvelle Ère Lissoise. Découvrez les rôles et les informations de chaque membre et accédez à leurs profils.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <main class="content">
+    <section class="page-container">
+      <h1 class="page-title mt-4 mb-4">Membres</h1>
+      <div class="users-container">
+        
+        <% @users.each do |user| %>
+          <article class="user-card">
+            <div class="card-body text-center">
+
+              <!-- Gestion dynamique des images de rôle -->
+              <%
+                role = user.role.presence || "utilisateur"  # Définit un rôle par défaut si nil
+                role_icon = case role
+                            when "super_admin"
+                              "superadmin.webp"
+                            when "admin", "administrateur"
+                              "king.webp"
+                            else
+                              "member.webp"
+                            end
+              %>
+              <%= image_tag role_icon, alt: role.capitalize, class: "role-icon" %>
+
+              <!-- Nom d'Utilisateur -->
+              <h5 class="card-title">
+                <%= user.username.present? ? user.username : user.email %>
+              </h5>
+
+              <%= link_to 'Voir', user_path(user), class: 'btn btn-primary' %>
+            </div>
+          </article>
+        <% end %>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>

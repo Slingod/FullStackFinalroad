@@ -13,38 +13,37 @@
     <article class="card mx-auto user-profile-card">
       <div class="card-body text-center">
         <h2 class="user-name">
-          <% if user.username.present? %>
-            <%= user.username %>
-          <% elsif user.firstname.present? && user.name.present? %>
-            <%= "#{user.firstname} #{user.name}" %>
+          <% if @user.username.present? %>
+            <%= @user.username %>
+          <% elsif @user.firstname.present? && @user.name.present? %>
+            <%= "#{@user.firstname} #{@user.name}" %>
           <% else %>
-            Utilisateur #<%= user.id %>
+            Utilisateur #<%= @user.id %>
           <% end %>
         </h2>
 
-        <% if user.show_firstname %>
-          <p><strong>Prénom :</strong> <%= user.firstname %></p>
+        <% if @user.show_firstname %>
+          <p><strong>Prénom :</strong> <%= @user.firstname %></p>
         <% end %>
 
-        <% if user.show_name %>
-          <p><strong>Nom :</strong> <%= user.name %></p>
+        <% if @user.show_name %>
+          <p><strong>Nom :</strong> <%= @user.name %></p>
         <% end %>
 
-        <% if user.show_email %>
-          <p><strong>Email :</strong> <%= user.email %></p>
+        <% if @user.show_email %>
+          <p><strong>Email :</strong> <%= @user.email %></p>
         <% end %>
 
-        <% if user.show_age && user.age.present? %>
-          <p><strong>Âge :</strong> <%= user.age %></p>
+        <% if @user.show_age && @user.age.present? %>
+          <p><strong>Âge :</strong> <%= @user.age %></p>
         <% end %>
 
         <div class="user-actions">
-          <% if current_user == user %>
-            <%= link_to 'Modifier', edit_user_path(user), class: "btn btn-success" %>
-            <%= button_to "Supprimer Mon Compte", user_path(user), method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger" %>
+          <% if current_user == @user %>
+            <%= link_to 'Modifier', edit_user_path(@user), class: "btn btn-success" %>
+            <%= button_to "Supprimer Mon Compte", user_path(@user), method: :delete, data: { confirm: "Êtes-vous sûr ?" }, class: "btn btn-danger" %>
           <% end %>
-
-          <%= link_to 'Retour', members_path, class: "btn btn-primary" %>
+          <%= link_to 'Retour', users_path, class: "btn btn-primary" %>
         </div>
       </div>
     </article>

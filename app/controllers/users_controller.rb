@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
+  def index
+    @users = User.all
+  end
+
   def show
-    render template: "users/show", locals: { user: @user }
   end
 
   def edit
@@ -12,40 +15,41 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: "L'utilisateur a été mis à jour avec succès."
+      if current_user.admin?
+        redirect_to admin_users_path, notice: "Utilisateur mis à jour avec succès."
+      else
+        redirect_to @user, notice: "Votre profil a été mis à jour avec succès."
+      end
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
-  end
+  end  
 
   def destroy
-    @user.event_users.destroy_all
+    @user.event_users.destroy_all  # Supprime les liens avant de supprimer l'utilisateur
 
     if @user.destroy
-      redirect_to root_path, notice: "Votre compte a été supprimé avec succès."
+      redirect_to admin_users_path, notice: 'Utilisateur supprimé.'
     else
-      redirect_to user_path(@user), alert: "Échec de la suppression du compte. Veuillez réessayer."
+      redirect_to admin_users_path, alert: 'Erreur lors de la suppression de l’utilisateur.'
     end
   end
 
   private
 
   def set_user
-    Rails.logger.debug "PARAMS[:id]: #{params[:id]}"
-    @user = User.find_by(id: params[:id].to_i) || redirect_to(root_path, alert: "Utilisateur introuvable") # 🔹 Sécurisé
-  end
-
-  def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation,
-                                 :name, :firstname, :age, :show_name, :show_firstname,
-                                 :show_email, :show_age)
+    @user = User.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to users_path, alert: "Utilisateur non trouvé."
   end
 
   def authorize_user!
-    return if current_user == @user
-
-    unless current_user.super_admin? || (current_user.admin? && @user.user?)
-      redirect_to root_path, alert: "Vous n'êtes pas autorisé à effectuer cette action."
+    if current_user != @user && !current_user.admin?
+      redirect_to root_path, alert: 'Accès interdit.'
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :role, :username, :firstname, :show_firstname, :name, :show_name, :show_email, :age, :show_age)
   end
 end

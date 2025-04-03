@@ -4,13 +4,14 @@ class User < ApplicationRecord
   before_save :prevent_admin_change
 
   # Associe l'utilisateur aux événements via la table de jointure 'event_users'
-  has_many :event_users
+  has_many :event_users, dependent: :destroy
   has_many :events, through: :event_users
 
   validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
 
   after_initialize :set_default_visibility
 
+  # Méthodes pour vérifier les rôles
   def admin?
     role == "admin" || role == "administrateur"
   end
@@ -19,31 +20,28 @@ class User < ApplicationRecord
     role == "super_admin"
   end
 
+  def user?
+    role == "user"
+  end
+
   def can_manage?(other_user)
-    # Admins cannot manage SuperAdmins
     return false if other_user.super_admin? && !self.super_admin?
-    # Admins cannot manage other Admins unless they are SuperAdmins
     return false if other_user.admin? && !self.super_admin?
-    # Regular users can be managed by Admins and SuperAdmins
     true
   end
 
-  # Check if the user is over 18
   def over_18?
     age.present? && age >= 18
   end
 
-  # Cette méthode vérifie si l'utilisateur participe à un événement spécifique
   def participating?(event)
     events.include?(event)
   end
 
-  # Inscrire un utilisateur à un événement
   def join_event(event)
     events << event unless participating?(event)
   end
 
-  # Désinscrire un utilisateur d'un événement
   def leave_event(event)
     events.delete(event)
   end
