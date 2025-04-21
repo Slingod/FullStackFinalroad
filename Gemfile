@@ -32,7 +32,7 @@ gem "pundit" # Authorization library for Rails
 
 # Front-end and Assets
 gem "tailwindcss-rails" # Tailwind CSS integration for Rails
-gem "bootstrap", "~> 5.1.3" # Front-end framework for building responsive, mobile-first sites
+gem "bootstrap", "~> 5.3.5" # Front-end framework for building responsive, mobile-first sites
 gem "sprockets-rails" # Asset compilation and management
 
 # Internationalization and Environment
